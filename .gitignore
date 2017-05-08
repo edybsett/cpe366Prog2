@@ -1,4 +1,20 @@
+# Compiled source #
+######################
 *.class
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+
+# Specific files #
+##################
+nbproject/
+build/web/
+src/java/DBConnect.java
+/build/
+
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
