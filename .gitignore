@@ -20,7 +20,6 @@ src/java/DBConnect.java
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 

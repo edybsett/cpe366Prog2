@@ -4,10 +4,11 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:o="http://omnifaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
   <ui:composition template="template.xhtml">
     <ui:define name="head">
-        <title>Sticks Humane Society</title>
+        <title>ACME Humane Society</title>
     </ui:define>
     <ui:define name="body">
     
@@ -15,40 +16,51 @@
             <h:form>
                 <div class="container">
                     <!-- Title -->
-                    <h1 class="display-1">Sticks Humane Society</h1>
-                    <!-- Tabs for displaying different animals -->
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <h:commandLink value="All" 
-                                           action="#{animal.showAll()}"/>
-                        </li>
-                        <li>
-                            <h:commandLink value="Cats"
-                                           action="#{animal.showCats()}"/>
-                        </li>
-                        <li>
-                            <h:commandLink value="Dogs"
-                                           action="#{animal.showDogs()}"/>
-                        </li>       
-                    </ul>
-                    
-                    <!-- Table of animals -->
-                    <ui:repeat value="#{animal.getAllAnimals()}"
-                               var="ani">
-                        <div class="media">
+                    <h1 class="display-1">ACME Humane Society</h1>
+                </div>
+                </h:form>
+        </div>
+        <div class="container">
+             <h:form>
+                 <!-- Tabs to Search by type -->
+                 <ul class="nav nav-tabs nav-justified">
+                     <li class="active">
+                         <h:commandLink action="#{animal.showAll()}"
+                                        type="reset"
+                                        value="All"/>
+                     </li>
+                     <li>
+                         <h:commandLink action="#{animal.showDogs()}"
+                                        type="reset"
+                                        value="Dogs"/>
+                     </li>
+                     <li>
+                         <h:commandLink action="#{animal.showCats()}"
+                                        type="reset"
+                                        value="Cats"/>
+                     </li>
+                     
+                 </ul>
+                <!-- Table of animals -->
+                <ul class="list-unstyled">
+                <ui:repeat value="#{animal.getAllAnimals()}"
+                           var="ani">
+                    <li class="media">
                         <div class="media-left">
                             <o:graphicImage value="#{ani.image}"
                                             dataURI="true"
-                                            class="media-object"/>
+                                            class="media-object img-rounded"
+                                            width="100"
+                                            height="100"/>
                         </div>
-                        <div class="media-body">
+                        <div class="media-body media-right">
                             <h3 class="media-heading">#{ani.name}</h3>
-                            <p class="media-body">#{ani.description}</p>
+                            <p class="media-body"
+                              style="font-size: 12pt">#{ani.description}</p>
                         </div>
-                        </div>
-                    </ui:repeat>
-                    </div>
-                </div>
+                    </li>
+                </ui:repeat>
+                </ul>
             </h:form>
         </div>
         
