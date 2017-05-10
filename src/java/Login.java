@@ -1,38 +1,18 @@
-
-    
-import java.io.Serializable;
-import java.sql.SQLException;
-
-import javax.annotation.ManagedBean;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
+   
 import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
-import javax.inject.Named;
-
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import javax.servlet.http.HttpSession;
 import javax.inject.Named;
-import java.util.Date;
-import java.util.TimeZone;
-import javax.el.ELContext;
-import javax.faces.bean.ManagedProperty;
 
 
 /*
@@ -44,9 +24,9 @@ import javax.faces.bean.ManagedProperty;
  *
  * @author stanchev
  */
-@Named(value = "login")
-@SessionScoped
-@ManagedBean
+//@Named(value = "login")
+//@SessionScoped
+//@ManagedBean
 public class Login implements Serializable {
 
     private int lid;
@@ -142,12 +122,7 @@ public class Login implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    public String createLogin() throws SQLException, ParseException {
-        return new Form(login, password).createLogin();
-    }
-    
+
     public void validate(FacesContext context, UIComponent component, Object value)
             throws ValidatorException, SQLException {
         login = loginUI.getLocalValue().toString();

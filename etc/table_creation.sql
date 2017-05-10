@@ -22,7 +22,9 @@ create table Animal(
 	ageMonths INT,
 	name      TEXT,
 	weight    FLOAT,
-	special   TEXT
+	type      TEXT,
+        description TEXT,
+        image BLOB
 );
 
 create table Price(

@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+  <ui:composition template="template.xhtml">
+    <ui:define name="head">
+        <title>Sticks Humane Society</title>
+    </ui:define>
+    <ui:define name="body">
+    
+        <div class="jumbotron">
+            <h:form>
+                <div class="container">
+                    <!-- Title -->
+                    <h1 class="display-1">Add New Pet</h1>
+                </div>
+            </h:form>
+        </div>
+        
+        <div class="container">
+            <h:form class="form-group"
+                    enctype="multipart/form-data">
+                <label for='inputName'>Name</label>
+             
+                <h:inputText value="#{form.animalName}"
+                             class='form-control'
+                             required ="true"
+                             requiredMessage="Your must enter Animal's Name"
+                             id="inputName"/>
+                <label for='inputAgeM'>Age</label>
+                <h:inputText value='#{form.animalAgeM}'
+                             id='inputAgeM'
+                             class='form-control'/>
+         
+                <h:inputText value='#{form.animalAgeY}'
+                             id='inputAgeY'
+                             class='form-control'/>
+                <label for="inputDesc">Description</label>
+                <h:inputTextarea value='#{form.animalDesc}'
+                                 id='inputDesc'
+                                 class='form-control'/>
+                <label for="inputType">Type</label>
+                <h:selectOneListbox value='#{form.animalType}'
+                                    class='form-control'
+                                    id='inputType'>
+                    <f:selectItem itemValue="cat"
+                                  class="form-check-label"
+                                  itemLabel="cat"/>
+                    <f:selectItem itemValue="dog"
+                                  class="form-check-label"
+                                  itemLabel="dog"/>
+                </h:selectOneListbox>
+                <label for="inputImage">Upload image</label>
+                <h:inputFile id="inputImage"
+                             value="#{form.animalImage}"
+                             class="form-control"/>
+                
+                
+                <h:commandButton class="btn btn-primary"
+                                 value="Submit"
+                                 action="#{form.submitAnimal()}"/>
+                          
+            </h:form>
+        </div>
+        
+    </ui:define>
+  </ui:composition> 
+</html>

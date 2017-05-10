@@ -1,30 +1,14 @@
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author Austin
+ * Represents a single employee
+ * @author Austin Sparks (aasparks)
  */
-@Named(value = "employee")
-@SessionScoped
-@ManagedBean
+//@Named(value = "employee")
+//@SessionScoped
+//@ManagedBean
 public class Employee {
     private int id;
     private String name;
@@ -114,47 +98,5 @@ public class Employee {
     
     public String toString(){
         return id + ": " + name;
-    }
-    
-    public void changePassword() throws SQLException {
-        DBConnect dbCon = new DBConnect();
-        Connection con = dbCon.getConnection();
-        
-        if (con == null) {
-            throw new SQLException("could not connect to DB");
-        }
-        
-        
-        String q = "update Login set password = ? where id = ?;";
-        PreparedStatement ps = con.prepareStatement(q);
-        ps.setString(1, password);
-        ps.setInt(2, id);
-        int result = ps.executeUpdate();
-    }
-    
-    public List<Employee> getEmps() throws SQLException {
-        DBConnect dbCon = new DBConnect();
-        Connection con = dbCon.getConnection();
-        
-        if (con == null) {
-            throw new SQLException("could not connect to DB");
-        }
-        
-        String q = "SELECT e.eid, firstName, lastName, username, password ";
-        q       += "FROM Login l, Employee e WHERE title='employee' ";
-        q       += "AND e.eid = l.id ORDER BY e.eid";
-        PreparedStatement ps = con.prepareStatement(q);
-        ResultSet result = ps.executeQuery();
-        List<Employee> ret = new ArrayList<Employee>();
-        while (result.next()) {
-            Employee emp = new Employee(result.getInt("eid"), 
-                    result.getString("username"),
-            result.getString("password"));
-            emp.setFirstName(result.getString("firstName"));
-            emp.setLastName(result.getString("lastName"));
-            ret.add(emp);
-        }
-        return ret;
-  
     }
 }

@@ -1,50 +1,55 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
+  <h:head>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href="css/stylesheet.css" type="text/css" rel="stylesheet"/>
-        <title><ui:insert name="title">ACME Hotel</ui:insert></title>
-    </h:head>
-
-    <h:body>
-        <div id ="banner">
-            <ui:insert name="banner">
-                <h:outputStylesheet name="css/stylesheet.css"/>
-                <div class="bannerContainer">
-                    <img src="resources/common/HotelBanner.png"/>
-                    <div class="bannerUname">
-                        <ui:insert name="uname">
-                            <h:form>
-                                <h:outputText value="#{login.getLogin()}"/>
-                                <h:commandButton value="(Logout)" 
-                                                 action="#{login.logout}"
-                                                 styleClass="bannerLogout"/>
-                            </h:form>
-                        </ui:insert>
-                    </div>
-                </div>
-                
-            </ui:insert>
-        </div>
-        <div id="header">
-            <div class="headerTitle">
-                <ui:insert name="header">
-                   Default Title
-                </ui:insert>
+    <title>Sticks Humane Society</title>
+    <!-- Bootstrap core CSS -->
+    <h:outputStylesheet name="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <ui:insert name="head"/>
+  </h:head>
+  <h:body>
+      <ui:insert name="navbar">
+          <!-- NAV BAR -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" 
+                      data-toggle="collapse" 
+                      data-target="#navbar" 
+                      aria-expanded="false" 
+                      aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+                <h:link class="navbar-brand" outcome="newPet">
+                    <span class="glyphicon glyphicon-heart"
+                          aria-hidden="false"></span>
+                </h:link>
             </div>
-        </div>
-        
-        <div id="mainContainer">
-            <div class="main">
-            <ui:insert name="body">
-                
-            </ui:insert>
-        </div>
-        </div>
-    </h:body>
+            <div id="navbar" class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">Login</a></li>
+                <li><a href="#contact">Register</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+          </div>
+          </div>
+        </nav>
 
+      </ui:insert>
+    <ui:insert name="body"/>
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <h:outputScript name="bootstrap-3.3.7-dist/js/bootstrap.min.js"/>
+  </h:body>
 </html>

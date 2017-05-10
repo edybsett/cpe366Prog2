@@ -3,9 +3,15 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    
+    <application>
+        <resource-handler>
+            org.omnifaces.resourcehandler.UnmappedResourceHandler
+        </resource-handler>
+    </application>
     <managed-bean>
-        <managed-bean-name>selector</managed-bean-name>
-        <managed-bean-class>Selector</managed-bean-class>
+        <managed-bean-name>animal</managed-bean-name>
+        <managed-bean-class>Animal</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
@@ -14,403 +20,41 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>customer</managed-bean-name>
-        <managed-bean-class>Customer</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-        <managed-property>
-            <property-name>login</property-name>
-            <value>#{login}</value>
-        </managed-property>
-    </managed-bean>    
-    <managed-bean>
-        <managed-bean-name>login</managed-bean-name>
-        <managed-bean-class>Login</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean> 
-    <managed-bean>
-        <managed-bean-name>admindirectory</managed-bean-name>
-        <managed-bean-class>Admin</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>specialRates</managed-bean-name>
-        <managed-bean-class>SpecialRates</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>rooms</managed-bean-name>
-        <managed-bean-class>Rooms</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>employee</managed-bean-name>
-        <managed-bean-class>Employee</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>reservation</managed-bean-name>
-        <managed-bean-class>Reservation</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
         <managed-bean-name>form</managed-bean-name>
         <managed-bean-class>Form</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
-    <managed-bean>
-        <managed-bean-name>fees</managed-bean-name>
-        <managed-bean-class>Fees</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>resxfee</managed-bean-name>
-        <managed-bean-class>ResxFee</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>admin</managed-bean-name>
-        <managed-bean-class>AdminItem</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    
-    
     
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
+            <from-outcome>refresh</from-outcome>
+            <to-view-id>#{view.viewId}</to-view-id>
         </navigation-case>
     </navigation-rule>
     
-      
     <navigation-rule>
         <from-view-id>
             /index.xhtml
         </from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>
-            <to-view-id>/start.xhtml</to-view-id>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>register</from-outcome>
-            <to-view-id>/newCustomer.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>admin</from-outcome>
-            <to-view-id>/adminDirectory.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>employee</from-outcome>
-            <to-view-id>/employeeflow.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>customer</from-outcome>
-            <to-view-id>/customerflow.xhtml</to-view-id>
+            <from-outcome>newPet</from-outcome>
+            <to-view-id>/newPet.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
         <from-view-id>
-            /employeeflow.xhtml
+            /newPet.xhtml
         </from-view-id>
         <navigation-case>
-            <from-outcome>refresh</from-outcome>
-            <to-view-id>/employeeflow.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>bill</from-outcome>
-            <to-view-id>/employeebilling.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml </to-view-id>
-        </navigation-case>
-            
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /employeebilling.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>back</from-outcome>
-            <to-view-id>/employeeflow.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml </to-view-id>
-        </navigation-case>
-            
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /adminDirectory.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>showEmployeeList</from-outcome>
-            <to-view-id>/showEmployee.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml </to-view-id>
-        </navigation-case>
-
-        <naviagation-case>
-            <from-outcome>changeBasePrices</from-outcome>
-            <to-view-id>/basePrices.xhtml</to-view-id>
-        </naviagation-case>
-        
-        <navigation-case>
-            <from-outcome>showSpecialRates</from-outcome>
-            <to-view-id>/specialrates.xhtml </to-view-id>
-        </navigation-case>
-        
-        <navigation-case>
-            <from-outcome>register</from-outcome>
-            <to-view-id>/newCustomer.xhtml </to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>addAdmin</from-outcome>
-            <to-view-id>/addAdmin.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>showAdminList</from-outcome>
-            <to-view-id>/showAdmin.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /showAdmin.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>addAdmin</from-outcome>
-            <to-view-id>/addAdmin.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>showAdminInfo</from-outcome>
-            <to-view-id>/adminInfo.xhtml </to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml </to-view-id>
-        </navigation-case>
-    </navigation-rule> 
-    
-    <navigation-rule>
-        <from-view-id>
-            /showEmployee.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>addEmployee</from-outcome>
-            <to-view-id>/addEmployee.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>showEmployeeInfo</from-outcome>
-            <to-view-id>/employeeInfo.xhtml </to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml </to-view-id>
-        </navigation-case>
-    </navigation-rule> 
-    <navigation-rule>
-        <from-view-id>
-            /start.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>newCustomer</from-outcome>
-            <to-view-id>/newCustomer.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>listCustomers</from-outcome>
-            <to-view-id>/showAllCustomers.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>findCustomer</from-outcome>
-            <to-view-id>/findCustomer.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>deleteCustomer</from-outcome>
-            <to-view-id>/deleteCustomer.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /newCustomer.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>main</from-outcome>
+            <from-outcome>index</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /customerflow.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>refresh</from-outcome>
-            <to-view-id>/customerflow.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>reservation</from-outcome>
-            <to-view-id>/makeReservation.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    
-    <navigation-rule>
-        <from-view-id>
-            /makeReservation.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>refresh</from-outcome>
-            <to-view-id>/makeReservation.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>made</from-outcome>
-            <to-view-id>/customerflow.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>checkout</from-outcome>
-            <to-view-id>/reservationCheckout.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>/reservationCheckout.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>made</from-outcome>
-            <to-view-id>/resSuccess.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>/resSuccess.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>back</from-outcome>
-            <to-view-id>/customerflow.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /findCustomer.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>showCustomer</from-outcome>
-            <to-view-id>/displayCustomer.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml </to-view-id>
-        </navigation-case>
-
-    </navigation-rule>
-    
-        <navigation-rule>
-        <from-view-id>
-            /specialrates.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>refresh</from-outcome>
-            <to-view-id>/specialrates.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /changeBasePrices.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome> refresh</from-outcome>
-            <to-view-id>/changeBasePrices.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /addAdmin.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>admin</from-outcome>
-            <to-view-id>/showAdmin.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml </to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /addEmployee.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>admin</from-outcome>
-            <to-view-id>/showEmployee.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml </to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /deleteCustomer.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>main</from-outcome>
-            <to-view-id>/start.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml </to-view-id>
-        </navigation-case>
-
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /addAdmin.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>admin</from-outcome>
-            <to-view-id>/adminDirectory.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml </to-view-id>
-        </navigation-case>
-
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /employeeInfo.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml </to-view-id>
-        </navigation-case>
-
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /specialrates.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml </to-view-id>
-        </navigation-case>
-
-    </navigation-rule>
-    
     
 </faces-config>
