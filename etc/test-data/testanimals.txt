@@ -1,0 +1,51 @@
+
+--- Dogs
+-- Chula
+- Breed: Boxer, American Pit Bull, Terrier
+- Color: Brown Brindle
+- Age: Adult
+- Sex: Female
+- Personality: housetrained, highenergy, goodwdogs, goodwcats
+- Weight: 60
+- AgeY: 3
+- AgeM: 0
+- AgeW: 1
+- Description: Hello, my name is Chula and I'm one beautiful, large lady. I have a very mature and strong look to me, but I'm quite the softy when it comes to people giving me love and attention. I'll lean into you for more pets! It feels so nice to be pet! I'm sort of a busy-body. I enjoy having ways to exert my energy whether that is going for a run, playing in the yard, going for a walk, or a hike. Whatever floats your boat, I'm in! I'm an energetic, bouncy, and spunky gal that can't wait to have a home where I can be my goofy self. I just love to be where the people are and really feel a part of the family. Are you my perfect match that can give me that human companionship I so desperately desire?
+
+-- Hatchi
+- Breed: Siberian Husky Mix
+- Color: Grey and White
+- Age: Young
+- Sex: Male
+- Personality: highenergy
+- Weight: 60
+- AgeY: 1
+- AgeM: 1
+- AgeW: 1
+- Description: The name is Hatchi. Yes, I'm sure when you see me you will say, "Oooh-Aaaah!" Yes, I'm quite the looker and will probably grab your attention right when you meet me. I'm a friendly boy, but I definitely have my Husky quirks so I'm looking for an owner who has the time to spend with me and hopefully has some Husky experience. I'm definitely a free spirit and enjoy exploring the world around me. I love nothing more than going on walks and playing with my toys. I'm an exceptional soccer player and love playing goalie against people so I can take the ball and run around happily with it! I'm definitely a goofy boy who will bring a lot of joy to your life. Although I enjoy the company of people, I do enjoy my independence at times. I love to be shown affection, but on my own terms of course. When I'm feeling up for love, I'll approach you and probably plop myself right in your lap and roll over for belly rubs. I'm a quirky, funny, and happy boy who can't wait to find my person who can use all this goofy energy towards being active and learning new things! I'm a good boy and I can't wait to go home with you today
+
+
+--- Cats
+-- Dinah
+- Breed: Domestic Longhair
+- Color: Black
+- Age: Adult
+- Sex: Female
+- Personality: housetrained, loving, shy
+- Weight: 8.2
+- AgeY: 4
+- AgeM: 0
+- AgeW: 4
+- Description: I'm dependable, reliable, and balanced - the perfect housemate. I'm the same, morning, noon, and night - loving and quite relaxed. What more could you hope for? The name is Dinah. I'm a beautiful gal who is trying to figure out this shelter environment. I can be a bit reserved and timid, but if you give me some time, I do break out of my shell. I love it when someone approaches me slowly, lets me sniff their hand, and then pets my head gently. I do enjoy affection and once I'm even more comfortable around you, I'll be happy to let you pet me back gently. I really am a sweet girl who is going break out of her shell when I get into a home of my own! Could I be the beautiful gal for you?
+
+-- Bella
+- Breed: Siamese
+- Color: Grey and White
+- Age: Senior
+- Sex: Female
+- Personality: outgoing, goodwkids
+- Weight: 11.6
+- AgeY: 10
+- AgeM: 0
+- AgeW: 0
+- Description: Eye catching, quiet, and sweet - yeah that's me, Bella! I'm sure to captivate you by my cute face and winning personality! I'm a super outgoing girl who will always greet you with a nice meow and a possible head butt in hopes you will give me attention. I'm definitely a people kitty and haven't met a person I haven't liked. I love to strut my stuff, swat toys around, bask in the sun, and follow my humans around. I'll have fun getting affection from you, snoozing in a cozy bed, and exploring my surroundings. I know once I go to a home of my very own I'm going to be one happy cat that will bring you a lot of joy! I just know it!
