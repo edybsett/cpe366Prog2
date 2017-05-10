@@ -11,37 +11,83 @@
         <title>ACME Humane Society</title>
     </ui:define>
     <ui:define name="body">
-    
-        <div class="jumbotron">
-            <h:form>
-                <div class="container">
-                    <!-- Title -->
-                    <h1 class="display-1">ACME Humane Society</h1>
-                </div>
-                </h:form>
-        </div>
+        
+        <!-- The Jumbotron -->
+        <b:jumbotron>
+            <h1>ACME Humane Society</h1>
+            <p>Welcome to our website. Below are our current residents.</p>
+        </b:jumbotron>
+        
+        <h:form>
+        <ul class="nav nav-tabs nav-justified">
+            <li>
+            <h:commandLink value="All"
+                           class="nav nav-tabs tab-content"
+                           action="#{animal.showAll()}"/>
+            </li>
+            <li>
+            <h:commandLink value="Dogs"
+                           class="nav nav-tabs tab-content"
+                           action="#{animal.showDogs()}"/>
+            </li>
+            <li>
+            <h:commandLink value="Cats"
+                           class="tab-content"
+                           action="#{animal.showCats()}"/>
+            </li>
+        </ul>
+        </h:form>
+        
+<!--
+        <b:form inline="true">
+            <ui:repeat value="#{animal.getAllAnimals()}"
+                       var="ani">
+                    <b:thumbnail>
+                        <o:graphicImage value="#{ani.image}"
+                                        dataURI="true"
+                                        width="100"
+                                        height="100"/>
+                        <f:facet name="caption">
+                            <h3>#{ani.name}</h3>
+                            <p>#{ani.description}</p>
+                            <p>
+                                <b:button look="primary"
+                                          value="View Details"/>
+                            </p>
+                        </f:facet>
+                    </b:thumbnail>
+            </ui:repeat>
+        </b:form>
+        -->
+            
+            <!--
+            <b:row>
+                <ui:repeat value="#{animal.getAllAnimals()}"
+                           var="ani">
+                    <b:column col-sm="6" col-md="4">
+                        <b:thumbnail>
+                            <o:graphicImage value="#{ani.image}"
+                                            dataURI="true"
+                                            width="100"
+                                            height="100"/>
+                            <f:facet name="caption">
+                                <h3>#{ani.name}</h3>
+                                <p>#{ani.description}</p>
+                                <p>
+                                    <b:button look="primary"
+                                              value="View Details"/>
+                                </p>
+                            </f:facet>
+                        </b:thumbnail>
+                    </b:column>
+                </ui:repeat>
+            </b:row>
+            
+            -->
+        
+        
         <div class="container">
              <h:form>
-                 <!-- Tabs to Search by type -->
-                 <ul class="nav nav-tabs nav-justified">
-                     <li class="active">
-                         <h:commandLink action="#{animal.showAll()}"
-                                        type="reset"
-                                        value="All"/>
-                     </li>
-                     <li>
-                         <h:commandLink action="#{animal.showDogs()}"
-                                        type="reset"
-                                        value="Dogs"/>
-                     </li>
-                     <li>
-                         <h:commandLink action="#{animal.showCats()}"
-                                        type="reset"
-                                        value="Cats"/>
-                     </li>
-                     
-                 </ul>
-                <!-- Table of animals -->
                 <ul class="list-unstyled">
                 <ui:repeat value="#{animal.getAllAnimals()}"
                            var="ani">
