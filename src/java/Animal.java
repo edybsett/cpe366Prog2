@@ -27,6 +27,7 @@ public class Animal implements Serializable {
     private byte[] image; //base64 encoded bytes
     private DBConnect dbConnect = new DBConnect();
     private String type = "all";
+    private int activeIndex = 0;
     
     /**
      * Gets a list of all animals to be displayed where 
@@ -39,6 +40,7 @@ public class Animal implements Serializable {
         Connection con = Util.connect(dbConnect);
         
         String query = "SELECT * from Animal";
+        setTypeFromActiveIndex();
         if (!type.equals("all"))
             query += " WHERE type=?";
         
@@ -64,6 +66,20 @@ public class Animal implements Serializable {
         con.commit();
         con.close();
         return allAnimals;
+    }
+    
+    private void setTypeFromActiveIndex() {
+        switch (activeIndex) {
+            case 0:
+                type = "all";
+                break;
+            case 1:
+                type = "dogs";
+                break;
+            case 2:
+                type = "cats";
+                break;
+        }
     }
 
     /**
@@ -163,5 +179,19 @@ public class Animal implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * @return the activeIndex
+     */
+    public int getActiveIndex() {
+        return activeIndex;
+    }
+
+    /**
+     * @param activeIndex the activeIndex to set
+     */
+    public void setActiveIndex(int activeIndex) {
+        this.activeIndex = activeIndex;
     }
 }
