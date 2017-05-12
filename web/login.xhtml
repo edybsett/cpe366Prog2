@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    <ui:composition template="template.xhtml">
+        <ui:define name="head">
+         
+            <title>ACME Humane Society</title>
+        </ui:define>
+        <ui:define name="navbar"/>
+        <ui:define name="body">
+            <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
+            <b:container fluid="true">
+                <h:outputText value="Hello"/>
+                <b:well>
+                    <h:form enctype="multipart/form-data">
+                        <b:inputText value="#{loginBean.username}"
+                                 fieldSize="lg"
+                                 class='form-control'
+                                 required ="true"
+                                 label="Username"
+                                 binding="#{loginBean.loginUI}"
+                                 requiredMessage="Your must enter a username"
+                                 id="isername"
+                                 placeholder="Username"/>
+                        <b:inputSecret value="#{loginBean.password}"
+                                 fieldSize="lg"
+                                 class='form-control'
+                                 required ="true"
+                                 label="Password"
+                                 validatorMessage="Incorrect Password/Username"
+                                 validator="#{loginBean.loginValidate}"
+                                 requiredMessage="Your must enter a password"
+                                 
+                                 id="password"/>
+                        <h:commandButton class="btn btn-primary"
+                                     value="Submit"
+                                     action="#{loginBean.getNav()}"/>
+                    </h:form>
+                    
+                </b:well>
+            </b:container>
+         
+        </ui:define>
+    </ui:composition> 
+</html>
