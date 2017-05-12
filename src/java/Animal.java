@@ -24,6 +24,7 @@ public class Animal implements Serializable {
     private String description;
     private int ageYears;
     private int ageMonths;
+    private int ageWeeks;
     private byte[] image; //base64 encoded bytes
     private DBConnect dbConnect = new DBConnect();
     private String type = "all";
@@ -42,7 +43,7 @@ public class Animal implements Serializable {
         String query = "SELECT * from Animal";
         setTypeFromActiveIndex();
         if (!type.equals("all"))
-            query += " WHERE type=?";
+            query += " WHERE species=?";
         
         /* Execute query */
         PreparedStatement ps = con.prepareStatement(query);
@@ -58,8 +59,6 @@ public class Animal implements Serializable {
             a.setAgeYears(rs.getInt("ageYears"));
             a.setAgeMonths(rs.getInt("ageMonths"));
             a.setDescription(rs.getString("description"));
-            //byte[] img = rs.getBytes("image");
-            //byte[] enc = Base64.getEncoder().encode(img);
             a.setImage(rs.getBytes("image"));
             allAnimals.add(a);
         }
