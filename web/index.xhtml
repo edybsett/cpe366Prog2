@@ -36,6 +36,7 @@
             </b:container>
         </b:jumbotron>
         <b:container>
+            <h:form>
             <ui:repeat value="#{animal.getAllAnimals()}"
                        var="ani">
                 <b:column col-xs="6" 
@@ -55,11 +56,14 @@
                                 Age: young <br/>
                             Weight: fat <br/>
                             Breed: blah</p>
-                            <a class="btn btn-primary">Learn More</a>
+                            <h:commandLink value="Learn More"
+                                             class="btn btn-primary"
+                                             action="#{profile.createProfile(ani)}"/>
                         </div>
                     </div>
                 </b:column>
             </ui:repeat>
+            </h:form>
         </b:container>
         
         <!-- Contact Us -->
