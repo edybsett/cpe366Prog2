@@ -1,5 +1,9 @@
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
@@ -14,6 +18,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 @RequestScoped
 public class LoginBean implements Serializable {
     private UIInput loginUI;
+    /* DB Connection */
+    private DBConnect dbConnect = new DBConnect();
     
     @NotEmpty
     private String username;
@@ -53,10 +59,32 @@ public class LoginBean implements Serializable {
         return navigation;
     }
  
-    public void loginValidate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+    public void loginValidate(FacesContext context, UIComponent component, Object value) throws ValidatorException, SQLException {
+        Connection con = Util.connect(dbConnect);
         username = loginUI.getLocalValue().toString();
         password = value.toString();
         navigation = "";
+        
+        if (con == null) {
+           throw new SQLException("Can't get database connection");
+        }
+        
+        PreparedStatement ps
+                    = con.prepareStatement(
+                            "select role, id from Login where username=? and password=?");
+        ps.setString(1, username);
+        ps.setString(2, password);
+        ResultSet result = ps.executeQuery();
+        if (!result.next()) {
+            navigation = "login";
+            FacesMessage errorMessage = new FacesMessage("Wrong login/password");
+            throw new ValidatorException(errorMessage);
+        }
+        String getTitle = result.getString("role");
+        navigation = "home";
+        result.close();
+        con.close();
+        /*
         if ("admin".equalsIgnoreCase(username) && "hi".equalsIgnoreCase(password)) {           
             navigation = "home";
         } else {
@@ -64,6 +92,7 @@ public class LoginBean implements Serializable {
             FacesMessage errorMessage = new FacesMessage("Wrong login/password");
             throw new ValidatorException(errorMessage);   
         }
+*/
     }
  
     
