@@ -15,6 +15,11 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>profile</managed-bean-name>
+        <managed-bean-class>Profile</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
         <managed-bean-name>util</managed-bean-name>
         <managed-bean-class>Util</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
@@ -57,6 +62,10 @@
         <navigation-case>
             <from-outcome>newPet</from-outcome>
             <to-view-id>/newPet.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>profile</from-outcome>
+            <to-view-id>/profile.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     

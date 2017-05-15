@@ -48,38 +48,17 @@ public class Form implements Serializable {
         PreparedStatement ps;
         String query;
         query = "INSERT INTO Animal(name, ageYears, ageMonths, description, ";
-        query += "type) VALUES (?,?,?,?,?)";
+        query += "species, image) VALUES (?,?,?,?,?, ?)";
         ps = con.prepareStatement(query);
         ps.setString(1, animalName);
         ps.setInt(2, animalAgeY);
         ps.setInt(3, animalAgeM);
         ps.setString(4, animalDesc);
         ps.setString(5, animalType);
-        ps.executeUpdate();
-        
-        /* Get the id and consider animals might have the same name */
-        query = "SELECT id FROM Animal WHERE name = ?";
-        query += " AND ageYears = ? AND ageMonths = ?";
-        query += " AND description = ? AND type = ?";
-        ps = con.prepareStatement(query);
-        ps.setString(1, animalName);
-        ps.setInt(2, animalAgeY);
-        ps.setInt(3, animalAgeM);
-        ps.setString(4, animalDesc);
-        ps.setString(5, animalType);
-        ResultSet rs = ps.executeQuery();
-        rs.next();
-        animalId = rs.getInt("id");
-        
-        /* Set the image for that id */
-        query = "UPDATE Animal SET image=? ";
-        query += "WHERE id = ?";
-        ps = con.prepareStatement(query);
-        //ps.setBinaryStream(1, fin, (int)img.length());
         InputStream is = animalImage.getInputStream();
-        ps.setBinaryStream(1,is);
-        ps.setInt(2, animalId);
+        ps.setBinaryStream(6,is);
         ps.executeUpdate();
+        
         con.commit();
         con.close();
         return "index";

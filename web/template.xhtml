@@ -11,24 +11,23 @@
     <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
     <ui:insert name="head"/>
   </h:head>
-  <h:body>
+  <h:body style="padding-top:70px;">
       <ui:insert name="navbar">
           <!-- NAV BAR -->
           <b:container>
           <b:navBar brand="ACME"
                     brandHref="index.xhtml"
                     inverse="true"
-                    position="top"
                     fixed="top">
               
               <b:navbarLinks >
                   <b:listLinks class="navbar-nav"
                                style="display:inline;">
-                  <b:navLink value="Home" href="index.xhtml#"/>
+                  <b:navLink value="Home" href="faces/index.xhtml#"/>
                   <b:navLink value="Add A Pet"
                              outcome="newPet"/>
-                  <b:navLink value="About" href="index.xhtml#pets"/>
-                  <b:navLink value="Contact" href="index.xhtml#contact"/>
+                  <b:navLink value="About" href="faces/index.xhtml#pets"/>
+                  <b:navLink value="Contact" href="faces/index.xhtml#contact"/>
                   </b:listLinks>
                   
               </b:navbarLinks>
