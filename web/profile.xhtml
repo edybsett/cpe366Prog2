@@ -14,13 +14,42 @@
     </ui:define>
       
       <ui:define name="body">
-          <h:form>
-              <h1>#{profile.name}</h1>
-              <h3>#{profile.ageYears}</h3>
-              <h3>#{profile.ageMonths}</h3>
-              <p>#{profile.description}</p>
-          </h:form>
-          
+          <b:container>
+              <b:panel title="#{profile.name}"
+                       collapsible="false"
+                       look="primary">
+                  <b:container>
+                      <b:row class="show-grid">
+                          <b:column col-xs="6" col-md="4">
+                            <o:graphicImage value="#{profile.image}"
+                                      dataURI="true"
+                                      class="img-fluid"/>
+                          </b:column>
+                          <b:column col-xs="12" col-md="8">
+                              <h4>Introduction</h4>
+                                <p>#{profile.description}</p>
+                          </b:column>
+                      </b:row>
+                    
+                      <b:row>
+                          <h:form>
+                              <h4>About Me</h4>
+                              <b:panelGrid colSpans="2, 10" size="xs">
+                                  <h:outputLabel value="Age"/>
+                                  <h:outputText value="#{profile.ageYears} years, #{profile.ageMonths} months, #{profile.ageWeeks} weeks"/>
+                                  <h:outputLabel value="Breed"/>
+                                  <h:outputText value="#{profile.breed}"/>
+                                  <h:outputLabel value="Weight"/>
+                                  <h:outputText value="#{profile.weight}"/>
+                                  <h:outputLabel value="Sex"/>
+                                  <h:outputText value="#{profile.sex}"/>
+                              </b:panelGrid>
+                          </h:form>
+                      </b:row>
+                  </b:container>
+                  
+              </b:panel>
+          </b:container>
       </ui:define>
       
   </ui:composition>

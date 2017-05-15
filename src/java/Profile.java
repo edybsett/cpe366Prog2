@@ -36,6 +36,7 @@ public class Profile implements Serializable{
         this.setDescription(ani.getDescription());
         this.setAgeYears(ani.getAgeYears());
         this.setAgeMonths(ani.getAgeMonths());
+        this.setImage(ani.getImage());
         
         return "profile";        
     }
