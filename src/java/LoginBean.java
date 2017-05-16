@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class LoginBean implements Serializable {
     private UIInput loginUI;
     /* DB Connection */
@@ -28,6 +28,8 @@ public class LoginBean implements Serializable {
     private String password;
  
     private String navigation;
+    
+    private boolean loggedIn;
     
     public UIInput getLoginUI() {
         return loginUI;
@@ -58,6 +60,15 @@ public class LoginBean implements Serializable {
     public String getNav() {
         return navigation;
     }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+    
+    public String logout() {
+        Util.invalidateUserSession();
+        return "home";
+    }
  
     public void loginValidate(FacesContext context, UIComponent component, Object value) throws ValidatorException, SQLException {
         Connection con = Util.connect(dbConnect);
@@ -81,6 +92,7 @@ public class LoginBean implements Serializable {
             throw new ValidatorException(errorMessage);
         }
         String getTitle = result.getString("role");
+        loggedIn = true;
         navigation = "home";
         result.close();
         con.close();

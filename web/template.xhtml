@@ -34,7 +34,9 @@
               <b:navbarLinks pull="right">
                   <b:listLinks class="navbar-nav"
                                style="display:inline;">
-                  <b:navLink value="Login" outcome="login"/>
+                  <b:navLink value="#{loginBean.username}" rendered="#{loginBean.isLoggedIn()}"/>
+                  <b:navLink value="Login" outcome="login" rendered="#{!loginBean.isLoggedIn()}"/>
+                  <b:navLink value="Sign Out" outcome="#{loginBean.logout()}" rendered="#{loginBean.isLoggedIn()}"/>
                   <b:navLink value="Register"/>
                   </b:listLinks>
               </b:navbarLinks>
