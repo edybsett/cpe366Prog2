@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+  <ui:composition template="template.xhtml">
+    <ui:define name="head">
+        <title>ACME Humane Society</title>
+    </ui:define>
+      
+    <ui:define name="body">
+        <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
+        <!-- The Jumbotron -->
+        <b:jumbotron>
+            <b:container>
+            <h1 class="display-3">Adoption</h1>
+            <p class="lead">Thank you for adopting today!</p>
+            </b:container>
+        </b:jumbotron>
+                     <b:well>
+                    <h:form enctype="multipart/form-data">
+                        <b:inputText value="#{adoption.animalid}"
+                                 fieldSize="lg"
+                                 class='form-control'
+                                 required ="true"
+                                 label="Animal ID"
+                                 requiredMessage="Your must enter an animal to adopt"
+                                 id="animalid"
+                                 placeholder="Animal"/>
+                        <b:inputSecret value="#{adoption.customerid}"
+                                 fieldSize="lg"
+                                 class='form-control'
+                                 required ="true"
+                                 label="Customer ID"
+                                 validatorMessage="Invalid Customer Id"
+                                 validator="#{adoption.validate}"
+                                 requiredMessage="Your must enter a customer to adopt"
+                                 id="customerid"
+                                 placeholder="Customer"/>
+                        <h:commandButton class="btn btn-primary"
+                                     value="Adopt!"
+                                     action="#{adoption.deleteAnimal()}"/>
+                    </h:form>
+                    
+                </b:well>
+        
+    </ui:define>
+  </ui:composition> 
+</html>
