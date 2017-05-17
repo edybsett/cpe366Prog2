@@ -18,6 +18,8 @@
               <b:panel title="#{profile.name}"
                        collapsible="false"
                        look="primary">
+                  
+                  <!-- Image and description -->
                   <b:container>
                       <b:row class="show-grid">
                           <b:column col-xs="6" col-md="4">
@@ -30,22 +32,50 @@
                                 <p>#{profile.description}</p>
                           </b:column>
                       </b:row>
-                    
-                      <b:row>
-                          <h:form>
-                              <h4>About Me</h4>
-                              <b:panelGrid colSpans="2, 10" size="xs">
-                                  <h:outputLabel value="Age"/>
-                                  <h:outputText value="#{profile.ageYears} years, #{profile.ageMonths} months, #{profile.ageWeeks} weeks"/>
-                                  <h:outputLabel value="Breed"/>
-                                  <h:outputText value="#{profile.breed}"/>
-                                  <h:outputLabel value="Weight"/>
-                                  <h:outputText value="#{profile.weight}"/>
-                                  <h:outputLabel value="Sex"/>
-                                  <h:outputText value="#{profile.sex}"/>
-                              </b:panelGrid>
-                          </h:form>
-                      </b:row>
+                  </b:container>
+                  
+                  <!-- About Me -->
+                  <b:container>
+                      <h:form>
+                          <h4>About Me</h4>
+                          <b:panelGrid size="md"
+                                     colSpans="3, 9"
+                                     columns="2">
+                            <h:outputLabel value="Age"/>
+                            <h:outputText value="#{profile.ageYears} years, #{profile.ageMonths} months, #{profile.ageWeeks} weeks"/>
+
+                            <h:outputLabel value="Color"/>
+                            <h:outputText value="#{profile.color}"/>
+
+                            <h:outputLabel value="Sex"/>
+                            <h:outputText value="#{profile.sex}"/>
+
+                            <h:outputLabel value="Weight"/>
+                            <h:outputText value="#{profile.weight}"/>
+
+                            <h:outputLabel value="Energy Level"/>
+                            <h:outputText value="#{profile.energyLevel}"/>
+
+                            <h:outputLabel value="Food Type"/>
+                            <h:outputText value="#{profile.foodType}"/>
+                          </b:panelGrid>
+                      </h:form>
+                  </b:container>
+                  
+                  <!-- Medical History -->
+                  <b:container>
+                      <h:form>
+                          <h4>Medical History</h4>
+                          <p>None!</p>
+                      </h:form>
+                  </b:container>
+                  
+                  <!-- Current Holds/Place a Hold -->
+                  <b:container>
+                      <h:form>
+                          <h4>Current Holds</h4>
+                          <p>None</p>
+                      </h:form>
                   </b:container>
                   
               </b:panel>

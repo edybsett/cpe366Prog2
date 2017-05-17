@@ -23,29 +23,36 @@ and open the template in the editor.
             <b:container fluid="true">
                 
                 <b:well>
-                    <h:form enctype="multipart/form-data">
+                    <h:form enctype="multipart/form-data"
+                            id="loginform">
+                        <b:fetchBeanInfos/>
                         <b:inputText value="#{loginBean.username}"
-                                 fieldSize="lg"
-                                 class='form-control'
-                                 required ="true"
-                                 label="Username"
-                                 binding="#{loginBean.loginUI}"
-                                 requiredMessage="Your must enter a username"
-                                 id="isername"
-                                 placeholder="Username"/>
+                                     fieldSize="lg"
+                                     class='form-control'
+                                     required ="true"
+                                     label="Username"
+                                     binding="#{loginBean.loginUI}"
+                                     requiredMessage="Your must enter a username"
+                                     id="isername"
+                                     placeholder="Username"/>
                         <b:inputSecret value="#{loginBean.password}"
-                                 fieldSize="lg"
-                                 class='form-control'
-                                 required ="true"
-                                 label="Password"
-                                 validatorMessage="Incorrect Password/Username"
-                                 validator="#{loginBean.loginValidate}"
-                                 requiredMessage="Your must enter a password"
-                                 
-                                 id="password"/>
-                        <h:commandButton class="btn btn-primary"
-                                     value="Submit"
-                                     action="#{loginBean.getNav()}"/>
+                                       fieldSize="lg"
+                                       class='form-control'
+                                       required ="true"
+                                       label="Password"
+                                       validatorMessage="Incorrect Password/Username"
+                                       validator="#{loginBean.loginValidate}"
+                                       requiredMessage="Your must enter a password"
+                                       id="password">
+                            <f:validateLength minimum="2"/>
+                        </b:inputSecret>
+                        <b:commandButton class="btn btn-primary"
+                                         ajax="true"
+                                         update="@form:loginform"
+                                         value="Submit"
+                                         oncomplete="if(validationFailed) alert('Invalid username/password'); "
+                                         action="#{loginBean.getNav()}"/>
+   
                     </h:form>
                     
                 </b:well>

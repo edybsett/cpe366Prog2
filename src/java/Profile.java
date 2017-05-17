@@ -1,5 +1,6 @@
 
 import java.io.Serializable;
+import java.sql.Date;
 import javax.annotation.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
@@ -13,16 +14,25 @@ import javax.inject.Named;
 @SessionScoped
 @ManagedBean
 public class Profile implements Serializable{
-    private String   name;
-    private String   description;
-    private int      ageYears;
-    private int      ageMonths;
-    private int      ageWeeks;
-    private byte[]   image;
-    private String[] breed;
-    private String   sex;
-    private float    weight;
+    /* Inherited from Animal */
+    private int    id;
+    private int    ageYears;
+    private int    ageMonths;
+    private int    ageWeeks;
+    private String name;
+    private float  weight;
+    private String species;
+    private String description;
+    private Date   dateAdmitted;
+    private String color;
+    private String foodType;
+    private int    energyLevel;
+    private String sex;
+    private byte[] image; 
+    /* Need to be constructed from tables */
+    private DBConnect dbConnect = new DBConnect();
     private String[] tags;
+    private String[] breeds;
     
     /**
      * Using the given animal information, finds the rest of 
@@ -32,12 +42,20 @@ public class Profile implements Serializable{
      * @return "profile". You should never need to go anywhere else
      */
     public String createProfile(Animal ani) {
-        this.setName(ani.getName());
-        this.setDescription(ani.getDescription());
-        this.setAgeYears(ani.getAgeYears());
-        this.setAgeMonths(ani.getAgeMonths());
-        this.setImage(ani.getImage());
-        
+        this.id           = ani.getId();
+        this.ageYears     = ani.getAgeYears();
+        this.ageMonths    = ani.getAgeMonths();
+        this.ageWeeks     = ani.getAgeWeeks();
+        this.name         = ani.getName();
+        this.weight       = ani.getWeight();
+        this.species      = ani.getSpecies();
+        this.description  = ani.getDescription();
+        this.dateAdmitted = ani.getDateAdmitted();
+        this.color        = ani.getColor();
+        this.foodType     = ani.getFoodType();
+        this.energyLevel  = ani.getEnergyLevel();
+        this.sex          = ani.getSex();
+        this.image        = ani.getImage();
         return "profile";        
     }
 
@@ -122,21 +140,7 @@ public class Profile implements Serializable{
      * @param image the image to set
      */
     public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-    /**
-     * @return the breed
-     */
-    public String[] getBreed() {
-        return breed;
-    }
-
-    /**
-     * @param breed the breed to set
-     */
-    public void setBreed(String[] breed) {
-        this.breed = breed;
+        this.setImage(image);
     }
 
     /**
@@ -178,6 +182,104 @@ public class Profile implements Serializable{
      * @param tags the tags to set
      */
     public void setTags(String[] tags) {
-        this.tags = tags;
+        this.setTags(tags);
+    }
+
+    /**
+     * @return the breeds
+     */
+    public String[] getBreeds() {
+        return breeds;
+    }
+
+    /**
+     * @param breeds the breeds to set
+     */
+    public void setBreeds(String[] breeds) {
+        this.setBreeds(breeds);
+    }
+
+    /**
+     * @return the color
+     */
+    public String getColor() {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the species
+     */
+    public String getSpecies() {
+        return species;
+    }
+
+    /**
+     * @param species the species to set
+     */
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    /**
+     * @return the dateAdmitted
+     */
+    public Date getDateAdmitted() {
+        return dateAdmitted;
+    }
+
+    /**
+     * @param dateAdmitted the dateAdmitted to set
+     */
+    public void setDateAdmitted(Date dateAdmitted) {
+        this.dateAdmitted = dateAdmitted;
+    }
+
+    /**
+     * @return the foodType
+     */
+    public String getFoodType() {
+        return foodType;
+    }
+
+    /**
+     * @param foodType the foodType to set
+     */
+    public void setFoodType(String foodType) {
+        this.foodType = foodType;
+    }
+
+    /**
+     * @return the energyLevel
+     */
+    public int getEnergyLevel() {
+        return energyLevel;
+    }
+
+    /**
+     * @param energyLevel the energyLevel to set
+     */
+    public void setEnergyLevel(int energyLevel) {
+        this.energyLevel = energyLevel;
     }
 }
