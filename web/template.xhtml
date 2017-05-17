@@ -35,6 +35,8 @@
                   <b:listLinks class="navbar-nav"
                                style="display:inline;">
                   <b:navLink value="#{loginBean.username}" rendered="#{loginBean.isLoggedIn()}"/>
+                  <b:navLink value="List All Animals" outcome="home" rendered="#{loginBean.isEmployee()}"/>
+                  <b:navLink value="List All Employees" outcome="home" rendered="#{loginBean.isManager()}"/>
                   <b:navLink value="Login" outcome="login" rendered="#{!loginBean.isLoggedIn()}"/>
                   <b:navLink value="Sign Out" outcome="#{loginBean.logout()}" rendered="#{loginBean.isLoggedIn()}"/>
                   <b:navLink value="Register"/>
