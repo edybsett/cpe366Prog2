@@ -34,6 +34,16 @@
         <managed-bean-class>LoginBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>adoption</managed-bean-name>
+        <managed-bean-class>Adoption</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>employee</managed-bean-name>
+        <managed-bean-class>Employee</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
     
     <navigation-rule>
         <from-view-id>*</from-view-id>
@@ -64,6 +74,10 @@
             <to-view-id>/newPet.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-outcome>employeeAnimal</from-outcome>
+            <to-view-id>/employee.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>profile</from-outcome>
             <to-view-id>/profile.xhtml</to-view-id>
         </navigation-case>
@@ -72,6 +86,16 @@
     <navigation-rule>
         <from-view-id>
             /newPet.xhtml
+        </from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>
+            /adoption.xhtml
         </from-view-id>
         <navigation-case>
             <from-outcome>index</from-outcome>
