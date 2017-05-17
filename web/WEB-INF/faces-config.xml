@@ -74,6 +74,10 @@
             <to-view-id>/newPet.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-outcome>employeeAnimal</from-outcome>
+            <to-view-id>/employee.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>profile</from-outcome>
             <to-view-id>/profile.xhtml</to-view-id>
         </navigation-case>
