@@ -26,22 +26,22 @@ and open the template in the editor.
                     <h:form enctype="multipart/form-data"
                             id="loginform">
                         <b:fetchBeanInfos/>
-                        <b:inputText value="#{loginBean.username}"
+                        <b:inputText value="#{form.loginUsername}"
                                      fieldSize="lg"
                                      class='form-control'
                                      required ="true"
                                      label="Username"
-                                     binding="#{loginBean.loginUI}"
+                                     binding="#{form.loginUI}"
                                      requiredMessage="Your must enter a username"
                                      id="isername"
                                      placeholder="Username"/>
-                        <b:inputSecret value="#{loginBean.password}"
+                        <b:inputSecret value="#{form.loginPassword}"
                                        fieldSize="lg"
                                        class='form-control'
                                        required ="true"
                                        label="Password"
                                        validatorMessage="Incorrect Password/Username"
-                                       validator="#{loginBean.loginValidate}"
+                                       validator="#{form.loginValidate}"
                                        requiredMessage="Your must enter a password"
                                        id="password">
                             <f:validateLength minimum="2"/>
@@ -50,8 +50,10 @@ and open the template in the editor.
                                          ajax="true"
                                          update="@form:loginform"
                                          value="Submit"
-                                         oncomplete="if(validationFailed) alert('Invalid username/password'); "
-                                         action="#{loginBean.getNav()}"/>
+                                         oncomplete="if(validationFailed) alert('Invalid username/password');"
+                                         action="#{login.createLogin(form)}"
+                                         />
+                        
    
                     </h:form>
                     

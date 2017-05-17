@@ -1,3 +1,10 @@
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
@@ -6,24 +13,51 @@ import javax.inject.Named;
  * Represents a single employee
  * @author Austin Sparks (aasparks)
  */
-//@Named(value = "employee")
-//@SessionScoped
-//@ManagedBean
-public class Employee {
+@Named(value = "employee")
+@SessionScoped
+@ManagedBean
+public class Employee implements Serializable{
     private int id;
-    private String name;
+    private String username;
     private String password;
     private String firstName;
     private String lastName;
+    private String role;
+    private float  wage;
+    private DBConnect dbConnect = new DBConnect();
     
-    public Employee(){}
     
-    public Employee(int id, String name, String password) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
+    /**
+     * Gets a list of all Employees in the Database
+     */
+    public List<Employee> getEmployees() throws SQLException {
+         ArrayList<Employee> allEmps = new ArrayList<Employee>();
+        Connection con = Util.connect(dbConnect);
+        
+        String query = "SELECT * from Login JOIN Employee ON Login.id=Employee.id";
+        
+        /* Execute query */
+        PreparedStatement ps = con.prepareStatement(query);;
+        /* Get results */
+        ResultSet rs = ps.executeQuery();
+        
+        /* Get every result */
+        while (rs.next()) {
+            Employee emp = new Employee();
+            emp.setId(rs.getInt("id"));
+            emp.setUsername(rs.getString("username"));
+            emp.setFirstName(rs.getString("firstName"));
+            emp.setLastName(rs.getString("lastName"));
+            emp.setPassword(rs.getString("password"));
+            emp.setRole(rs.getString("role"));
+            emp.setWage(rs.getFloat("wage"));
+            allEmps.add(emp);
+        }
+        con.commit();
+        con.close();
+        return allEmps;
     }
-    
+   
     
     /**
      * @return the firstName
@@ -69,20 +103,6 @@ public class Employee {
     }
 
     /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    /**
      * @return the password
      */
     public String getPassword() {
@@ -97,6 +117,48 @@ public class Employee {
     }
     
     public String toString(){
-        return id + ": " + name;
+        return id + ": " + firstName;
+    }
+
+    /**
+     * @return the role
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * @param role the role to set
+     */
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    /**
+     * @return the wage
+     */
+    public float getWage() {
+        return wage;
+    }
+
+    /**
+     * @param wage the wage to set
+     */
+    public void setWage(float wage) {
+        this.wage = wage;
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

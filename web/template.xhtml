@@ -14,7 +14,8 @@
   <h:body style="padding-top:70px;">
       <ui:insert name="navbar">
           <!-- NAV BAR -->
-          <b:container>
+          <h:form>
+          <b:container id="navcontainer">
           <b:navBar brand="ACME"
                     brandHref="index.xhtml"
                     inverse="true"
@@ -34,16 +35,26 @@
               <b:navbarLinks pull="right">
                   <b:listLinks class="navbar-nav"
                                style="display:inline;">
-                  <b:navLink value="#{loginBean.username}" rendered="#{loginBean.isLoggedIn()}"/>
-                  <b:navLink value="List All Animals" outcome="employeeAnimal" rendered="#{loginBean.isEmployee()}"/>
-                  <b:navLink value="List All Employees" outcome="home" rendered="#{loginBean.isManager()}"/>
-                  <b:navLink value="Login" outcome="login" rendered="#{!loginBean.isLoggedIn()}"/>
-                  <b:navLink value="Sign Out" outcome="#{loginBean.logout()}" rendered="#{loginBean.isLoggedIn()}"/>
-                  <b:navLink value="Register"/>
+                      <!-- When logged in -->
+                      <b:dropMenu value="#{login.username}" 
+                                  rendered="#{login.isLoggedIn()}">
+                        <b:navLink value="List All Animals" outcome="employeeAnimal"/>
+                        <b:navLink value="List All Employees" outcome="home"/>
+                        <b:navCommandLink value="Logout"
+                                          action="#{login.logout}"/>
+                    </b:dropMenu>
+                      <!-- When not logged in -->
+                    <b:navLink value="Login" 
+                               outcome="login" 
+                               rendered="#{!login.isLoggedIn()}"/>
+                  <b:navLink value="Register" 
+                             outcome="register" 
+                             rendered="#{!login.isLoggedIn()}"/>
                   </b:listLinks>
               </b:navbarLinks>
           </b:navBar>
           </b:container>
+              </h:form>
       </ui:insert>
     <ui:insert name="body"/>
   </h:body>
