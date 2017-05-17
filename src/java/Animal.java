@@ -1,6 +1,4 @@
-import java.io.InputStream;
 import java.io.Serializable;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Base64;
+import java.sql.Date;
 
 /**
  * Represents the animals
@@ -20,15 +18,21 @@ import java.util.Base64;
 @SessionScoped
 @ManagedBean
 public class Animal implements Serializable {
+    private int    id;
+    private int    ageYears;
+    private int    ageMonths;
+    private int    ageWeeks;
     private String name;
+    private float  weight;
+    private String species;
     private String description;
-    private int ageYears;
-    private int ageMonths;
-    private int ageWeeks;
+    private Date   dateAdmitted;
+    private String color;
+    private String foodType;
+    private int    energyLevel;
+    private String sex;
     private byte[] image; 
     private DBConnect dbConnect = new DBConnect();
-    private String type = "all";
-    private int activeIndex = 0;
     
     /**
      * Gets a list of all animals to be displayed where 
@@ -41,23 +45,28 @@ public class Animal implements Serializable {
         Connection con = Util.connect(dbConnect);
         
         String query = "SELECT * from Animal";
-        if (!type.equals("all"))
-            query += " WHERE species=?";
         
         /* Execute query */
         PreparedStatement ps = con.prepareStatement(query);
-        if (!type.equals("all"))
-            ps.setString(1, getType());
         /* Get results */
         ResultSet rs = ps.executeQuery();
         
         /* Get every result */
         while (rs.next()) {
             Animal a = new Animal();
-            a.setName(rs.getString("name"));
+            a.setId(rs.getInt("id"));
             a.setAgeYears(rs.getInt("ageYears"));
             a.setAgeMonths(rs.getInt("ageMonths"));
+            a.setAgeWeeks(rs.getInt("ageWeeks"));
+            a.setName(rs.getString("name"));
+            a.setWeight(rs.getFloat("weight"));
+            a.setSpecies(rs.getString("species"));
             a.setDescription(rs.getString("description"));
+            a.setDateAdmitted(rs.getDate("dateAdmitted"));
+            a.setColor(rs.getString("color"));
+            a.setFoodType(rs.getString("foodType"));
+            a.setEnergyLevel(rs.getInt("energyLevel"));
+            a.setSex(rs.getString("sex"));
             a.setImage(rs.getBytes("image"));
             allAnimals.add(a);
         }
@@ -114,34 +123,6 @@ public class Animal implements Serializable {
     }
 
     /**
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-    
-    public String showAll(){
-        this.type = "all";
-        return "refresh";
-    }
-    
-    public String showDogs() {
-        this.type = "dog";
-        return "refresh";
-    }
-    public String showCats() {
-        this.type = "cat";
-        return "refresh";
-    }
-
-    /**
      * @return the image
      */
     public byte[] getImage() {
@@ -171,16 +152,128 @@ public class Animal implements Serializable {
     }
 
     /**
-     * @return the activeIndex
+     * @return the ageWeeks
      */
-    public int getActiveIndex() {
-        return activeIndex;
+    public int getAgeWeeks() {
+        return ageWeeks;
     }
 
     /**
-     * @param activeIndex the activeIndex to set
+     * @param ageWeeks the ageWeeks to set
      */
-    public void setActiveIndex(int activeIndex) {
-        this.activeIndex = activeIndex;
+    public void setAgeWeeks(int ageWeeks) {
+        this.ageWeeks = ageWeeks;
+    }
+
+    /**
+     * @return the color
+     */
+    public String getColor() {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    /**
+     * @return the sex
+     */
+    public String getSex() {
+        return sex;
+    }
+
+    /**
+     * @param sex the sex to set
+     */
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    /**
+     * @return the weight
+     */
+    public float getWeight() {
+        return weight;
+    }
+
+    /**
+     * @param weight the weight to set
+     */
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the species
+     */
+    public String getSpecies() {
+        return species;
+    }
+
+    /**
+     * @param species the species to set
+     */
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    /**
+     * @return the dateAdmitted
+     */
+    public Date getDateAdmitted() {
+        return dateAdmitted;
+    }
+
+    /**
+     * @param dateAdmitted the dateAdmitted to set
+     */
+    public void setDateAdmitted(Date dateAdmitted) {
+        this.dateAdmitted = dateAdmitted;
+    }
+
+    /**
+     * @return the foodType
+     */
+    public String getFoodType() {
+        return foodType;
+    }
+
+    /**
+     * @param foodType the foodType to set
+     */
+    public void setFoodType(String foodType) {
+        this.foodType = foodType;
+    }
+
+    /**
+     * @return the energyLevel
+     */
+    public int getEnergyLevel() {
+        return energyLevel;
+    }
+
+    /**
+     * @param energyLevel the energyLevel to set
+     */
+    public void setEnergyLevel(int energyLevel) {
+        this.energyLevel = energyLevel;
     }
 }

@@ -57,15 +57,17 @@ create table Animal(
     id          SERIAL PRIMARY KEY,
     /* Age is usually a guess and this prevents us 
        from dealing with DATEs */
-    ageYears     INT,
-    ageMonths    INT,
-    ageWeeks     INT,
+    ageYears     INT CHECK(ageYears < 100 AND ageYears > -1),
+    ageMonths    INT CHECK(ageMonths < 12 AND ageMonths > -1),
+    ageWeeks     INT CHECK(ageWeeks < 5 AND ageWeeks > -1),
     name         TEXT,
     weight       FLOAT,
     species      TEXT, /* 'cat' or 'dog' */
     description  TEXT,
     dateAdmitted DATE,
+    color        TEXT, /* Can be anything */
     foodtype     TEXT, /* May be anything */
+    sex          TEXT,
     energyLevel  INT,  /* 1 - 10 */
     image        BYTEA
 );

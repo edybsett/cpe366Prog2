@@ -1,16 +1,20 @@
 
 --- Dogs
 -- Chula
-- Breed: Boxer, American Pit Bull, Terrier
-- Color: Brown Brindle
-- Age: Adult
-- Sex: Female
-- Personality: housetrained, highenergy, goodwdogs, goodwcats
-- Weight: 60
 - AgeY: 3
 - AgeM: 0
 - AgeW: 1
+- Name: Chula
+- Weight: 60
+- Species: dog
 - Description: Hello, my name is Chula and I'm one beautiful, large lady. I have a very mature and strong look to me, but I'm quite the softy when it comes to people giving me love and attention. I'll lean into you for more pets! It feels so nice to be pet! I'm sort of a busy-body. I enjoy having ways to exert my energy whether that is going for a run, playing in the yard, going for a walk, or a hike. Whatever floats your boat, I'm in! I'm an energetic, bouncy, and spunky gal that can't wait to have a home where I can be my goofy self. I just love to be where the people are and really feel a part of the family. Are you my perfect match that can give me that human companionship I so desperately desire?
+- DateAdmitted: bogus
+- FoodType: regular
+- EnergyLevel: 8
+- Sex: Female
+- Breed: Boxer, American Pit Bull, Terrier
+- Color: Brown Brindle
+- Tags: housetrained, highenergy, goodwdogs, goodwcats
 
 -- Hatchi
 - Breed: Siberian Husky Mix
