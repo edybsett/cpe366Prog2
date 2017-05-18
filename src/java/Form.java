@@ -105,7 +105,7 @@ public class Form implements Serializable {
         
         con.commit();
         con.close();
-        return "index";
+        return "home";
     }
     
     /**
