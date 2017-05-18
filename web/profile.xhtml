@@ -74,10 +74,13 @@
                   </b:container>
                   
                   <!-- Current Holds/Place a Hold -->
-                  <b:container>
+                  <b:container id="holds">
                       <h:form>
                           <h4>Current Holds</h4>
-                          <p>None</p>
+                          <ui:repeat value="#{profile.holds}"
+                                     var="h">
+                              <p>#{h}</p>
+                          </ui:repeat>
                       </h:form>
                   </b:container>
 
@@ -87,27 +90,45 @@
                        look="danger"
                        collapsible="false"
                        title="Employee Functions">
+                  
                   <b:panel title="Adopt"
                            collapsed="true"
                            look="success">
                       <h:form>
                       <b:inputText value="#{profile.customerUsername}"
+                                   validator="#{profile.validateAdopt}"
                                    label="Customer Username"/>
-                      <b:navCommandLink class="btn btn-primary"
-                                        style="color:white;"
+                      <b:commandButton  class="btn btn-primary"
+                                        ajax="true"
+                                        update="@form"
                                         action="#{adoption.checkout(profile)}"
                                         value="Adopt"/>
+                      <b:messages escape="false"/>
                       </h:form>
                   </b:panel>
+                  
                   <b:panel title="Hold"
                            collapsed="true"
                            look="warning">
-                      <h:form>
+                      <h:form id="formhold">
                       <b:inputText value="#{profile.customerUsername}"
+                                   validator="#{profile.validateHold}"
                                    label="Customer Username"/>
-                      <b:navCommandLink class="btn btn-primary"
-                                        style="color:white;"
-                                        value="Hold"/>
+                      
+                      <b:switch value="#{profile.removing}"
+                                onText="Remove"
+                                offText="Add"
+                                onColor="danger"
+                                update="@form"
+                                offColor="success"/>
+                      <br/>
+                      <b:commandButton class="btn btn-primary"
+                                       ajax="true"
+                                       update="@form"
+                                       action="#{profile.buttonAction()}"
+                                       value="Submit">
+                      </b:commandButton>
+                      <b:messages escape="false"/>
                       </h:form>
                   </b:panel>
                       

@@ -6,120 +6,120 @@
       xmlns:o="http://omnifaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-    
-  <ui:composition template="template.xhtml">
-    <ui:define name="head">
-        <title>ACME Humane Society</title>
-    </ui:define>
-      
-    <ui:define name="body">
-        <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
-        <!-- The Jumbotron -->
-        <b:jumbotron>
-            <b:container>
-            <h1 class="display-3">Adoption</h1>
-            <p class="lead">Thank you for adopting today!</p>
-            </b:container>
-        </b:jumbotron>
-        
-        <b:container>
-            <h2>Summary</h2>
-            <b:panelGrid size="md"
-                         colSpans="3, 9"
-                         columns="2">
-                <h:outputLabel value="Customer"/>
-                <h:outputText value="#{adoption.customerUsername}"/>
-                
-                <h:outputLabel value="Animal"/>
-                <h:outputText value="#{adoption.animalName}"/>
-                
-                <h:outputLabel value="Total Cost"/>
-                <h:outputText value="#{adoption.price}"/>
-            </b:panelGrid>
-        </b:container>
-        
-        <b:container>
-                    <h2>Checkout Information</h2>
-                    <b:well>
-                        <b:form enctype="multipart/form-data">
-                            <b:inputText label="Card Number"
-                                         placeholder="XXXX-XXXX-XXXX-XXXX"/>
-                            <b:inputText label="Name on Card"
-                                         placeholder="Sandy Cheeks"/>
-                            <b:row>
-                                <b:column col-xs="3">
-                                    <b:inputText value='#{form.cvc}'
-                                                 id='inputcvc'
-                                                 required="true"
-                                                 label="CVC"
-                                                 validatorMessage="CVC must be 3 digits"
-                                                 update="@this"
-                                                 class='form-control'>
-                                        <f:convertNumber minIntegerDigits="3"/>
-                                    </b:inputText>
-                                </b:column>
-                                <b:column col-xs="3">
-                                    <b:selectOneMenu value="#{form.expirationM}"
-                                                     style="height:2.5em;"
-                                                     label="Month">
-                                        <f:selectItem itemLabel="01 January"
-                                                      itemValue="1"/>
-                                        <f:selectItem itemLabel="02 February"
-                                                      itemValue="2"/>
-                                        <f:selectItem itemLabel="03 May"
-                                                      itemValue="3"/>
-                                        <f:selectItem itemLabel="04 April"
-                                                      itemValue="4"/>
-                                        <f:selectItem itemLabel="05 May"
-                                                      itemValue="5"/>
-                                        <f:selectItem itemLabel="06 June"
-                                                      itemValue="6"/>
-                                        <f:selectItem itemLabel="07 July"
-                                                      itemValue="7"/>
-                                        <f:selectItem itemLabel="08 August"
-                                                      itemValue="8"/>
-                                        <f:selectItem itemLabel="09 September"
-                                                      itemValue="9"/>
-                                        <f:selectItem itemLabel="10 October"
-                                                      itemValue="10"/>
-                                        <f:selectItem itemLabel="11 November"
-                                                      itemValue="11"/>
-                                        <f:selectItem itemLabel="12 December"
-                                                      itemValue="12"/>
-                                    </b:selectOneMenu>
-                                </b:column>
-                                <b:column col-xs="3">
-                                    <b:selectOneMenu value="#{form.expirationY}"
-                                                     style="height:2.5em;"
-                                                     label="Year">
-                                        <f:selectItem itemLabel="2017"
-                                                      />
-                                        <f:selectItem itemLabel="2018"/>
-                                        <f:selectItem itemLabel="2019"/>
-                                        <f:selectItem itemLabel="2020"/>
-                                        <f:selectItem itemLabel="2021"/>
-                                        <f:selectItem itemLabel="2022"/>
-                                        <f:selectItem itemLabel="2023"/>
-                                        <f:selectItem itemLabel="2024"/>
-                                        <f:selectItem itemLabel="2025"/>
-                                        <f:selectItem itemLabel="2026"/>
-                                        <f:selectItem itemLabel="2027"/>
-                                        <f:selectItem itemLabel="2028"/>
-                                        <f:selectItem itemLabel="2029"/>
-                                        <f:selectItem itemLabel="2030"/>
-                                    </b:selectOneMenu>
-                                </b:column>
-                            </b:row>
-                            <b:messages escape="false"/>
-                            <b:commandButton class="btn btn-primary"
-                                             ajax="true"
-                                             update="@form"
-                                             action="#{form.deleteAnimal(adoption.animalId)}"
-                                             value="Submit"/>
-                        </b:form>
-                    </b:well>
+          
+    <ui:composition template="template.xhtml">
+        <ui:define name="head">
+            <title>ACME Humane Society</title>
+        </ui:define>
+            
+        <ui:define name="body">
+            <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
+            <!-- The Jumbotron -->
+            <b:jumbotron>
+                <b:container>
+                    <h1 class="display-3">Adoption</h1>
+                    <p class="lead">Thank you for adopting today!</p>
                 </b:container>
-        
-    </ui:define>
-  </ui:composition> 
+            </b:jumbotron>
+                
+            <b:container>
+                <h2>Summary</h2>
+                <b:panelGrid size="md"
+                             colSpans="3, 9"
+                             columns="2">
+                    <h:outputLabel value="Customer"/>
+                    <h:outputText value="#{adoption.customerUsername}"/>
+                        
+                    <h:outputLabel value="Animal"/>
+                    <h:outputText value="#{adoption.animalName}"/>
+                        
+                    <h:outputLabel value="Total Cost"/>
+                    <h:outputText value="$#{adoption.price}"/>
+                </b:panelGrid>
+            </b:container>
+                
+            <b:container>
+                <h2>Checkout Information</h2>
+                <b:well>
+                    <b:form enctype="multipart/form-data">
+                        <b:inputText label="Card Number"
+                                     placeholder="XXXX-XXXX-XXXX-XXXX"/>
+                        <b:inputText label="Name on Card"
+                                     placeholder="Sandy Cheeks"/>
+                        <b:row>
+                            <b:column col-xs="3">
+                                <b:inputText value='#{form.cvc}'
+                                             id='inputcvc'
+                                             required="true"
+                                             label="CVC"
+                                             validatorMessage="CVC must be 3 digits"
+                                             update="@this"
+                                             class='form-control'>
+                                    <f:convertNumber minIntegerDigits="3"/>
+                                </b:inputText>
+                            </b:column>
+                            <b:column col-xs="3">
+                                <b:selectOneMenu value="#{form.expirationM}"
+                                                 style="height:2.5em;"
+                                                 label="Month">
+                                    <f:selectItem itemLabel="01 January"
+                                                  itemValue="1"/>
+                                    <f:selectItem itemLabel="02 February"
+                                                  itemValue="2"/>
+                                    <f:selectItem itemLabel="03 May"
+                                                  itemValue="3"/>
+                                    <f:selectItem itemLabel="04 April"
+                                                  itemValue="4"/>
+                                    <f:selectItem itemLabel="05 May"
+                                                  itemValue="5"/>
+                                    <f:selectItem itemLabel="06 June"
+                                                  itemValue="6"/>
+                                    <f:selectItem itemLabel="07 July"
+                                                  itemValue="7"/>
+                                    <f:selectItem itemLabel="08 August"
+                                                  itemValue="8"/>
+                                    <f:selectItem itemLabel="09 September"
+                                                  itemValue="9"/>
+                                    <f:selectItem itemLabel="10 October"
+                                                  itemValue="10"/>
+                                    <f:selectItem itemLabel="11 November"
+                                                  itemValue="11"/>
+                                    <f:selectItem itemLabel="12 December"
+                                                  itemValue="12"/>
+                                </b:selectOneMenu>
+                            </b:column>
+                            <b:column col-xs="3">
+                                <b:selectOneMenu value="#{form.expirationY}"
+                                                 style="height:2.5em;"
+                                                 label="Year">
+                                    <f:selectItem itemLabel="2017"
+                                                  />
+                                    <f:selectItem itemLabel="2018"/>
+                                    <f:selectItem itemLabel="2019"/>
+                                    <f:selectItem itemLabel="2020"/>
+                                    <f:selectItem itemLabel="2021"/>
+                                    <f:selectItem itemLabel="2022"/>
+                                    <f:selectItem itemLabel="2023"/>
+                                    <f:selectItem itemLabel="2024"/>
+                                    <f:selectItem itemLabel="2025"/>
+                                    <f:selectItem itemLabel="2026"/>
+                                    <f:selectItem itemLabel="2027"/>
+                                    <f:selectItem itemLabel="2028"/>
+                                    <f:selectItem itemLabel="2029"/>
+                                    <f:selectItem itemLabel="2030"/>
+                                </b:selectOneMenu>
+                            </b:column>
+                        </b:row>
+                        <b:messages escape="false"/>
+                        <b:commandButton class="btn btn-primary"
+                                         ajax="true"
+                                         update="@form"
+                                         action="#{form.deleteAnimal(adoption.animalId)}"
+                                         value="Submit"/>
+                    </b:form>
+                </b:well>
+            </b:container>
+                
+        </ui:define>
+    </ui:composition> 
 </html>

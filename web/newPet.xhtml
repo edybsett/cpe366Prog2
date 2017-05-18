@@ -27,6 +27,7 @@
                             <b:inputText value="#{form.animalName}"
                                          class='form-control'
                                          required ="true"
+                                         
                                          label="Name"
                                          requiredMessage="Your must enter Animal's Name"
                                          id="inputName"/>
@@ -70,6 +71,7 @@
                                     <b:inputText value='#{form.animalWeight}'
                                                  id='inputWeight'
                                                  required="true"
+                                                 requiredMessage="Weight required"
                                                  label="Weight"
                                                  class='form-control'>
                                         <f:convertNumber />
@@ -82,6 +84,7 @@
                                     <b:inputText value='#{form.animalAgeY}'
                                                  id='inputAgeY'
                                                  required="true"
+                                                 requiredMessage="Age Years required"
                                                  update="@this"
                                                  validatorMessage="Age Years must be 0 - 100"
                                                  label="Age Years"
@@ -94,6 +97,7 @@
                                     <b:inputText value='#{form.animalAgeM}'
                                                  id='inputAgeM'
                                                  required="true"
+                                                 requiredMessage="Age Months Required"
                                                  label="Age Months"
                                                  update="@this"
                                                  validatorMessage="Age Months must be 0 - 11"
@@ -107,6 +111,7 @@
                                     <b:inputText value='#{form.animalAgeW}'
                                                  id='inputAgeW'
                                                  required="true"
+                                                 requiredMessage="Age Weeks Required"
                                                  validatorMessage="Age Weeks must be 0 - 4"
                                                  label="Age Weeks"
                                                  update="@this"
@@ -122,6 +127,7 @@
                                     <b:inputText value='#{form.animalColor}'
                                                  id='inputColor'
                                                  required="true"
+                                                 requiredMessage="Color requried"
                                                  label="Color"
                                                  class='form-control'/>
                                 </b:column>
@@ -130,6 +136,7 @@
                                     <b:touchSpin value="#{form.animalEnergyLevel}"
                                                  id="inputEnergyLevel"
                                                  required="true"
+                                                 requiredMessage="Energy Level Required"
                                                  label="Energy Level"
                                                  min="0"
                                                  max="10"/>
@@ -139,12 +146,14 @@
                             <b:inputText value="#{form.animalFoodType}"
                                          id="inputFoodType"
                                          required="true"
+                                         requiredMessage="Food Type required"
                                          label="Food Type"
                                          class="form-control"/>
                             <!-- Description -->
                             <b:inputTextarea value='#{form.animalDesc}'
                                              id='inputDesc'
                                              required="true"
+                                             requiredMessage="Description required"
                                              label="Description"
                                              class='form-control'/>
                             <!-- Breeds -->
@@ -153,6 +162,7 @@
                                     <b:inputText value="#{form.animalBreeds}"
                                                  id="inputBreeds"
                                                  required="true"
+                                                 requiredMessage="Breeds required"
                                                  label="Breeds"
                                                  class="tags"
                                                  tags="true">
@@ -167,6 +177,8 @@
                             <h:inputFile id="inputImage"
                                          value="#{form.animalImage}"
                                          class="form-control"
+                                         required="true"
+                                         requiredMessage="Image required"
                                          style="height:3em;"/>
                             <b:messages escape="false"/>
                             <br/>

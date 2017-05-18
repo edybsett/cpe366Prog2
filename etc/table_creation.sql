@@ -127,7 +127,7 @@ create table Personality(
 /* Just store who adopted whom */
 create table Adoption(
     animalId   INT REFERENCES Animal ON DELETE CASCADE,
-    customerId INT REFERENCES Customer ON DELETE CASCADE,
+    customerId INT REFERENCES Login ON DELETE CASCADE,
     day        DATE
 );
 
@@ -136,7 +136,7 @@ create table Adoption(
    in order of who placed it. */
 create table TempHold(
     animalId   INT REFERENCES Animal ON DELETE CASCADE, 
-    customerId INT REFERENCES Customer ON DELETE CASCADE,
+    customerId INT REFERENCES Login ON DELETE CASCADE,
     startDate  DATE,
     /* 1, 2, or 3 */
     priority   INT

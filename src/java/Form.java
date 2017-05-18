@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
@@ -23,7 +24,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author Austin Sparks (aasparks)
  */
 @Named(value = "form")
-@SessionScoped
+@ViewScoped
 @ManagedBean
 public class Form implements Serializable {
     /* DB Connection */
@@ -58,6 +59,8 @@ public class Form implements Serializable {
     private int    cvc;
     private int    expirationM;
     private int    expirationY;
+    /* Hold form data */
+    private String customerUsername;
     
     
     /**
@@ -193,8 +196,7 @@ public class Form implements Serializable {
         con.close();
         return "index";
     }
-    
-    
+     
     /**
      * @return the animalName
      */
@@ -529,5 +531,19 @@ public class Form implements Serializable {
      */
     public void setExpirationY(int expirationY) {
         this.expirationY = expirationY;
+    }
+
+    /**
+     * @return the customerUsername
+     */
+    public String getCustomerUsername() {
+        return customerUsername;
+    }
+
+    /**
+     * @param customerUsername the customerUsername to set
+     */
+    public void setCustomerUsername(String customerUsername) {
+        this.customerUsername = customerUsername;
     }
 }

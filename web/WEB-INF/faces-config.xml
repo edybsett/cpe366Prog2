@@ -27,7 +27,7 @@
     <managed-bean>
         <managed-bean-name>form</managed-bean-name>
         <managed-bean-class>Form</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
+        <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>login</managed-bean-name>
@@ -103,6 +103,11 @@
         <navigation-case>
             <from-outcome>adoption</from-outcome>
             <to-view-id>/adoption.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>profile</from-outcome>
+            <to-view-id>/profile.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
 
