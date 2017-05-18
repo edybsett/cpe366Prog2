@@ -14,7 +14,7 @@ and open the template in the editor.
     
     <ui:composition template="template.xhtml">
         <ui:define name="head">
-         
+            
             <title>ACME Humane Society</title>
         </ui:define>
         
@@ -34,7 +34,11 @@ and open the template in the editor.
                                      binding="#{form.loginUI}"
                                      requiredMessage="Your must enter a username"
                                      id="isername"
-                                     placeholder="Username"/>
+                                     placeholder="Username">
+                            <f:facet name="prepend">
+                                <b:icon name="user"/>
+                            </f:facet>
+                        </b:inputText>
                         <b:inputSecret value="#{form.loginPassword}"
                                        fieldSize="lg"
                                        class='form-control'
@@ -45,6 +49,9 @@ and open the template in the editor.
                                        requiredMessage="Your must enter a password"
                                        id="password">
                             <f:validateLength minimum="2"/>
+                            <f:facet name="prepend">
+                                <b:iconAwesome name="key"/>
+                            </f:facet>
                         </b:inputSecret>
                         <b:commandButton class="btn btn-primary"
                                          ajax="true"
@@ -54,12 +61,12 @@ and open the template in the editor.
                                          action="#{login.createLogin(form)}"
                                          />
                         
-   
+                        
                     </h:form>
                     
                 </b:well>
             </b:container>
-         
+            
         </ui:define>
     </ui:composition> 
 </html>

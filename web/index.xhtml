@@ -14,8 +14,9 @@
             
         <ui:define name="body">
             <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
+
             <!-- The Jumbotron -->
-            <b:jumbotron>
+            <b:jumbotron style="background-color:lightblue;">
                 <b:container>
                     <h1 class="display-3">ACME Humane Society</h1>
                     <p class="lead">Discover your new best friend</p>
@@ -23,23 +24,36 @@
             </b:jumbotron>
                 
             <h:form>
-            <b:container>
-                <b:carousel id="parque" style="width:600px">
-                    <b:carouselItem style="width:600px; height:400px">
-                        <b:image value="pic/thesmuggest.jpg"/>
+                <b:carousel id="parque"
+                            style="margin:auto; max-width:1000px">
+                    <b:carouselItem >
+                        <b:image value="pic/sneakycat.jpg"
+                                 width="1280px"
+                                 height="640px"/>
                     </b:carouselItem>
-                    <b:carouselItem style="width:600px; height:413px">
-                        <b:image value="pic/smug.jpg" />
+                    <b:carouselItem >
+                        <b:image value="pic/cooldog.jpg"
+                                 width="1280px"
+                                 height="640px"/>
                     </b:carouselItem>
-                    <b:carouselItem style="width:597px; height:413px">
-                        <b:image value="pic/happydog.jpg"/>
+                    <b:carouselItem >
+                        <b:image value="pic/burritocat.jpg"
+                                 width="1280px"
+                                 height="640px"/>
                     </b:carouselItem>
-                </b:carousel>     
-            </b:container>
+                    <b:carouselItem >
+                        <b:image value="pic/scareddog.jpg"
+                                 width="1280px"
+                                 height="640px"/>
+                    </b:carouselItem>
+                </b:carousel>   
             </h:form>
+            
+            <br/>
                 
             <!-- Animal Listing -->
-            <b:jumbotron id="pets">
+            <b:jumbotron id="pets"
+                         style="background-color:lightblue">
                 <b:container>
                     <h2>Current Residents</h2>
                     <p class="lead">
@@ -88,7 +102,8 @@
             </b:container>
                 
             <!-- Contact Us -->
-            <b:jumbotron id="contact">
+            <b:jumbotron id="contact"
+                         style="background-color:lightblue;">
                 <b:container>
                     <h2 class="display-2">Contact Us</h2>
                 </b:container>
