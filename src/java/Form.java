@@ -33,10 +33,17 @@ public class Form implements Serializable {
     private String animalName;
     private int    animalAgeY;
     private int    animalAgeM;
+    private int    animalAgeW;
     private String animalDesc;
-    private String animalType;
+    private float  animalWeight;
+    private String animalSpecies;
+    private String animalColor;
+    private String animalFoodType;
+    private int    animalEnergyLevel;
+    private String animalSex;
     private Part   animalImage;
     private int    animalId;
+    private String animalBreeds;
     /* Login form data */
     private UIInput loginUI;
     @NotEmpty
@@ -58,21 +65,75 @@ public class Form implements Serializable {
         Connection con = Util.connect(dbConnect);
         PreparedStatement ps;
         String query;
-        query = "INSERT INTO Animal(name, ageYears, ageMonths, description, ";
-        query += "species, image) VALUES (?,?,?,?,?, ?)";
+        query = "INSERT INTO Animal(name, ageYears, ageMonths, ageWeeks, ";
+        query += "description, weight, species, color, foodType, energyLevel, ";
+        query += "sex, image) ";
+        query += "VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ";
+        query += "RETURNING id";
         ps = con.prepareStatement(query);
         ps.setString(1, animalName);
         ps.setInt(2, animalAgeY);
         ps.setInt(3, animalAgeM);
-        ps.setString(4, animalDesc);
-        ps.setString(5, animalType);
+        ps.setInt(4, animalAgeW);
+        ps.setString(5, animalDesc);
+        ps.setFloat(6, animalWeight);
+        ps.setString(7,animalSpecies);
+        ps.setString(8, animalColor);
+        ps.setString(9, animalFoodType);
+        ps.setInt(10, animalEnergyLevel);
+        ps.setString(11, animalSex);
         InputStream is = animalImage.getInputStream();
-        ps.setBinaryStream(6,is);
-        ps.executeUpdate();
+        ps.setBinaryStream(12,is);
+        ResultSet rs = ps.executeQuery();
+        /* Get the animal id */
+        if (rs.next())
+            animalId = rs.getInt("id");
+        ps.close();
+        rs.close();
+        
+        /* Insert breeds into table */
+        for(String s : animalBreeds.split(",")) {
+            addBreed(s, con);
+        }
         
         con.commit();
         con.close();
         return "index";
+    }
+    
+    /**
+     * Adds the breed if it doesn't already exist
+     * @param breed
+     * @param con 
+     */
+    private void addBreed(String breed, Connection con) throws SQLException {
+        int breedId = -1;
+        /* Try to get breed id from table */
+        String query = "SELECT id FROM Breed WHERE type=?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, breed);
+        ResultSet rs = ps.executeQuery();
+        
+        /* If breed doesn't exist */
+        if (!rs.next()) {
+            /* Add to table and get id */
+            query = "INSERT INTO Breed(type) VALUES (?) RETURNING id";
+            ps = con.prepareStatement(query);
+            ps.setString(1, breed);
+            rs = ps.executeQuery();
+            rs.next();
+ 
+        }
+            
+        /* Add id's to BreedXAnimal */
+        breedId = rs.getInt("id");
+        
+        query = "INSERT INTO BreedXAnimal VALUES (?, ?)";
+        ps = con.prepareStatement(query);
+        ps.setInt(2, animalId);
+        ps.setInt(1, breedId);
+        ps.executeUpdate();
+        ps.close();
     }
     
     /**
@@ -172,15 +233,15 @@ public class Form implements Serializable {
     /**
      * @return the animalType
      */
-    public String getAnimalType() {
-        return animalType;
+    public String getAnimalSpecies() {
+        return animalSpecies;
     }
 
     /**
-     * @param animalType the animalType to set
+     * @param animalSpecies the animalType to set
      */
-    public void setAnimalType(String animalType) {
-        this.animalType = animalType;
+    public void setAnimalSpecies(String animalSpecies) {
+        this.animalSpecies = animalSpecies;
     }
 
     /**
@@ -293,5 +354,103 @@ public class Form implements Serializable {
      */
     public void setLoginUI(UIInput loginUI) {
         this.loginUI = loginUI;
+    }
+
+    /**
+     * @return the animalAgeW
+     */
+    public int getAnimalAgeW() {
+        return animalAgeW;
+    }
+
+    /**
+     * @param animalAgeW the animalAgeW to set
+     */
+    public void setAnimalAgeW(int animalAgeW) {
+        this.animalAgeW = animalAgeW;
+    }
+
+    /**
+     * @return the animalWeight
+     */
+    public float getAnimalWeight() {
+        return animalWeight;
+    }
+
+    /**
+     * @param animalWeight the animalWeight to set
+     */
+    public void setAnimalWeight(float animalWeight) {
+        this.animalWeight = animalWeight;
+    }
+
+    /**
+     * @return the animalColor
+     */
+    public String getAnimalColor() {
+        return animalColor;
+    }
+
+    /**
+     * @param animalColor the animalColor to set
+     */
+    public void setAnimalColor(String animalColor) {
+        this.animalColor = animalColor;
+    }
+
+    /**
+     * @return the animalFoodType
+     */
+    public String getAnimalFoodType() {
+        return animalFoodType;
+    }
+
+    /**
+     * @param animalFoodType the animalFoodType to set
+     */
+    public void setAnimalFoodType(String animalFoodType) {
+        this.animalFoodType = animalFoodType;
+    }
+
+    /**
+     * @return the energyLevel
+     */
+    public int getAnimalEnergyLevel() {
+        return animalEnergyLevel;
+    }
+
+    /**
+     * @param animalEnergyLevel the energyLevel to set
+     */
+    public void setAnimalEnergyLevel(int animalEnergyLevel) {
+        this.animalEnergyLevel = animalEnergyLevel;
+    }
+
+    /**
+     * @return the sex
+     */
+    public String getAnimalSex() {
+        return animalSex;
+    }
+
+    /**
+     * @param animalSex the sex to set
+     */
+    public void setAnimalSex(String animalSex) {
+        this.animalSex = animalSex;
+    }
+
+    /**
+     * @return the animalBreeds
+     */
+    public String getAnimalBreeds() {
+        return animalBreeds;
+    }
+
+    /**
+     * @param animalBreeds the animalBreeds to set
+     */
+    public void setAnimalBreeds(String animalBreeds) {
+        this.animalBreeds = animalBreeds;
     }
 }

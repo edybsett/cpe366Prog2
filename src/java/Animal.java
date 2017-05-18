@@ -31,6 +31,7 @@ public class Animal implements Serializable {
     private String foodType;
     private int    energyLevel;
     private String sex;
+    private String breeds = "Unknown";
     private byte[] image; 
     private DBConnect dbConnect = new DBConnect();
     
@@ -68,11 +69,47 @@ public class Animal implements Serializable {
             a.setEnergyLevel(rs.getInt("energyLevel"));
             a.setSex(rs.getString("sex"));
             a.setImage(rs.getBytes("image"));
+            query = "SELECT type FROM Breed JOIN BreedXAnimal ON ";
+            query += "Breed.id = breedId WHERE animalId = ?";
+            PreparedStatement bps = con.prepareStatement(query);
+            bps.setInt(1, a.getId());
+            ResultSet breedSet = bps.executeQuery();
+
+            while (breedSet.next()) {
+                if (a.getBreeds().equals("Unknown"))
+                    a.setBreeds(breedSet.getString("type"));
+                else
+                    a.setBreeds(a.getBreeds() + ", " + breedSet.getString("type"));
+            }
             allAnimals.add(a);
         }
         con.commit();
         con.close();
         return allAnimals;
+    }
+    
+    private void collectBreeds(Animal a, Connection con) throws SQLException {
+        String query = "SELECT type FROM Breed JOIN BreedXAnimal ON ";
+        query += "Breed.id = breedId WHERE id = ?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, a.getId());
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            a.setBreeds(a.getBreeds() + ", " + rs.getString("type"));
+        }
+    }
+    
+    public String getShortAge() {
+        if (ageYears < 3)
+            return "young";
+        if (ageYears > 9)
+            return "senior";
+        return "adult";
+    }
+    
+    public String getFirstBreed() {
+        return breeds.split(",")[0];
     }
     
     public String onClick() {
@@ -275,5 +312,19 @@ public class Animal implements Serializable {
      */
     public void setEnergyLevel(int energyLevel) {
         this.energyLevel = energyLevel;
+    }
+
+    /**
+     * @return the breeds
+     */
+    public String getBreeds() {
+        return breeds;
+    }
+
+    /**
+     * @param breeds the breeds to set
+     */
+    public void setBreeds(String breeds) {
+        this.breeds = breeds;
     }
 }

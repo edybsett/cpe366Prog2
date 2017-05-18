@@ -6,73 +6,200 @@
       xmlns:o="http://omnifaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-
-      <h:body>
-  <ui:composition template="template.xhtml">
-
-    <ui:define name="head">
-        <title>Add Animal</title>
-    </ui:define>
-      
-    <ui:define name="body">
-        <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
-        
-        <b:jumbotron>
-            <b:container>
-                <h2>Add New Pet</h2>
-            </b:container>
-        </b:jumbotron>
-        
-        <b:container>
-            <b:well>
-                <h:form enctype="multipart/form-data">
-                    <b:inputText value="#{form.animalName}"
-                                 class='form-control'
-                                 required ="true"
-                                 label="Name"
-                                 requiredMessage="Your must enter Animal's Name"
-                                 id="inputName"/>
-                    <b:inputText value='#{form.animalAgeM}'
-                                 id='inputAgeM'
-                                 required="true"
-                                 label="Age Months"
-                                 class='form-control'/>
-                    <b:inputText value='#{form.animalAgeY}'
-                                 id='inputAgeY'
-                                 required="true"
-                                 label="Age Years"
-                                 class='form-control'/>
-                    <b:inputTextarea value='#{form.animalDesc}'
-                                     id='inputDesc'
-                                     required="true"
-                                     label="Description"
-                                     class='form-control'/>
-                    <b:selectOneMenu value='#{form.animalType}'
-                                     required="true"
-                                        class='form-control'
-                                        label="Species"
-                                        id='inputType'>
-                        <f:selectItem itemValue="cat"
-                                      class="form-check-label"
-                                      itemLabel="cat"/>
-                        <f:selectItem itemValue="dog"
-                                      class="form-check-label"
-                                      itemLabel="dog"/>
-                    </b:selectOneMenu>
-                    <label for="inputImage">Upload image</label>
-                    <h:inputFile id="inputImage"
-                                 value="#{form.animalImage}"
-                                 class="form-control"/>
-
-
-                    <h:commandButton class="btn btn-primary"
-                                     value="Submit"
-                                     action="#{form.submitAnimal()}"/>
-                </h:form>
-            </b:well>
-        </b:container>
-        
-    </ui:define>
-  </ui:composition>
+          
+    <h:body>
+        <ui:composition template="template.xhtml">
+            
+            <ui:define name="head">
+                <title>Add Animal</title>
+            </ui:define>
+                
+            <ui:define name="body">
+                <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
+                    
+                <b:jumbotron>
+                    <b:container>
+                        <h2>Add New Pet</h2>
+                    </b:container>
+                </b:jumbotron>
+                    
+                <b:container>
+                    <b:well>
+                        <b:form enctype="multipart/form-data"
+                                id="animalinfo">
+                            <!-- Name -->
+                            <b:inputText value="#{form.animalName}"
+                                         class='form-control'
+                                         required ="true"
+                                         label="Name"
+                                         requiredMessage="Your must enter Animal's Name"
+                                         id="inputName"/>
+                            <!-- Species and Sex are one row -->
+                            <b:row>
+                                <!-- Species -->
+                                <b:column col-md="4"
+                                          col-xs="6">
+                                    <b:selectOneMenu value='#{form.animalSpecies}'
+                                                     required="true"
+                                                     label="Species"
+                                                     style="height: 2.5em;"
+                                                     id='inputSpecies'>
+                                        <f:selectItem itemValue="cat"
+                                                      class="form-check-label"
+                                                      itemLabel="cat"/>
+                                        <f:selectItem itemValue="dog"
+                                                      class="form-check-label"
+                                                      itemLabel="dog"/>
+                                    </b:selectOneMenu>
+                                </b:column>
+                                <!-- Sex -->
+                                <b:column col-md="4"
+                                          col-xs="6">
+                                    <b:selectOneMenu value='#{form.animalSex}'
+                                                     required="true"
+                                                     label="Sex"
+                                                     style="height:2.5em;"
+                                                     id='inputSex'>
+                                        <f:selectItem itemValue="male"
+                                                      class="form-check-label"
+                                                      itemLabel="male"/>
+                                        <f:selectItem itemValue="female"
+                                                      class="form-check-label"
+                                                      itemLabel="female"/>
+                                    </b:selectOneMenu>
+                                </b:column>
+                                <!-- Weight -->
+                                <b:column col-md="4"
+                                          col-xs="6">
+                                    <b:inputText value='#{form.animalWeight}'
+                                                 id='inputWeight'
+                                                 required="true"
+                                                 label="Weight"
+                                                 class='form-control'>
+                                        <f:convertNumber />
+                                    </b:inputText>
+                                </b:column>
+                            </b:row>
+                            <!-- Age -->
+                            <b:row>
+                                <b:column col-md="4" col-xs="6">
+                                    <b:inputText value='#{form.animalAgeY}'
+                                                 id='inputAgeY'
+                                                 required="true"
+                                                 update="@this"
+                                                 validatorMessage="Age Years must be 0 - 100"
+                                                 label="Age Years"
+                                                 class='form-control'>
+                                        <f:validateLongRange minimum="0"
+                                                             maximum="100"/>
+                                    </b:inputText>
+                                </b:column>
+                                <b:column col-md="4" col-xs="6">
+                                    <b:inputText value='#{form.animalAgeM}'
+                                                 id='inputAgeM'
+                                                 required="true"
+                                                 label="Age Months"
+                                                 update="@this"
+                                                 validatorMessage="Age Months must be 0 - 11"
+                                                 class='form-control'>
+                                        <f:validateLongRange minimum="0"
+                                                             maximum="11"/>
+                                                         
+                                    </b:inputText>
+                                </b:column>
+                                <b:column col-md="4" col-xs="6">
+                                    <b:inputText value='#{form.animalAgeW}'
+                                                 id='inputAgeW'
+                                                 required="true"
+                                                 validatorMessage="Age Weeks must be 0 - 4"
+                                                 label="Age Weeks"
+                                                 update="@this"
+                                                 class='form-control'>
+                                        <f:validateLongRange minimum="0"
+                                                             maximum="4"/>
+                                    </b:inputText>
+                                </b:column>
+                            </b:row>
+                            <!-- Color -->
+                            <b:row>
+                                <b:column col-xs="6">
+                                    <b:inputText value='#{form.animalColor}'
+                                                 id='inputColor'
+                                                 required="true"
+                                                 label="Color"
+                                                 class='form-control'/>
+                                </b:column>
+                                <!-- Energy Level -->
+                                <b:column col-xs="6">
+                                    <b:touchSpin value="#{form.animalEnergyLevel}"
+                                                 id="inputEnergyLevel"
+                                                 required="true"
+                                                 label="Energy Level"
+                                                 min="0"
+                                                 max="10"/>
+                                </b:column>
+                            </b:row>
+                            <!-- Food Type -->
+                            <b:inputText value="#{form.animalFoodType}"
+                                         id="inputFoodType"
+                                         required="true"
+                                         label="Food Type"
+                                         class="form-control"/>
+                            <!-- Description -->
+                            <b:inputTextarea value='#{form.animalDesc}'
+                                             id='inputDesc'
+                                             required="true"
+                                             label="Description"
+                                             class='form-control'/>
+                            <!-- Breeds -->
+                            <b:row>
+                                <b:column span="12">
+                                    <b:inputText value="#{form.animalBreeds}"
+                                                 id="inputBreeds"
+                                                 required="true"
+                                                 label="Breeds"
+                                                 class="tags"
+                                                 tags="true">
+                                        <script>
+                                            $('.tags').tagsinput('refresh');
+                                        </script>
+                                    </b:inputText>
+                                </b:column>
+                            </b:row>
+                            <!-- Image -->
+                            <label for="inputImage">Upload image</label>
+                            <h:inputFile id="inputImage"
+                                         value="#{form.animalImage}"
+                                         class="form-control"
+                                         style="height:3em;"/>
+                            <b:messages escape="false"/>
+                            <br/>
+                                             
+                            <b:commandButton class="btn btn-primary"
+                                             value="Submit"
+                                             ajax="true"
+                                             update="@form"
+                                             action="#{form.submitAnimal()}"/>
+                        </b:form>
+                    </b:well>
+                        
+                    <!-- This script disables the enter key for tags
+                          so that a new tag doesn't submit the form -->
+                    <script>
+                        $('#animalinfo').on('keyup keypress', function(e) {
+                            var keyCode = e.keyCode || e.which;
+                            var focusedId = ($("*:focus").attr("id"));
+                            if(keyCode === 13) {
+                                if(typeof focusedId === "undefined") {
+                                    e.preventDefault();
+                                    return false;
+                                }
+                            }
+                        })
+                    </script>
+                </b:container>
+                    
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>

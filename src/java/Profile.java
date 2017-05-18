@@ -32,7 +32,7 @@ public class Profile implements Serializable{
     /* Need to be constructed from tables */
     private DBConnect dbConnect = new DBConnect();
     private String[] tags;
-    private String[] breeds;
+    private String breeds;
     
     /**
      * Using the given animal information, finds the rest of 
@@ -55,6 +55,7 @@ public class Profile implements Serializable{
         this.foodType     = ani.getFoodType();
         this.energyLevel  = ani.getEnergyLevel();
         this.sex          = ani.getSex();
+        this.breeds       = ani.getBreeds();
         this.image        = ani.getImage();
         return "profile";        
     }
@@ -188,14 +189,14 @@ public class Profile implements Serializable{
     /**
      * @return the breeds
      */
-    public String[] getBreeds() {
+    public String getBreeds() {
         return breeds;
     }
 
     /**
      * @param breeds the breeds to set
      */
-    public void setBreeds(String[] breeds) {
+    public void setBreeds(String breeds) {
         this.setBreeds(breeds);
     }
 
