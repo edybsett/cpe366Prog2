@@ -51,7 +51,7 @@
                             <h:outputText value="#{profile.sex}"/>
 
                             <h:outputLabel value="Weight"/>
-                            <h:outputText value="#{profile.weight}"/>
+                            <h:outputText value="#{profile.weight} lbs"/>
 
                             <h:outputLabel value="Energy Level"/>
                             <h:outputText value="#{profile.energyLevel}"/>
@@ -80,7 +80,41 @@
                           <p>None</p>
                       </h:form>
                   </b:container>
-                  
+
+              </b:panel>
+              
+              <b:panel rendered="#{login.isEmployee()}"
+                       look="danger"
+                       collapsible="false"
+                       title="Employee Functions">
+                  <b:panel title="Adopt"
+                           collapsed="true"
+                           look="success">
+                      <h:form>
+                      <b:inputText value="#{profile.customerUsername}"
+                                   label="Customer Username"/>
+                      <b:navCommandLink class="btn btn-primary"
+                                        style="color:white;"
+                                        action="#{adoption.checkout(profile)}"
+                                        value="Adopt"/>
+                      </h:form>
+                  </b:panel>
+                  <b:panel title="Hold"
+                           collapsed="true"
+                           look="warning">
+                      <h:form>
+                      <b:inputText value="#{profile.customerUsername}"
+                                   label="Customer Username"/>
+                      <b:navCommandLink class="btn btn-primary"
+                                        style="color:white;"
+                                        value="Hold"/>
+                      </h:form>
+                  </b:panel>
+                      
+                  <b:panel title="Edit"
+                           look="info">
+                      
+                  </b:panel>
               </b:panel>
           </b:container>
       </ui:define>

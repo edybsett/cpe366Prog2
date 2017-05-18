@@ -61,8 +61,16 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>register</from-outcome>
             <to-view-id>/register.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>employeeAnimal</from-outcome>
+            <to-view-id>/employee.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
@@ -90,22 +98,13 @@
     
     <navigation-rule>
         <from-view-id>
-            /newPet.xhtml
+            /profile.xhtml
         </from-view-id>
         <navigation-case>
-            <from-outcome>index</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
+            <from-outcome>adoption</from-outcome>
+            <to-view-id>/adoption.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>
-            /adoption.xhtml
-        </from-view-id>
-        <navigation-case>
-            <from-outcome>index</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+
     
 </faces-config>

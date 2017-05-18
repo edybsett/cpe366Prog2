@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet; 
 import java.sql.SQLException;
@@ -52,6 +53,11 @@ public class Form implements Serializable {
     private String loginPassword;
     private int    loginId;
     private String loginRole = "";
+    /* Checkout form data */
+    private String cardNumber;
+    private int    cvc;
+    private int    expirationM;
+    private int    expirationY;
     
     
     /**
@@ -67,8 +73,8 @@ public class Form implements Serializable {
         String query;
         query = "INSERT INTO Animal(name, ageYears, ageMonths, ageWeeks, ";
         query += "description, weight, species, color, foodType, energyLevel, ";
-        query += "sex, image) ";
-        query += "VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ";
+        query += "sex, image, dateAdmitted) ";
+        query += "VALUES (?,?,?,?,?,?,?,?,?,?,?,?, ?) ";
         query += "RETURNING id";
         ps = con.prepareStatement(query);
         ps.setString(1, animalName);
@@ -84,6 +90,7 @@ public class Form implements Serializable {
         ps.setString(11, animalSex);
         InputStream is = animalImage.getInputStream();
         ps.setBinaryStream(12,is);
+        ps.setDate(13, new Date(System.currentTimeMillis()));
         ResultSet rs = ps.executeQuery();
         /* Get the animal id */
         if (rs.next())
@@ -171,6 +178,20 @@ public class Form implements Serializable {
         result.close();
         con.commit();
         con.close();
+    }
+    
+    public String deleteAnimal (int id) throws SQLException, IOException {
+        Connection con = Util.connect(dbConnect);
+        PreparedStatement ps;
+        String query;
+        query = "DELETE FROM Animal where id = ?";
+        ps = con.prepareStatement(query);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+        
+        con.commit();
+        con.close();
+        return "index";
     }
     
     
@@ -452,5 +473,61 @@ public class Form implements Serializable {
      */
     public void setAnimalBreeds(String animalBreeds) {
         this.animalBreeds = animalBreeds;
+    }
+
+    /**
+     * @return the cardNumber
+     */
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    /**
+     * @param cardNumber the cardNumber to set
+     */
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    /**
+     * @return the cvc
+     */
+    public int getCvc() {
+        return cvc;
+    }
+
+    /**
+     * @param cvc the cvc to set
+     */
+    public void setCvc(int cvc) {
+        this.cvc = cvc;
+    }
+
+    /**
+     * @return the expirationM
+     */
+    public int getExpirationM() {
+        return expirationM;
+    }
+
+    /**
+     * @param expirationM the expirationM to set
+     */
+    public void setExpirationM(int expirationM) {
+        this.expirationM = expirationM;
+    }
+
+    /**
+     * @return the expirationY
+     */
+    public int getExpirationY() {
+        return expirationY;
+    }
+
+    /**
+     * @param expirationY the expirationY to set
+     */
+    public void setExpirationY(int expirationY) {
+        this.expirationY = expirationY;
     }
 }

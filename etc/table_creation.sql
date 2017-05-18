@@ -84,15 +84,15 @@ create table Price(
 /* This table is here in case we need it but we
    may never use it */
 create table Customer(
-    id    INT REFERENCES Login(id) PRIMARY KEY,
-    email TEXT 
+    id    INT REFERENCES Login ON DELETE CASCADE PRIMARY KEY,
+    email TEXT
 );
 
 /* Employees have a wage. Manager are employees. 
    Future information may be needed */
 create table Employee(
-    id   INT REFERENCES Login(id) PRIMARY KEY,
-    wage DECIMAL(6, 2)	
+    id   INT REFERENCES Login ON DELETE CASCADE,
+    wage DECIMAL(6, 2)
 );
 
 /* Animal breeds. We aren't pre-specifing all breeds
@@ -106,8 +106,8 @@ create table Breed(
 /* Crosses Breed with Animal for that 
    many-to-many relationship */
 create table BreedXAnimal(
-    breedId  INT REFERENCES Breed(id),
-    animalId INT REFERENCES Animal(id)
+    breedId  INT REFERENCES Breed ON DELETE CASCADE,
+    animalId INT REFERENCES Animal ON DELETE CASCADE
 );
 
 /* Tags represent the animal personality. These
@@ -120,14 +120,14 @@ create table Tag(
 
 /* Connects an animal to personality tags*/
 create table Personality(
-    animalId INT REFERENCES Animal(id),
-    tagId    INT REFERENCES Tag(id)   
+    animalId INT REFERENCES Animal ON DELETE CASCADE,
+    tagId    INT REFERENCES Tag ON DELETE CASCADE
 );
 
 /* Just store who adopted whom */
 create table Adoption(
-    animalId   INT REFERENCES Animal(id),
-    customerId INT REFERENCES Customer(id),
+    animalId   INT REFERENCES Animal ON DELETE CASCADE,
+    customerId INT REFERENCES Customer ON DELETE CASCADE,
     day        DATE
 );
 
@@ -135,8 +135,8 @@ create table Adoption(
    Up to 3 people can place a hold with priority 
    in order of who placed it. */
 create table TempHold(
-    animalId   INT REFERENCES Animal(id), 
-    customerId INT REFERENCES Customer(id),
+    animalId   INT REFERENCES Animal ON DELETE CASCADE, 
+    customerId INT REFERENCES Customer ON DELETE CASCADE,
     startDate  DATE,
     /* 1, 2, or 3 */
     priority   INT
@@ -157,8 +157,8 @@ create table MedicalCondition(
 
 /* Connects animals to conditions */
 create table MedicalInfo(
-    animalId INT REFERENCES Animal(id),
-    conditionId INT REFERENCES MedicalCondition(id)
+    animalId INT REFERENCES Animal ON DELETE CASCADE,
+    conditionId INT REFERENCES MedicalCondition ON DELETE CASCADE
 );
 
 /**************************
@@ -167,6 +167,8 @@ create table MedicalInfo(
 /* One manager to start */
 INSERT INTO Login(username, password, firstName, lastName, role)
 VALUES ('admin', 'admin', 'Ad', 'Min', 'manager');
+INSERT INTO Employee
+VALUES ((select id from Login where username='admin'), 20.00);
 
 /* Pricing as given by Wood's Humane Society except the timing 
    is a little different. */

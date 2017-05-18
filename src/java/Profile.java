@@ -33,6 +33,8 @@ public class Profile implements Serializable{
     private DBConnect dbConnect = new DBConnect();
     private String[] tags;
     private String breeds;
+    /* Used for holds and adoptions */
+    private String customerUsername;
     
     /**
      * Using the given animal information, finds the rest of 
@@ -282,5 +284,19 @@ public class Profile implements Serializable{
      */
     public void setEnergyLevel(int energyLevel) {
         this.energyLevel = energyLevel;
+    }
+
+    /**
+     * @return the customerUsername
+     */
+    public String getCustomerUsername() {
+        return customerUsername;
+    }
+
+    /**
+     * @param customerUsername the customerUsername to set
+     */
+    public void setCustomerUsername(String customerUsername) {
+        this.customerUsername = customerUsername;
     }
 }
