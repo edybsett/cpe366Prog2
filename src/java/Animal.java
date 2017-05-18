@@ -33,6 +33,8 @@ public class Animal implements Serializable {
     private String sex;
     private String breeds = "Unknown";
     private byte[] image; 
+    private boolean showCats = true;
+    private boolean showDogs = true;
     private DBConnect dbConnect = new DBConnect();
     
     /**
@@ -45,9 +47,25 @@ public class Animal implements Serializable {
         ArrayList<Animal> allAnimals = new ArrayList<Animal>();
         Connection con = Util.connect(dbConnect);
         
-        String query = "SELECT * from Animal";
+        String query = "SELECT * from Animal ";
+        
+        if (!showDogs) {
+            query += "WHERE species != 'dog' ";
+            
+            if (!showCats)
+                query += "AND species != 'cat' ";
+        }
+        
+        else if (!showCats) {
+            query += "WHERE species != 'cat' ";
+            
+            if (!showDogs)
+                query += "AND species != 'dog'";
+        }
+        
         
         /* Execute query */
+        System.out.println("Executing query: " + query);
         PreparedStatement ps = con.prepareStatement(query);
         /* Get results */
         ResultSet rs = ps.executeQuery();
@@ -326,5 +344,33 @@ public class Animal implements Serializable {
      */
     public void setBreeds(String breeds) {
         this.breeds = breeds;
+    }
+
+    /**
+     * @return the showCats
+     */
+    public boolean isShowCats() {
+        return showCats;
+    }
+
+    /**
+     * @param showCats the showCats to set
+     */
+    public void setShowCats(boolean showCats) {
+        this.showCats = showCats;
+    }
+
+    /**
+     * @return the showDogs
+     */
+    public boolean isShowDogs() {
+        return showDogs;
+    }
+
+    /**
+     * @param showDogs the showDogs to set
+     */
+    public void setShowDogs(boolean showDogs) {
+        this.showDogs = showDogs;
     }
 }

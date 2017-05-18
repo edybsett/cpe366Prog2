@@ -64,6 +64,21 @@
             
             <b:container>
                 <h:form>
+                    <b:row>
+                        <b:column col-md="2">
+                            <b:switch value="#{animal.showDogs}"
+                                      label="Show Dogs"
+                                      ajax="true"
+                                      update="@form"
+                                      />
+                        </b:column>
+                        <b:column col-md="2">
+                            <b:switch value="#{animal.showCats}"
+                                      ajax="true"
+                                      update="@form"
+                                      label="Show Cats"/>
+                        </b:column>
+                    </b:row>
                     <ui:repeat value="#{animal.getAllAnimals()}"
                                var="ani">
                         <b:column col-xs="6" 
