@@ -92,7 +92,7 @@ public class Form implements Serializable {
         ps.setInt(10, animalEnergyLevel);
         ps.setString(11, animalSex);
         InputStream is = animalImage.getInputStream();
-        ps.setBinaryStream(12,is);
+        ps.setBinaryStream(12,is,is.available());
         ps.setDate(13, new Date(System.currentTimeMillis()));
         ResultSet rs = ps.executeQuery();
         /* Get the animal id */
