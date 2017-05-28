@@ -161,6 +161,30 @@ create table MedicalInfo(
     conditionId INT REFERENCES MedicalCondition ON DELETE CASCADE
 );
 
+/* Class times */
+create table ClassTimes(
+    blockId   INT PRIMARY KEY,
+    startTime TIME,
+    endTime   TIME
+);
+
+/* Teachers teach classes */
+create table Teachers (
+    classId   INT PRIMARY KEY,
+    teacherId INT,
+    className TEXT,
+    FOREIGN KEY (teacherId) REFERENCES Login (id)
+);
+
+/* Many-many relationship table */
+create table Class (
+    id      INT PRIMARY KEY,
+    teachId INT,
+    blockID INT,
+    FOREIGN KEY (teachId) REFERENCES Teachers (classId),
+    FOREIGN KEY (blockId) REFERENCES ClassTimes (blockId)
+);
+
 /**************************
  * Initial, static data
  **************************/
@@ -194,6 +218,37 @@ VALUES ('good with dogs'),
        ('cuddler'),
        ('spayed/neutered'),
        ('bites');
+
+/* Set time blocks */
+INSERT INTO ClassTimes(blockId, startTime, endTime)
+VALUES (101, '03:00 PM', '04:00 PM'),
+       (102, '04:00 PM', '05:00 PM'),
+       (103, '05:00 PM', '06:00 PM'),
+       (104, '06:00 PM', '07:00 PM'),
+       (201, '03:00 PM', '04:00 PM'),
+       (202, '04:00 PM', '05:00 PM'),
+       (203, '05:00 PM', '06:00 PM'),
+       (204, '06:00 PM', '07:00 PM'),
+       (301, '03:00 PM', '04:00 PM'),
+       (302, '04:00 PM', '05:00 PM'),
+       (303, '05:00 PM', '06:00 PM'),
+       (304, '06:00 PM', '07:00 PM'),
+       (401, '03:00 PM', '04:00 PM'),
+       (402, '04:00 PM', '05:00 PM'),
+       (403, '05:00 PM', '06:00 PM'),
+       (404, '06:00 PM', '07:00 PM'),
+       (501, '03:00 PM', '04:00 PM'),
+       (502, '04:00 PM', '05:00 PM'),
+       (503, '05:00 PM', '06:00 PM'),
+       (504, '06:00 PM', '07:00 PM'),
+       (601, '03:00 PM', '04:00 PM'),
+       (602, '04:00 PM', '05:00 PM'),
+       (603, '05:00 PM', '06:00 PM'),
+       (604, '06:00 PM', '07:00 PM'),
+       (701, '03:00 PM', '04:00 PM'),
+       (702, '04:00 PM', '05:00 PM'),
+       (703, '05:00 PM', '06:00 PM'),
+       (704, '06:00 PM', '07:00 PM');
 
 /**************************
  * Permissions for everyone 
