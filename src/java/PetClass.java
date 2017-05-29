@@ -64,15 +64,42 @@ public class PetClass implements Serializable{
     public void setPrice(double price) {
         this.price = price;
     }
-    
     public List<PetClass> getMondayClasses() throws SQLException {
+        return getClasses(1);
+    }
+    
+    public List<PetClass> getTuesdayClasses() throws SQLException {
+        return getClasses(2);
+    }
+    
+    public List<PetClass> getWednesdayClasses() throws SQLException {
+        return getClasses(3);
+    }
+    
+    public List<PetClass> getThursdayClasses() throws SQLException {
+        return getClasses(4);
+    }
+    
+    public List<PetClass> getFridayClasses() throws SQLException {
+        return getClasses(5);
+    }
+    
+    public List<PetClass> getSaturdayClasses() throws SQLException {
+        return getClasses(6);
+    }
+    
+    public List<PetClass> getSundayClasses() throws SQLException {
+        return getClasses(7);
+    }
+    
+    public List<PetClass> getClasses(int day) throws SQLException {
         Connection con = Util.connect(dbConnect);
         List<PetClass> list = new ArrayList<PetClass>();
         PreparedStatement ps
                 = con.prepareStatement("select ct.startTime, ct.endTime, t.className, l.firstName, l.lastName, c.price \n" +
                                         "from Class c, ClassTimes ct, Teachers t, Login l\n" +
                                         "where c.teachId = t.classId and c.blockId = ct.blockId and l.id = t.teacherId\n" +
-                                        "and (ct.blockId >= 100 and ct.blockId < 200)");
+                                        "and (ct.blockId >= " + day +"00 and ct.blockId < " + day+1 +"00)");
         ResultSet result = ps.executeQuery();
 
      

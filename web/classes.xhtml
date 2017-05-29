@@ -23,14 +23,74 @@
                   <b:container>
                       <h3>Monday Classes</h3>
                       <h:form>
-                          <b:dataTable value="#{petclass.getMondayClasses()}" var="mon">
-                              <b:dataTableColumn value="#{mon.startTime}" label="Start Time" />
-                              <b:dataTableColumn value="#{mon.endTime}" label="End Time" />
-                              <b:dataTableColumn value="#{mon.className}" label="Class Name" />
-                              <b:dataTableColumn value="#{mon.username}" label="Teacher" />
-                              <b:dataTableColumn value="#{mon.price}" label="Drop-in Price" />
+                          <b:dataTable value="#{petclass.getMondayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
+                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
+                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
+                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
+                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
                           </b:dataTable>               
-                      </h:form>                  
+                      </h:form> 
+                      <h3>Tuesday Classes</h3>
+                      <h:form>
+                          <b:dataTable value="#{petclass.getTuesdayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
+                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
+                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
+                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
+                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
+                          </b:dataTable>               
+                      </h:form> 
+                      <h3>Wednesday Classes</h3>
+                      <h:form>
+                          <b:dataTable value="#{petclass.getWednesdayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
+                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
+                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
+                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
+                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
+                          </b:dataTable>
+                      </h:form> 
+                      <h3>Thursday Classes</h3>
+                      <h:form>
+                          <b:dataTable value="#{petclass.getThursdayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
+                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
+                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
+                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
+                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
+                          </b:dataTable>
+                      </h:form> 
+                      <h3>Friday Classes</h3>
+                      <h:form>
+                          <b:dataTable value="#{petclass.getFridayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
+                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
+                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
+                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
+                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
+                          </b:dataTable>
+                      </h:form> 
+                      <h3>Saturday Classes</h3>
+                      <h:form>
+                          <b:dataTable value="#{petclass.getSaturdayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
+                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
+                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
+                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
+                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
+                          </b:dataTable>
+                      </h:form> 
+                      <h3>Sunday Classes</h3>
+                      <h:form>
+                          <b:dataTable value="#{petclass.getSundayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
+                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
+                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
+                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
+                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
+                          </b:dataTable>
+                      </h:form> 
                   </b:container>
                   
                      
