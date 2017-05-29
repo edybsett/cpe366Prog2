@@ -170,7 +170,7 @@ create table ClassTimes(
 
 /* Teachers teach classes */
 create table Teachers (
-    classId   INT PRIMARY KEY,
+    classId   SERIAL PRIMARY KEY,
     teacherId INT,
     className TEXT,
     FOREIGN KEY (teacherId) REFERENCES Login (id)
@@ -178,9 +178,10 @@ create table Teachers (
 
 /* Many-many relationship table */
 create table Class (
-    id      INT PRIMARY KEY,
+    id      SERIAL PRIMARY KEY,
     teachId INT,
     blockID INT,
+    price   REAL,
     FOREIGN KEY (teachId) REFERENCES Teachers (classId),
     FOREIGN KEY (blockId) REFERENCES ClassTimes (blockId)
 );

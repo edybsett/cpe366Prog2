@@ -44,6 +44,11 @@
         <managed-bean-class>Employee</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>petclass</managed-bean-name>
+        <managed-bean-class>PetClass</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
     
     <navigation-rule>
         <from-view-id>*</from-view-id>
@@ -71,6 +76,10 @@
         <navigation-case>
             <from-outcome>employeeAnimal</from-outcome>
             <to-view-id>/employee.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>classes</from-outcome>
+            <to-view-id>/classes.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     

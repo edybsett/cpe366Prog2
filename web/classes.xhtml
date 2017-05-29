@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    
+  <ui:composition template="template.xhtml">
+    <ui:define name="head">
+        <title>#{profile.name}</title>
+    </ui:define>
+      
+      <ui:define name="body">
+          <b:container>
+              <b:panel title="Classes"
+                       collapsible="false"
+                       look="primary">
+                  
+                  <!-- Image and description -->
+                  <b:container>
+                      <h3>Monday Classes</h3>
+                      <h:form>
+                          <b:dataTable value="#{petclass.getMondayClasses()}" var="mon">
+                              <b:dataTableColumn value="#{mon.startTime}" label="Start Time" />
+                              <b:dataTableColumn value="#{mon.endTime}" label="End Time" />
+                              <b:dataTableColumn value="#{mon.className}" label="Class Name" />
+                              <b:dataTableColumn value="#{mon.username}" label="Teacher" />
+                              <b:dataTableColumn value="#{mon.price}" label="Drop-in Price" />
+                          </b:dataTable>               
+                      </h:form>                  
+                  </b:container>
+                  
+                     
+              </b:panel>
+          </b:container>
+      </ui:define>
+      
+  </ui:composition>
+</html>
