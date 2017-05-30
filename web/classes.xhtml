@@ -24,6 +24,7 @@
                       <h3>Monday Classes</h3>
                       <h:form>
                           <b:dataTable value="#{petclass.getMondayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
                               <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
                               <b:dataTableColumn value="#{day.endTime}" label="End Time" />
                               <b:dataTableColumn value="#{day.className}" label="Class Name" />
@@ -34,6 +35,7 @@
                       <h3>Tuesday Classes</h3>
                       <h:form>
                           <b:dataTable value="#{petclass.getTuesdayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
                               <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
                               <b:dataTableColumn value="#{day.endTime}" label="End Time" />
                               <b:dataTableColumn value="#{day.className}" label="Class Name" />
@@ -44,6 +46,7 @@
                       <h3>Wednesday Classes</h3>
                       <h:form>
                           <b:dataTable value="#{petclass.getWednesdayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
                               <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
                               <b:dataTableColumn value="#{day.endTime}" label="End Time" />
                               <b:dataTableColumn value="#{day.className}" label="Class Name" />
@@ -54,6 +57,7 @@
                       <h3>Thursday Classes</h3>
                       <h:form>
                           <b:dataTable value="#{petclass.getThursdayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
                               <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
                               <b:dataTableColumn value="#{day.endTime}" label="End Time" />
                               <b:dataTableColumn value="#{day.className}" label="Class Name" />
@@ -64,6 +68,7 @@
                       <h3>Friday Classes</h3>
                       <h:form>
                           <b:dataTable value="#{petclass.getFridayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
                               <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
                               <b:dataTableColumn value="#{day.endTime}" label="End Time" />
                               <b:dataTableColumn value="#{day.className}" label="Class Name" />
@@ -74,6 +79,7 @@
                       <h3>Saturday Classes</h3>
                       <h:form>
                           <b:dataTable value="#{petclass.getSaturdayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
                               <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
                               <b:dataTableColumn value="#{day.endTime}" label="End Time" />
                               <b:dataTableColumn value="#{day.className}" label="Class Name" />
@@ -84,6 +90,7 @@
                       <h3>Sunday Classes</h3>
                       <h:form>
                           <b:dataTable value="#{petclass.getSundayClasses()}" var="day">
+                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
                               <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
                               <b:dataTableColumn value="#{day.endTime}" label="End Time" />
                               <b:dataTableColumn value="#{day.className}" label="Class Name" />
@@ -92,6 +99,44 @@
                           </b:dataTable>
                       </h:form> 
                   </b:container>
+                  <b:panel rendered="#{login.isEmployee()}"
+                       look="danger"
+                       collapsible="false"
+                       title="Employee Functions">
+                  
+                      <b:panel title="Add Class"
+                               collapsed="true"
+                               look="success">
+                          <h:form>
+                          <b:formGroup>
+                            <b:selectOneMenu value="#{petclass.time}" colMd="2" required="true" label="Select Time:" labelColMd="2">
+                                <f:selectItem itemLabel="(Please select)" itemValue="" />
+                                <f:selectItem itemLabel="3:00-4:00" itemValue="1" />
+                                <f:selectItem itemLabel="4:00-5:00" itemValue="2" />
+                                <f:selectItem itemLabel="5:00-6:00" itemValue="3" />
+                                <f:selectItem itemLabel="6:00-7:00" itemValue="4" />
+                            </b:selectOneMenu>
+                            <b:selectOneMenu value="#{petclass.day}" colMd="2" required="true" label="Select Day:" labelColMd="2">
+                                <f:selectItem itemLabel="(Please select)" itemValue="" />
+                                <f:selectItem itemLabel="Monday" itemValue="100" />
+                                <f:selectItem itemLabel="Tuesday" itemValue="200" />
+                                <f:selectItem itemLabel="Wednesday" itemValue="300" />
+                                <f:selectItem itemLabel="Thursday" itemValue="400" />
+                                <f:selectItem itemLabel="Friday" itemValue="500" />
+                                <f:selectItem itemLabel="Saturday" itemValue="600" />
+                                <f:selectItem itemLabel="Sunday" itemValue="700" />
+                                
+                            </b:selectOneMenu>
+                          </b:formGroup>
+                          <b:commandButton  class="btn btn-primary"
+                                            ajax="true"
+                                            
+                                            action="#{petclass.addClass(login.username)}"
+                                            value="Add Class"/>
+                          <b:messages escape="false"/>
+                          </h:form>
+                      </b:panel>
+                  </b:panel>
                   
                      
               </b:panel>

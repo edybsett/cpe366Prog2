@@ -23,7 +23,35 @@ public class PetClass implements Serializable{
     private String username;
     private String className;
     private double price;
+    private int classId;
     private DBConnect dbConnect = new DBConnect();
+    
+    private int time;
+    private int day;
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getClassId() {
+        return classId;
+    }
+
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
 
     public String getStartTime() {
         return startTime;
@@ -92,11 +120,15 @@ public class PetClass implements Serializable{
         return getClasses(7);
     }
     
+    public String addClass(String username) {
+        return "classes";
+    }
+    
     public List<PetClass> getClasses(int day) throws SQLException {
         Connection con = Util.connect(dbConnect);
         List<PetClass> list = new ArrayList<PetClass>();
         PreparedStatement ps
-                = con.prepareStatement("select ct.startTime, ct.endTime, t.className, l.firstName, l.lastName, c.price \n" +
+                = con.prepareStatement("select c.id, ct.startTime, ct.endTime, t.className, l.firstName, l.lastName, c.price \n" +
                                         "from Class c, ClassTimes ct, Teachers t, Login l\n" +
                                         "where c.teachId = t.classId and c.blockId = ct.blockId and l.id = t.teacherId\n" +
                                         "and (ct.blockId >= " + day +"00 and ct.blockId < " + day+1 +"00)");
@@ -105,6 +137,7 @@ public class PetClass implements Serializable{
      
         while (result.next()) {
             PetClass pet = new PetClass();
+            pet.setClassId(result.getInt("id"));
             pet.setStartTime(result.getTime("startTime").toString());
             pet.setEndTime(result.getTime("endTime").toString());
             pet.setClassName(result.getString("className"));
