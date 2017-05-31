@@ -10,4 +10,7 @@ import javax.inject.Named;
 //@SessionScoped
 //@ManagedBean
 public class Admin {
+    
+    
+
 }

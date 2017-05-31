@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+          
+    <h:body>
+        <ui:composition template="template.xhtml">
+            
+            <ui:define name="head">
+                <title>Add Animal</title>
+            </ui:define>
+                
+            <ui:define name="body">
+                <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
+                    
+
+                <b:container>
+                    <h2>Register as a new Customer!</h2>
+                    <b:well>
+
+                        <b:form enctype="multipart/form-data"
+                                id="customerinfo">
+                              <b:row>
+                                <!-- Species -->
+                                <b:column col-md="5"
+                                          col-xs="7">
+                            <!-- Name -->
+                            <b:inputText value="#{register.username}"
+                                         class='form-control'
+                                         required ="true"
+                                         
+                                         label="Username"
+                                         requiredMessage="You must enter a username"
+                                         id="inputusername"/>
+                                </b:column>
+                                <b:column col-md="5"
+                                          col-xs="7">
+                            <b:inputSecret value="#{register.password}"
+                                         class='form-control'
+                                         required ="true"
+                                         
+                                         label="Password"
+                                         requiredMessage="You must enter a password"
+                                         id="inputpassword"/>
+                                 </b:column>
+                            </b:row>
+                              <b:row>
+                                <!-- Species -->
+                                <b:column col-md="5"
+                                          col-xs="7">
+                            <!-- Name -->
+                            <b:inputText value="#{register.firstname}"
+                                         class='form-control'
+                                         required ="true"
+                                         
+                                         label="First Name"
+                                         requiredMessage="You must enter your first name"
+                                         id="inputFirstName"/>
+                                </b:column>
+                                <b:column col-md="5"
+                                          col-xs="7">
+                            <b:inputText value="#{register.lastname}"
+                                         class='form-control'
+                                         required ="true"
+                                         
+                                         label="Last Name"
+                                         requiredMessage="You must enter your last name"
+                                         id="inputLastName"/>
+                                 </b:column>
+                        </b:row>
+                            <b:row>
+                                <b:column col-md="5"
+                                          col-xs="10">
+                             <b:inputText value="#{register.email}"
+                                   class='form-control'
+                                   required ="true"
+                                   requiredMessage="Email Required"
+                                   label="Email Address;"
+                                   id="email"/>
+                                </b:column>
+                            </b:row>
+                                             
+                            <b:commandButton class="btn btn-primary"
+                                             value="Submit"
+                                             ajax="true"
+                                             update="@form"
+                                             action="#{register.addCustomer()}"/>
+                        </b:form>
+                    </b:well>
+                    <!-- This script disables the enter key for tags
+                          so that a new tag doesn't submit the form -->
+                    <script>
+                        $('#animalinfo').on('keyup keypress', function(e) {
+                            var keyCode = e.keyCode || e.which;
+                            var focusedId = ($("*:focus").attr("id"));
+                            if(keyCode === 13) {
+                                if(typeof focusedId === "undefined") {
+                                    e.preventDefault();
+                                    return false;
+                                }
+                            }
+                        })
+                    </script>
+                </b:container>
+                    
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
