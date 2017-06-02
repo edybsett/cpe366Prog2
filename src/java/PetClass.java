@@ -124,6 +124,33 @@ public class PetClass implements Serializable{
         return "classes";
     }
     
+    public List<PetClass> showUserClasses(String username) throws SQLException {
+        Connection con = Util.connect(dbConnect);
+        PreparedStatement ps
+                = con.prepareStatement("select l.id\n" +
+                                       "from Login l, Teachers t \n" +
+                                       "where t.teacherid = l.id and l.username = ?");
+        ps.setString(1, username);
+        ResultSet result = ps.executeQuery();
+        result.next();
+        int userId = result.getInt("id");
+        ps = con.prepareStatement("select t.classid, t.classname\n" +
+                                    "from Teachers t \n" +
+                                    "where t.teacherid = ?");
+        ps.setInt(1, userId);
+        result = ps.executeQuery();
+        List<PetClass> list = new ArrayList<PetClass>();
+        while (result.next()) {
+            PetClass temp = new PetClass();
+            temp.setClassId(result.getInt("classId"));
+            temp.setClassName(result.getString("classname"));
+            list.add(temp);
+        }
+        return list;
+        
+        
+    }
+    
     public List<PetClass> getClasses(int day) throws SQLException {
         Connection con = Util.connect(dbConnect);
         List<PetClass> list = new ArrayList<PetClass>();

@@ -103,7 +103,19 @@
                        look="danger"
                        collapsible="false"
                        title="Employee Functions">
-                  
+                      <b:panel title="Employee Classes"
+                               collapsed="true"
+                          look="success">
+                          <h:form>
+                          <b:dataTable value="#{petclass.showUserClasses(login.username)}" var="day">
+                              <b:dataTableColumn value="#{day.classId}" label="Id" />
+                             
+                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
+                              
+                          </b:dataTable>
+                      </h:form> 
+                                   
+                      </b:panel>
                       <b:panel title="Add Class"
                                collapsed="true"
                                look="success">
