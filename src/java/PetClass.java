@@ -9,12 +9,14 @@ import javax.inject.Named;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.Date;
+import javax.faces.application.FacesMessage;
+import javax.faces.validator.ValidatorException;
 
 /**
  *
  * @author eric
  */
-@Named(value = "class")
+@Named(value = "petclass")
 @ManagedBean
 @SessionScoped
 public class PetClass implements Serializable{
@@ -28,6 +30,25 @@ public class PetClass implements Serializable{
     
     private int time;
     private int day;
+    private int classChoice;
+    private int pricechoice;
+
+    public int getClassChoice() {
+        return classChoice;
+    }
+
+    public void setClassChoice(int classChoice) {
+        this.classChoice = classChoice;
+    }
+
+    public int getPricechoice() {
+        return pricechoice;
+    }
+
+    public void setPricechoice(int pricechoice) {
+        this.pricechoice = pricechoice;
+    }
+
 
     public int getTime() {
         return time;
@@ -120,8 +141,69 @@ public class PetClass implements Serializable{
         return getClasses(7);
     }
     
-    public String addClass(String username) {
-        return "classes";
+    
+    
+    public void checkClass() throws SQLException, ValidatorException {
+        Connection con = Util.connect(dbConnect);
+        PreparedStatement ps
+                = con.prepareStatement("select l.id\n" +
+                                       "from Login l, Teachers t \n" +
+                                       "where t.teacherid = l.id and l.username = ?");
+        ps.setString(1, username);
+        ResultSet result = ps.executeQuery();
+        result.next();
+        int userId = result.getInt("id");
+        ps = con.prepareStatement("select t.classid, t.classname\n" +
+                                    "from Teachers t \n" +
+                                    "where t.teacherid = ?");
+        ps.setInt(1, userId);
+        result = ps.executeQuery();
+        List<Integer> list = new ArrayList<Integer>();
+        while (result.next()) {
+            list.add(result.getInt("classid"));
+        }
+        if (!list.contains(classChoice)) {
+            FacesMessage errorMessage = new FacesMessage("Class not valid");
+            throw new ValidatorException(errorMessage); 
+        }
+        result.close();
+        con.close();
+        
+    }
+    
+    public String addClass(String username) throws SQLException, ValidatorException {
+        Connection con = Util.connect(dbConnect);
+        PreparedStatement ps
+                = con.prepareStatement("select l.id\n" +
+                                       "from Login l, Teachers t \n" +
+                                       "where t.teacherid = l.id and l.username = ?");
+        ps.setString(1, username);
+        ResultSet result = ps.executeQuery();
+        result.next();
+        int userId = result.getInt("id");
+        ps = con.prepareStatement("select t.classid, t.classname\n" +
+                                    "from Teachers t \n" +
+                                    "where t.teacherid = ?");
+        ps.setInt(1, userId);
+        result = ps.executeQuery();
+        List<Integer> list = new ArrayList<Integer>();
+        while (result.next()) {
+            list.add(result.getInt("classid"));
+        }
+        if (!list.contains(classChoice)) {
+            FacesMessage errorMessage = new FacesMessage("Class not valid");
+            throw new ValidatorException(errorMessage); 
+        }
+        result.close();
+        ps = con.prepareStatement("insert into class(teachid,blockid,price) values (?,?,?)");
+        ps.setInt(1, classChoice);
+        ps.setInt(2, day + time);
+        ps.setFloat(3, pricechoice);
+        ps.executeUpdate();
+        con.commit();
+        con.close();
+        return "refresh";
+        
     }
     
     public List<PetClass> showUserClasses(String username) throws SQLException {
@@ -146,6 +228,8 @@ public class PetClass implements Serializable{
             temp.setClassName(result.getString("classname"));
             list.add(temp);
         }
+        result.close();
+        con.close();
         return list;
         
         
@@ -154,11 +238,14 @@ public class PetClass implements Serializable{
     public List<PetClass> getClasses(int day) throws SQLException {
         Connection con = Util.connect(dbConnect);
         List<PetClass> list = new ArrayList<PetClass>();
+        day = day * 100;
         PreparedStatement ps
                 = con.prepareStatement("select c.id, ct.startTime, ct.endTime, t.className, l.firstName, l.lastName, c.price \n" +
                                         "from Class c, ClassTimes ct, Teachers t, Login l\n" +
-                                        "where c.teachId = t.classId and c.blockId = ct.blockId and l.id = t.teacherId\n" +
-                                        "and (ct.blockId >= " + day +"00 and ct.blockId < " + day+1 +"00)");
+                                        "where c.teachId = t.classId and c.blockId = ct.blockId and l.id = t.teacherId \n" +
+                                        "and (ct.blockId >= ? and ct.blockId < ?)");
+        ps.setInt(1, day);
+        ps.setInt(2, day + 100);
         ResultSet result = ps.executeQuery();
 
      
