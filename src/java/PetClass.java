@@ -32,6 +32,26 @@ public class PetClass implements Serializable{
     private int day;
     private int classChoice;
     private int pricechoice;
+    
+    private String newClassname;
+    
+    private int removeClassId;
+
+    public int getRemoveClassId() {
+        return removeClassId;
+    }
+
+    public void setRemoveClassId(int removeClassId) {
+        this.removeClassId = removeClassId;
+    }
+
+    public String getNewClassname() {
+        return newClassname;
+    }
+
+    public void setNewClassname(String newClassname) {
+        this.newClassname = newClassname;
+    }
 
     public int getClassChoice() {
         return classChoice;
@@ -141,9 +161,22 @@ public class PetClass implements Serializable{
         return getClasses(7);
     }
     
+    public String deleteClass() throws SQLException {
+        Connection con = Util.connect(dbConnect);
+        PreparedStatement ps
+                = con.prepareStatement("delete from Class where id = ?");
+        ps.setInt(1, removeClassId);
+        ps.executeUpdate();
+        con.commit();
+        con.close();
+        return "refresh";
+    }
     
-    
-    public void checkClass() throws SQLException, ValidatorException {
+    public String addNewClassname(String username) throws SQLException, ValidatorException {
+        if (newClassname.equals("")) {
+            FacesMessage errorMessage = new FacesMessage("Class not valid");
+            throw new ValidatorException(errorMessage); 
+        }
         Connection con = Util.connect(dbConnect);
         PreparedStatement ps
                 = con.prepareStatement("select l.id\n" +
@@ -153,22 +186,14 @@ public class PetClass implements Serializable{
         ResultSet result = ps.executeQuery();
         result.next();
         int userId = result.getInt("id");
-        ps = con.prepareStatement("select t.classid, t.classname\n" +
-                                    "from Teachers t \n" +
-                                    "where t.teacherid = ?");
+        ps = con.prepareStatement("insert into Teachers (teacherid, classname) values (?,?)");
         ps.setInt(1, userId);
-        result = ps.executeQuery();
-        List<Integer> list = new ArrayList<Integer>();
-        while (result.next()) {
-            list.add(result.getInt("classid"));
-        }
-        if (!list.contains(classChoice)) {
-            FacesMessage errorMessage = new FacesMessage("Class not valid");
-            throw new ValidatorException(errorMessage); 
-        }
+        ps.setString(2, newClassname);
+        ps.executeUpdate();
         result.close();
+        con.commit();
         con.close();
-        
+        return "refresh";
     }
     
     public String addClass(String username) throws SQLException, ValidatorException {

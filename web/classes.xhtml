@@ -116,6 +116,22 @@
                       </h:form> 
                                    
                       </b:panel>
+                      <b:panel title="Sign up for new class"
+                               collapsed="true"
+                          look="success">
+                          <h:form>
+                              <b:inputText label="Class Name"
+                                         value="#{petclass.newClassname}"
+                                         id="newclassname"/>
+                              <b:commandButton  class="btn btn-primary"
+                                            ajax="true"
+                                            oncomplete="if(validationFailed) alert('Invalid class name');"
+                                            action="#{petclass.addNewClassname(login.username)}"
+                                            value="Add New Class"/>
+                          
+                          </h:form> 
+                                   
+                      </b:panel>
                       <b:panel title="Add Class"
                                collapsed="true"
                                look="success">
@@ -155,13 +171,34 @@
                                             ajax="true"
                                             oncomplete="if(validationFailed) alert('Invalid class');"
                                             action="#{petclass.addClass(login.username)}"
-                                            value="classes"/>
+                                            value="Add Class"/>
                           <b:messages escape="false"/>
                           </h:form>
                       </b:panel>
                   </b:panel>
-                  
+                  <b:panel rendered="#{login.isManager()}"
+                       look="danger"
+                       collapsible="false"
+                       title="Manager Functions">
+                      <b:panel title="Remove Class"
+                               collapsed="true"
+                          look="success">
+                          <h:form>
+                              <b:inputText label="Class Id"
+                                         value="#{petclass.removeClassId}"
+                                         id="newclassname"/>
+                              <b:commandButton  class="btn btn-primary"
+                                            ajax="true"
+                                            oncomplete="if(validationFailed) alert('Invalid class name');"
+                                            action="#{petclass.deleteClass()}"
+                                            value="Delete Class"/>
+                          
+                          </h:form> 
+                                   
+                      </b:panel>
+                      
                      
+                  </b:panel>
               </b:panel>
           </b:container>
       </ui:define>
