@@ -65,6 +65,7 @@
         <navigation-case>
             <from-outcome>refresh</from-outcome>
             <to-view-id>#{view.viewId}</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>login</from-outcome>
