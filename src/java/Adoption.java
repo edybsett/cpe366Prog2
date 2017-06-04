@@ -1,25 +1,10 @@
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Scanner;
-import javax.annotation.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.validator.ValidatorException;
-import javax.inject.Named;
-import javax.servlet.http.Part;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -46,8 +31,8 @@ public class Adoption implements Serializable {
      * @throws SQLException
      * @throws IOException 
      */
-    public String checkout(Profile p) throws SQLException {
-        setCustomerUsername(p.getCustomerUsername());
+    public String checkout(Profile p, AnimalForm a) throws SQLException {
+        customerUsername = a.getCustomerUsername();
         animalId         = p.getId();
         animalAgeY       = p.getAgeYears();
         setAnimalName(p.getName());

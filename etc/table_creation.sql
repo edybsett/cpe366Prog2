@@ -152,6 +152,7 @@ create table MedicalCondition(
     id          SERIAL PRIMARY KEY,
     name        TEXT,
     description TEXT,
+    type        TEXT, /* allergy, surgery, spay/neuter, condition */
     action      TEXT
 );
 
