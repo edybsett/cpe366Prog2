@@ -25,8 +25,6 @@
                   <b:listLinks class="navbar-nav"
                                style="display:inline;">
                   <b:navLink value="Home" href="faces/index.xhtml#"/>
-                  <b:navLink value="Add A Pet"
-                             outcome="newPet"/>
                   <b:navLink value="About" href="faces/index.xhtml#pets"/>
                   <b:navLink value="Contact" href="faces/index.xhtml#contact"/>
                   <b:navLink value="Classes" outcome="classes" />
@@ -38,9 +36,10 @@
                                style="display:inline;">
                       <!-- When logged in -->
                       <b:dropMenu value="#{login.username}" 
-                                  rendered="#{login.isLoggedIn()}">
+                                  rendered="#{login.isEmployee()}">
                         <b:navLink value="List All Animals" outcome="employeeAnimal"/>
-                        <b:navLink value="List All Employees" outcome="home"/>
+                        <b:navLink value="List All Employees" outcome="home" rendered="#{login.isManager()}"/>
+                        <b:navLink value="Add A Pet" outcome="newPet"/>
                         <b:navCommandLink value="Logout"
                                           action="#{login.logout}"/>
                     </b:dropMenu>
