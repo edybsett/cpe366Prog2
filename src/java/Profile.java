@@ -38,6 +38,13 @@ public class Profile implements Serializable{
     private String[] tags;
     private String breeds;
     private List<String> holds;
+    /* Conditions are going to be stored in separate lists
+       by type because they are needed in groups by type
+    */
+    private List<MedicalInfo> allergies;
+    private List<MedicalInfo> conditions;
+    private MedicalInfo       spay;
+    private List<MedicalInfo> surgeries;
    
     
     /**
@@ -64,6 +71,7 @@ public class Profile implements Serializable{
         this.breeds       = ani.getBreeds();
         this.image        = ani.getImage();
         constructHolds();
+        constructConditions();
         return "profile";
     }
     
@@ -96,7 +104,63 @@ public class Profile implements Serializable{
         con.close();
     }
     
-    
+    public void constructConditions() throws SQLException {
+        String query;
+        Connection con = Util.connect(dbConnect);
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        query  = "SELECT * FROM MedicalInfo ";
+        query += "WHERE animalId = ? ";
+        query += "ORDER BY type";
+        ps = con.prepareStatement(query);
+        ps.setInt(1, id);
+        rs = ps.executeQuery();
+        
+        setConditions(new ArrayList<MedicalInfo>());
+        setAllergies(new ArrayList<MedicalInfo>());
+        setSurgeries(new ArrayList<MedicalInfo>());
+        
+        /* Add in all medical conditions */
+        while (rs.next()) {
+            MedicalInfo m = new MedicalInfo();
+            m.setName(rs.getString("name"));
+            m.setDescription(rs.getString("description"));
+            m.setType(rs.getString("type"));
+            m.setAction(rs.getString("action"));
+            
+            switch (m.getType()) {
+                case "spay":
+                    setSpay(m);
+                    break;
+                case "allergy":
+                    allergies.add(m);
+                    break;
+                case "condition":
+                    conditions.add(m);
+                    break;
+                case "surgery":
+                    surgeries.add(m);
+                    break;
+                default:
+                    throw new SQLException();
+            }
+        }
+        
+        /* If any are empty, give them a blank info, which
+           says 'none'
+        */
+        if (spay == null)
+            spay = new MedicalInfo();
+        if (allergies.isEmpty())
+            allergies.add(new MedicalInfo());
+        if (surgeries.isEmpty())
+            surgeries.add(new MedicalInfo());
+        if (conditions.isEmpty())
+            conditions.add(new MedicalInfo());
+        con.commit();
+        con.close();
+    }
     
     /**
      * @return the name
@@ -335,5 +399,62 @@ public class Profile implements Serializable{
      */
     public void setHolds(List<String> holds) {
         this.holds = holds;
+    }
+
+    /**
+     * @return the conditions
+     */
+    public List<MedicalInfo> getConditions() throws SQLException {
+        constructConditions();
+        return conditions;
+    }
+
+    /**
+     * @param conditions the conditions to set
+     */
+    public void setConditions(List<MedicalInfo> conditions) {
+        this.conditions = conditions;
+    }
+
+    /**
+     * @return the allergies
+     */
+    public List<MedicalInfo> getAllergies() {
+        return allergies;
+    }
+
+    /**
+     * @param allergies the allergies to set
+     */
+    public void setAllergies(List<MedicalInfo> allergies) {
+        this.allergies = allergies;
+    }
+
+    /**
+     * @return the spay
+     */
+    public MedicalInfo getSpay() {
+        return spay;
+    }
+
+    /**
+     * @param spay the spay to set
+     */
+    public void setSpay(MedicalInfo spay) {
+        this.spay = spay;
+    }
+
+    /**
+     * @return the surgeries
+     */
+    public List<MedicalInfo> getSurgeries() {
+        return surgeries;
+    }
+
+    /**
+     * @param surgeries the surgeries to set
+     */
+    public void setSurgeries(List<MedicalInfo> surgeries) {
+        this.surgeries = surgeries;
     }
 }

@@ -23,96 +23,15 @@ public class AnimalForm implements Serializable{
     private int    customerId;
     private int    topHolder;
     private boolean removing;
+    /* Used for medical conditions */
+    private String conditionTitle;
+    private String conditionDesc;
+    private String conditionAction;
+    private String conditionType;
     /* Need to bind the animal id */
     private UIInput profileUI;
     private DBConnect dbConnect = new DBConnect();
-    
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-        profileUI = new UIInput();
-        profileUI.setValue(id);
-    }
-
-    /**
-     * @return the customerUsername
-     */
-    public String getCustomerUsername() {
-        return customerUsername;
-    }
-
-    /**
-     * @param customerUsername the customerUsername to set
-     */
-    public void setCustomerUsername(String customerUsername) {
-        this.customerUsername = customerUsername;
-    }
-
-    /**
-     * @return the customerId
-     */
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    /**
-     * @param customerId the customerId to set
-     */
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    /**
-     * @return the topHolder
-     */
-    public int getTopHolder() {
-        return topHolder;
-    }
-
-    /**
-     * @param topHolder the topHolder to set
-     */
-    public void setTopHolder(int topHolder) {
-        this.topHolder = topHolder;
-    }
-
-    /**
-     * @return the removing
-     */
-    public boolean isRemoving() {
-        return removing;
-    }
-
-    /**
-     * @param removing the removing to set
-     */
-    public void setRemoving(boolean removing) {
-        this.removing = removing;
-    }
-
-    /**
-     * @return the profileUI
-     */
-    public UIInput getProfileUI() {
-        return profileUI;
-    }
-
-    /**
-     * @param profileUI the profileUI to set
-     */
-    public void setProfileUI(UIInput profileUI) {
-        this.profileUI = profileUI;
-    }
-    
     public void validateHold(FacesContext context, UIComponent component, Object value) throws ValidatorException, SQLException {
         Connection con   = Util.connect(dbConnect);
         id               = (int)getProfileUI().getLocalValue();
@@ -228,7 +147,24 @@ public class AnimalForm implements Serializable{
         return removing ? removeHold() : placeHold();
     }
     
-  
+    public String addCondition() throws SQLException {
+        String query;
+        Connection con = Util.connect(dbConnect);
+        PreparedStatement ps;
+        
+        query = "INSERT INTO MedicalInfo ";
+        query += "VALUES (?, ?, ?, ?, ?)";
+        ps = con.prepareStatement(query);
+        ps.setInt(1, id);
+        ps.setString(2, conditionTitle);
+        ps.setString(3, conditionDesc);
+        ps.setString(4, conditionType);
+        ps.setString(5, conditionAction);
+        ps.executeUpdate();
+        con.commit();
+        con.close();
+        return "profile";
+    }
     
     /**
      * @author Austin Sparks
@@ -236,7 +172,6 @@ public class AnimalForm implements Serializable{
      * @throws SQLException 
      */
     public String placeHold() throws SQLException {
-        System.out.println("Placing hold...");
         String query;
         Connection con = Util.connect(dbConnect);
         PreparedStatement ps;
@@ -260,7 +195,6 @@ public class AnimalForm implements Serializable{
      * @throws SQLException 
      */
     public String removeHold() throws SQLException {
-        System.out.println("Removing hold...");
         String query;
         Connection con = Util.connect(dbConnect);
         PreparedStatement ps;
@@ -273,5 +207,147 @@ public class AnimalForm implements Serializable{
         con.commit();
         con.close();
         return "profile";
+    }
+    
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+        profileUI = new UIInput();
+        profileUI.setValue(id);
+    }
+
+    /**
+     * @return the customerUsername
+     */
+    public String getCustomerUsername() {
+        return customerUsername;
+    }
+
+    /**
+     * @param customerUsername the customerUsername to set
+     */
+    public void setCustomerUsername(String customerUsername) {
+        this.customerUsername = customerUsername;
+    }
+
+    /**
+     * @return the customerId
+     */
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    /**
+     * @param customerId the customerId to set
+     */
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    /**
+     * @return the topHolder
+     */
+    public int getTopHolder() {
+        return topHolder;
+    }
+
+    /**
+     * @param topHolder the topHolder to set
+     */
+    public void setTopHolder(int topHolder) {
+        this.topHolder = topHolder;
+    }
+
+    /**
+     * @return the removing
+     */
+    public boolean isRemoving() {
+        return removing;
+    }
+
+    /**
+     * @param removing the removing to set
+     */
+    public void setRemoving(boolean removing) {
+        this.removing = removing;
+    }
+
+    /**
+     * @return the profileUI
+     */
+    public UIInput getProfileUI() {
+        return profileUI;
+    }
+
+    /**
+     * @param profileUI the profileUI to set
+     */    
+    public void setProfileUI(UIInput profileUI) {
+        this.profileUI = profileUI;
+    }
+
+    /**
+     * @return the conditionTitle
+     */
+    public String getConditionTitle() {
+        return conditionTitle;
+    }
+
+    /**
+     * @param conditionTitle the conditionTitle to set
+     */
+    public void setConditionTitle(String conditionTitle) {
+        this.conditionTitle = conditionTitle;
+    }
+
+    /**
+     * @return the conditionDesc
+     */
+    public String getConditionDesc() {
+        return conditionDesc;
+    }
+
+    /**
+     * @param conditionDesc the conditionDesc to set
+     */
+    public void setConditionDesc(String conditionDesc) {
+        this.conditionDesc = conditionDesc;
+    }
+
+    /**
+     * @return the conditionAction
+     */
+    public String getConditionAction() {
+        return conditionAction;
+    }
+
+    /**
+     * @param conditionAction the conditionAction to set
+     */
+    public void setConditionAction(String conditionAction) {
+        this.conditionAction = conditionAction;
+    }
+
+    /**
+     * @return the conditionType
+     */
+    public String getConditionType() {
+        return conditionType;
+    }
+
+    /**
+     * @param conditionType the conditionType to set
+     */
+    public void setConditionType(String conditionType) {
+        this.conditionType = conditionType;
     }
 }

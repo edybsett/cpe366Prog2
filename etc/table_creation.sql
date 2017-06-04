@@ -142,24 +142,19 @@ create table TempHold(
     priority   INT
 );
 
-/* Conditions can be allergies, medical conditions, 
+/* Stores medical information about a specific animal.
+   Conditions can be allergies, medical conditions, 
    or medical procedures. Bad name? 
    Each condition has an associated action to take
    for the animal. If they are allergic to chicken, the
    action is to not feed them any chicken. 
    These are not pre-determined. */
-create table MedicalCondition(
-    id          SERIAL PRIMARY KEY,
+create table MedicalInfo(
+    animalId    INT REFERENCES Animal ON DELETE CASCADE,
     name        TEXT,
     description TEXT,
-    type        TEXT, /* allergy, surgery, spay/neuter, condition */
+    type        TEXT,
     action      TEXT
-);
-
-/* Connects animals to conditions */
-create table MedicalInfo(
-    animalId INT REFERENCES Animal ON DELETE CASCADE,
-    conditionId INT REFERENCES MedicalCondition ON DELETE CASCADE
 );
 
 /* Class times */

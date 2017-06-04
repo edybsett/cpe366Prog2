@@ -28,8 +28,8 @@
                                                 class="img-fluid"/>
                             </b:column>
                             <b:column col-xs="12" col-md="8">
-                                <h4>Introduction</h4>
-                                <p>#{profile.description}</p>
+                                <h3>Introduction</h3>
+                                <h:outputText value="#{profile.description}"/>
                             </b:column>
                         </b:row>
                     </b:container>
@@ -37,7 +37,7 @@
                     <!-- About Me -->
                     <b:container>
                         <h:form>
-                            <h4>About Me</h4>
+                            <h3>About Me</h3>
                             <b:panelGrid size="md"
                                          colSpans="3, 9"
                                          columns="2">
@@ -67,16 +67,68 @@
                         
                     <!-- Medical History -->
                     <b:container>
-                        <h:form>
-                            <h4>Medical History</h4>
-                            <p>None!</p>
-                        </h:form>
+                        <b:tabView activeIndex="0">
+                            <b:tab title="Spay/Neuter">
+                                <b:label text="#{profile.spay.name}"
+                                         severity="danger"
+                                         />
+                                <h:outputText value="#{profile.spay.description}"
+                                              />
+                            </b:tab>
+                            <b:tab title="Allergies">
+                                <ui:repeat value="#{profile.allergies}"
+                                           var="allergy">
+                                    <h:outputText value="#{allergy.name}"
+                                                  class="h5"/>
+                                    <br/>
+                                    <h:outputText value="#{allergy.description}"
+                                                  rendered="#{allergy.hasDescription()}"/>
+                                    <br/>
+                                    <h:outputText value="#{allergy.action}"
+                                                  rendered="#{allergy.hasAction()}"/>
+                                    <br/>
+                                    <br/>
+                                </ui:repeat>
+                            </b:tab>
+                            <b:tab title="Surgeries">
+                                <ui:repeat value="#{profile.surgeries}"
+                                           var="surg">
+                                    <h:outputText value="#{surg.name}"
+                                                  class="h5"/>
+                                    <br/>
+                                    <h:outputText value="#{surg.description}"
+                                                  rendered="#{surg.hasDescription()}"/>
+                                    <br/>
+                                    <h:outputText value="#{surg.action}"
+                                                  rendered="#{surg.hasAction()}"/>
+                                    <br/>
+                                    <br/>
+                                </ui:repeat>
+                            </b:tab>
+                            <b:tab title="Medical Conditions">
+                                <ui:repeat value="#{profile.conditions}"
+                                           var="c">
+                                    <h:outputText value="#{c.name}"
+                                                  class="h4"/>
+                                    <br/>
+                                    <h:outputText value="#{c.description}"
+                                                  rendered="#{c.hasDescription()}"/>
+                                    <br/>
+                                    <h:outputText value="Recommended action:"
+                                                  rendered="#{c.hasAction()}"/>
+                                    <h:outputText value="#{c.action}"
+                                                  rendered="#{c.hasAction()}"/>
+                                    <br/>
+                                    <br/>
+                                </ui:repeat>
+                            </b:tab>
+                        </b:tabView>
                     </b:container>
                         
                     <!-- Current Holds/Place a Hold -->
                     <b:container id="holds">
                         <h:form>
-                            <h4>Current Holds</h4>
+                            <h3>Current Holds</h3>
                             <ui:repeat value="#{profile.holds}"
                                        var="h">
                                 <p>#{h}</p>
@@ -96,12 +148,13 @@
                          we just need to verify that customer exists
                          and then redirect to a form -->
                     <b:panel title="Adopt"
+                             onclick="#{animalform.setId(profile.id)}"
                              collapsed="true"
                              look="success">
                         <h:form>
                             <b:inputText value="#{animalform.customerUsername}"
-                                         onclick="#{animalform.setId(profile.id)}"
                                          validator="#{animalform.validateAdopt}"
+                                         required="true"
                                          label="Customer Username"/>
                             <b:commandButton  class="btn btn-primary"
                                               ajax="true"
@@ -117,12 +170,13 @@
                          an employee or a customer.
                          Lots of validation needed here -->
                     <b:panel title="Hold"
+                             onclick="#{animalform.setId(profile.id)}"
                              collapsed="true"
                              look="warning">
                         <h:form id="formhold">
                             <b:inputText value="#{animalform.customerUsername}"
-                                         onclick="#{animalform.setId(profile.id)}"
                                          validator="#{animalform.validateHold}"
+                                         required="true"
                                          label="Customer Username"/>
                                              
                             <b:switch value="#{animalform.removing}"
@@ -145,6 +199,7 @@
                     <!-- Modify this animal's About Me section -->
                     <b:panel title="Edit About Me"
                              collapsed="true"
+                             onclick="#{animalform.setId(profile.id)}"
                              look="info">
                                  
                     </b:panel>
@@ -153,20 +208,29 @@
                          a simple form -->
                     <b:panel title="Add Medical Condition"
                              collapsed="true"
+                             onclick="#{animalform.setId(profile.id)}"
                              look="info">
                         <h:form>
-                            <b:inputText label="Title"/>
+                            <b:inputText label="Title"
+                                         required="true"
+                                         value="#{animalform.conditionTitle}"/>
                             <b:row>
                                 <b:column col-md="6">
-                                    <b:inputTextarea label="Description"/>
+                                    <b:inputTextarea label="Description"
+                                                     required="true"
+                                                     value="#{animalform.conditionDesc}"/>
                                 </b:column>
                                 <b:column col-md="6">
-                                    <b:inputTextarea label="Required Action"/>
+                                    <b:inputTextarea label="Required Action"
+                                                     value="#{animalform.conditionAction}"/>
                                 </b:column>
                             </b:row>
                             <b:selectOneMenu label="Type of Condition"
+                                             required="true"
+                                             value="#{animalform.conditionType}"
                                              style="height:3em;">
-                                <f:selectItem itemLabel="Allergy"/>
+                                <f:selectItem itemLabel="Allergy"
+                                              itemValue="allergy"/>
                                 <f:selectItem itemLabel="Surgery"
                                               itemValue="surgery"/>
                                 <f:selectItem itemLabel="Spay/Neuter"
@@ -174,8 +238,12 @@
                                 <f:selectItem itemLabel="Condition"
                                               itemValue="condition"/>
                             </b:selectOneMenu>
-                            <b:commandButton value="Submit"
-                                             class="btn btn-info"/>
+                            <b:messages/>
+                            <b:commandButton class="btn btn-primary"
+                                             ajax="true"
+                                             update="@form"
+                                             action="#{animalform.addCondition()}"
+                                             value="Submit"/>
                         </h:form>
                     </b:panel>
                 </b:panel>

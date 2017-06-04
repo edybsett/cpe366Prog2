@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,6 +17,8 @@ import java.sql.SQLException;
  *
  * @author matt
  */
+@Named(value = "adoption")
+@SessionScoped
 public class Adoption implements Serializable {
     private DBConnect dbConnect = new DBConnect();
     private int customerId;
