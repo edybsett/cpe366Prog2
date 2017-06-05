@@ -10,7 +10,18 @@
 For our project we have created a web application for a made up animal shelter 
 using Java Server Faces and Postgres. 
 
-Will fill in later...
+## Running
+1. Open NetBeans 8.2
+2. Open the project
+3. Select the 'Run' command from the IDE
+
+## Features
+1. Functional login and registration
+-Manager user/pass: admin/admin
+2. Working nav bar
+3. Animal management (adoption/personal information/medical history)
+4. Employee management (viewing/adding)
+5. Pet classes (timeslots/class descriptions/unique classes per user)
 
 ## Important Stuff
 1. OmniFaces Library. We have included the OmniFaces Library in ```web/WEB-INF/lib```
