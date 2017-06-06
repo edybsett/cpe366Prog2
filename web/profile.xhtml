@@ -174,18 +174,18 @@
                              collapsed="true"
                              look="warning">
                         <h:form id="formhold">
+                            <b:switch value="#{animalform.removing}"
+                                      label="Add/Remove"
+                                      onText="Remove"
+                                      offText="Add"
+                                      update="@form"
+                                      onColor="danger"
+                                      offColor="success"/>
+                            <br/>
                             <b:inputText value="#{animalform.customerUsername}"
                                          validator="#{animalform.validateHold}"
                                          required="true"
                                          label="Customer Username"/>
-                                             
-                            <b:switch value="#{animalform.removing}"
-                                      onText="Remove"
-                                      offText="Add"
-                                      onColor="danger"
-                                      update="@form"
-                                      offColor="success"/>
-                            <br/>
                             <b:commandButton class="btn btn-primary"
                                              ajax="true"
                                              update="@form"

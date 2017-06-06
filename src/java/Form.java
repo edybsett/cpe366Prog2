@@ -6,10 +6,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet; 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -115,7 +114,7 @@ public class Form implements Serializable {
         
         con.commit();
         con.close();
-        return "home";
+        return "refresh";
     }
     
     /**
