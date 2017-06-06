@@ -33,78 +33,7 @@ public class Animal implements Serializable {
     private String sex;
     private String breeds = "Unknown";
     private byte[] image; 
-    private boolean showCats = true;
-    private boolean showDogs = true;
     private DBConnect dbConnect = new DBConnect();
-    
-    /**
-     * Gets a list of all animals to be displayed where 
-     * the specific type of animal to get is stored
-     * @author Austin Sparks
-     * @return list of all animals 
-     */
-    public List<Animal> getAllAnimals() throws SQLException{
-        ArrayList<Animal> allAnimals = new ArrayList<Animal>();
-        Connection con = Util.connect(dbConnect);
-        
-        String query = "SELECT * from Animal ";
-        
-        if (!showDogs) {
-            query += "WHERE species != 'dog' ";
-            
-            if (!showCats)
-                query += "AND species != 'cat' ";
-        }
-        
-        else if (!showCats) {
-            query += "WHERE species != 'cat' ";
-            
-            if (!showDogs)
-                query += "AND species != 'dog'";
-        }
-        
-        
-        /* Execute query */
-        System.out.println("Executing query: " + query);
-        PreparedStatement ps = con.prepareStatement(query);
-        /* Get results */
-        ResultSet rs = ps.executeQuery();
-        
-        /* Get every result */
-        while (rs.next()) {
-            Animal a = new Animal();
-            a.setId(rs.getInt("id"));
-            a.setAgeYears(rs.getInt("ageYears"));
-            a.setAgeMonths(rs.getInt("ageMonths"));
-            a.setAgeWeeks(rs.getInt("ageWeeks"));
-            a.setName(rs.getString("name"));
-            a.setWeight(rs.getFloat("weight"));
-            a.setSpecies(rs.getString("species"));
-            a.setDescription(rs.getString("description"));
-            a.setDateAdmitted(rs.getDate("dateAdmitted"));
-            a.setColor(rs.getString("color"));
-            a.setFoodType(rs.getString("foodType"));
-            a.setEnergyLevel(rs.getInt("energyLevel"));
-            a.setSex(rs.getString("sex"));
-            a.setImage(rs.getBytes("image"));
-            query = "SELECT type FROM Breed JOIN BreedXAnimal ON ";
-            query += "Breed.id = breedId WHERE animalId = ?";
-            PreparedStatement bps = con.prepareStatement(query);
-            bps.setInt(1, a.getId());
-            ResultSet breedSet = bps.executeQuery();
-
-            while (breedSet.next()) {
-                if (a.getBreeds().equals("Unknown"))
-                    a.setBreeds(breedSet.getString("type"));
-                else
-                    a.setBreeds(a.getBreeds() + ", " + breedSet.getString("type"));
-            }
-            allAnimals.add(a);
-        }
-        con.commit();
-        con.close();
-        return allAnimals;
-    }
     
     private void collectBreeds(Animal a, Connection con) throws SQLException {
         String query = "SELECT type FROM Breed JOIN BreedXAnimal ON ";
@@ -346,31 +275,4 @@ public class Animal implements Serializable {
         this.breeds = breeds;
     }
 
-    /**
-     * @return the showCats
-     */
-    public boolean isShowCats() {
-        return showCats;
-    }
-
-    /**
-     * @param showCats the showCats to set
-     */
-    public void setShowCats(boolean showCats) {
-        this.showCats = showCats;
-    }
-
-    /**
-     * @return the showDogs
-     */
-    public boolean isShowDogs() {
-        return showDogs;
-    }
-
-    /**
-     * @param showDogs the showDogs to set
-     */
-    public void setShowDogs(boolean showDogs) {
-        this.showDogs = showDogs;
-    }
 }

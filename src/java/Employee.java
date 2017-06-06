@@ -24,40 +24,32 @@ public class Employee implements Serializable{
     private String lastName;
     private String role;
     private float  wage;
+    private boolean editing;
     private DBConnect dbConnect = new DBConnect();
-    
-    
+   
     /**
-     * Gets a list of all Employees in the Database
+     * Allows editing of this employee's password
      */
-    public List<Employee> getEmployees() throws SQLException {
-         ArrayList<Employee> allEmps = new ArrayList<Employee>();
-        Connection con = Util.connect(dbConnect);
+    public void edit() throws SQLException {
+        this.editing = !this.editing;
         
-        String query = "SELECT * from Login JOIN Employee ON Login.id=Employee.id";
-        
-        /* Execute query */
-        PreparedStatement ps = con.prepareStatement(query);;
-        /* Get results */
-        ResultSet rs = ps.executeQuery();
-        
-        /* Get every result */
-        while (rs.next()) {
-            Employee emp = new Employee();
-            emp.setId(rs.getInt("id"));
-            emp.setUsername(rs.getString("username"));
-            emp.setFirstName(rs.getString("firstName"));
-            emp.setLastName(rs.getString("lastName"));
-            emp.setPassword(rs.getString("password"));
-            emp.setRole(rs.getString("role"));
-            emp.setWage(rs.getFloat("wage"));
-            allEmps.add(emp);
+        if (!this.editing) {
+            updateMe();
         }
+    }
+    
+    private void updateMe() throws SQLException {
+        Connection con = Util.connect(dbConnect);
+        String query = "UPDATE Login ";
+        query += "SET password=? ";
+        query += "WHERE id = ?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, this.password);
+        ps.setInt(2, this.id);
+        ps.executeUpdate();
         con.commit();
         con.close();
-        return allEmps;
     }
-   
     
     /**
      * @return the firstName
@@ -160,5 +152,19 @@ public class Employee implements Serializable{
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    /**
+     * @return the editing
+     */
+    public boolean isEditing() {
+        return editing;
+    }
+
+    /**
+     * @param editing the editing to set
+     */
+    public void setEditing(boolean editing) {
+        this.editing = editing;
     }
 }

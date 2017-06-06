@@ -66,20 +66,20 @@
                 <h:form>
                     <b:row>
                         <b:column col-md="2">
-                            <b:switch value="#{animal.showDogs}"
+                            <b:switch value="#{tables.showDogs}"
                                       label="Show Dogs"
                                       ajax="true"
                                       update="@form"
                                       />
                         </b:column>
                         <b:column col-md="2">
-                            <b:switch value="#{animal.showCats}"
+                            <b:switch value="#{tables.showCats}"
                                       ajax="true"
                                       update="@form"
                                       label="Show Cats"/>
                         </b:column>
                     </b:row>
-                    <ui:repeat value="#{animal.getAllAnimals()}"
+                    <ui:repeat value="#{tables.allAnimals}"
                                var="ani">
                         <b:column col-xs="6" 
                                   col-md="4" 

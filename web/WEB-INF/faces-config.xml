@@ -64,6 +64,11 @@
         <managed-bean-class>MedicalInfo</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>tables</managed-bean-name>
+        <managed-bean-class>Tables</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
     
     <navigation-rule>
         <from-view-id>*</from-view-id>
@@ -90,8 +95,12 @@
             <to-view-id>/register.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>employeeAnimal</from-outcome>
-            <to-view-id>/employee.xhtml</to-view-id>
+            <from-outcome>listEmployees</from-outcome>
+            <to-view-id>/listEmployees.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listAnimals</from-outcome>
+            <to-view-id>/listAnimals.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>classes</from-outcome>

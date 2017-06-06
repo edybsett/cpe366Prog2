@@ -37,8 +37,8 @@
                       <!-- When logged in -->
                       <b:dropMenu value="#{login.username}" 
                                   rendered="#{login.isEmployee()}">
-                        <b:navLink value="List All Animals" outcome="employeeAnimal"/>
-                        <b:navLink value="List All Employees" outcome="home" rendered="#{login.isManager()}"/>
+                        <b:navLink value="List All Animals" outcome="listAnimals"/>
+                        <b:navLink value="List All Employees" outcome="listEmployees" rendered="#{login.isManager()}"/>
                         <b:navLink value="Add A Pet" outcome="newPet"/>
                         <b:navCommandLink value="Logout"
                                           action="#{login.logout}"/>
