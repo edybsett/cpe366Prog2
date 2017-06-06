@@ -4,24 +4,14 @@
  * and open the template in the editor.
  */
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet; 
 import java.sql.SQLException;
 import javax.annotation.ManagedBean;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-import javax.servlet.http.Part;
-import org.hibernate.validator.constraints.NotEmpty;
 /**
  *
  * @author Jason

@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import javax.annotation.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
-import java.util.List;
-import java.util.ArrayList;
 import java.sql.Date;
 
 /**
