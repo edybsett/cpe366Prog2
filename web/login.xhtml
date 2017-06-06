@@ -53,12 +53,11 @@ and open the template in the editor.
                                 <b:iconAwesome name="key"/>
                             </f:facet>
                         </b:inputSecret>
-                        <b:messages/>
+                        <b:messages escape="false"/>
                         <b:commandButton class="btn btn-primary"
                                          ajax="true"
                                          update="@form:loginform"
                                          value="Submit"
-                                         oncomplete="if(validationFailed) alert('Invalid username/password');"
                                          action="#{login.createLogin(form)}"
                                          />
                         
