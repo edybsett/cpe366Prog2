@@ -34,10 +34,18 @@ public class Login implements Serializable {
         return "home";
     }
     
+    /**
+     * Checks if the logged in user is a manager.
+     * @return true for manager
+     */
     public boolean isManager() {
         return role.equals("manager");
     }
     
+    /**
+     * Checks if the logged in user is an employee.
+     * @return true for employee
+     */
     public boolean isEmployee() {
         return role.equals("manager") || role.equals("employee");
     }
