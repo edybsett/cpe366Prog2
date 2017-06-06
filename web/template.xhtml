@@ -35,11 +35,17 @@
                   <b:listLinks class="navbar-nav"
                                style="display:inline;">
                       <!-- When logged in -->
-                      <b:dropMenu value="#{login.username}" 
-                                  rendered="#{login.isEmployee()}">
-                        <b:navLink value="List All Animals" outcome="listAnimals"/>
-                        <b:navLink value="List All Employees" outcome="listEmployees" rendered="#{login.isManager()}"/>
-                        <b:navLink value="Add A Pet" outcome="newPet"/>
+                      <b:dropMenu value="#{login.username}"
+                                  rendered="#{login.isLoggedIn()}">
+                        <b:navLink value="List All Animals"
+                                   rendered="#{login.isEmployee()}"
+                                   outcome="listAnimals"/>
+                        <b:navLink value="List All Employees"
+                                   outcome="listEmployees" 
+                                   rendered="#{login.isManager()}"/>
+                        <b:navLink value="Add A Pet"
+                                   rendered="#{login.isEmployee()}"
+                                   outcome="newPet"/>
                         <b:navCommandLink value="Logout"
                                           action="#{login.logout}"/>
                     </b:dropMenu>
