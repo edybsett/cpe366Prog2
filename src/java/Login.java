@@ -92,6 +92,22 @@ public class Login implements Serializable {
         this.id = id;
     }
     
+    public boolean renderRegister() {
+        if(isManager() | !isLoggedIn()) {
+            return true;
+        }
+        return false;
+    }
+    
+    public String renderRegisterPage() {
+        if(isManager()) {
+            return "manager";
+        }
+        else {
+            return "customer";
+        }
+    }
+    
  
     
 }

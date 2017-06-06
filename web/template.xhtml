@@ -48,8 +48,8 @@
                                outcome="login" 
                                rendered="#{!login.isLoggedIn()}"/>
                   <b:navLink value="Register" 
-                             outcome="register" 
-                             rendered="#{!login.isLoggedIn()}"/>
+                             outcome="#{login.renderRegisterPage()}" 
+                             rendered="#{login.renderRegister()}"/>
                   </b:listLinks>
               </b:navbarLinks>
           </b:navBar>

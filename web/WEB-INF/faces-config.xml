@@ -91,8 +91,12 @@
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>register</from-outcome>
+            <from-outcome>customer</from-outcome>
             <to-view-id>/register.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manager</from-outcome>
+            <to-view-id>/registerEmployee.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>listEmployees</from-outcome>
@@ -133,6 +137,16 @@
     <navigation-rule>
         <from-view-id>
             /register.xhtml
+        </from-view-id>
+                <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>
+            /registerEmployee.xhtml
         </from-view-id>
                 <navigation-case>
             <from-outcome>success</from-outcome>
