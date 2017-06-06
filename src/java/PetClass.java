@@ -233,29 +233,31 @@ public class PetClass implements Serializable{
     
     public List<PetClass> showUserClasses(String username) throws SQLException {
         Connection con = Util.connect(dbConnect);
+        List<PetClass> classes = new ArrayList<PetClass>();
         PreparedStatement ps
                 = con.prepareStatement("select l.id\n" +
                                        "from Login l, Teachers t \n" +
                                        "where t.teacherid = l.id and l.username = ?");
         ps.setString(1, username);
         ResultSet result = ps.executeQuery();
-        result.next();
-        int userId = result.getInt("id");
-        ps = con.prepareStatement("select t.classid, t.classname\n" +
-                                    "from Teachers t \n" +
-                                    "where t.teacherid = ?");
-        ps.setInt(1, userId);
-        result = ps.executeQuery();
-        List<PetClass> list = new ArrayList<PetClass>();
-        while (result.next()) {
-            PetClass temp = new PetClass();
-            temp.setClassId(result.getInt("classId"));
-            temp.setClassName(result.getString("classname"));
-            list.add(temp);
+        if (result.next()) {
+            result.next();
+            int userId = result.getInt("id");
+            ps = con.prepareStatement("select t.classid, t.classname\n" +
+                    "from Teachers t \n" +
+                    "where t.teacherid = ?");
+            ps.setInt(1, userId);
+            result = ps.executeQuery();
+            while (result.next()) {
+                PetClass temp = new PetClass();
+                temp.setClassId(result.getInt("classId"));
+                temp.setClassName(result.getString("classname"));
+                classes.add(temp);
+            }
         }
         result.close();
         con.close();
-        return list;
+        return classes;
         
         
     }

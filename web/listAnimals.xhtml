@@ -15,7 +15,7 @@ and open the template in the editor.
     
     <ui:composition template="template.xhtml">
         <ui:define name="head">
-         
+            
             <title>ACME Humane Society</title>
         </ui:define>
         
@@ -24,34 +24,34 @@ and open the template in the editor.
             
             <b:container>
                 <h2>Animal Listing</h2>
-            <h:form>
-                <b:dataTable value="#{tables.getAllAnimals()}"
-                             var="ani"
-                             responsive="true"
-                             class="aniTable">
-                    <b:dataTableColumn label="Image">
-                        <o:graphicImage value="#{ani.image}"
-                                        dataURI="true"
-                                        class="img-thumbnail"
-                                        height="50px"
-                                        width="50px"/>
-                    </b:dataTableColumn>
-                    <b:dataTableColumn value="#{ani.name}"
-                                       searchable="true"
-                                       label="Name"/>
-                    <b:dataTableColumn value="#{ani.species}"
-                                       searchable="true"
-                                       label="Species"/>
-                    <b:dataTableColumn value="#{ani.breeds}"
-                                       searchable="true"
-                                       label="Breed"/>
-                    <b:dataTableColumn label="View Profile"> 
-                        <h:commandLink value="view/edit"
-                                       class="btn btn-info"
-                                       action="#{profile.createProfile(ani)}"/>
-                    </b:dataTableColumn>
-                </b:dataTable>
-            </h:form>
+                <h:form>
+                    <b:dataTable value="#{tables.getAllAnimals()}"
+                                 var="ani"
+                                 responsive="true"
+                                 class="aniTable">
+                        <b:dataTableColumn label="Image">
+                            <o:graphicImage value="#{ani.image}"
+                                            dataURI="true"
+                                            class="img-thumbnail"
+                                            height="50px"
+                                            width="50px"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn value="#{ani.name}"
+                                           searchable="true"
+                                           label="Name"/>
+                        <b:dataTableColumn value="#{ani.species}"
+                                           searchable="true"
+                                           label="Species"/>
+                        <b:dataTableColumn value="#{ani.breeds}"
+                                           searchable="true"
+                                           label="Breed"/>
+                        <b:dataTableColumn label="View Profile"> 
+                            <h:commandLink value="view/edit"
+                                           class="btn btn-info"
+                                           action="#{profile.createProfile(ani)}"/>
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                </h:form>
             </b:container>
         </ui:define>
     </ui:composition> 
