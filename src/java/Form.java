@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet; 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
@@ -61,6 +63,12 @@ public class Form implements Serializable {
     private int    expirationY;
     /* Hold form data */
     private String customerUsername;
+    /* Class form data */
+    private String newClassName;
+    private int    classId;
+    private int    classDay;
+    private int    classTime;
+    private int    classPrice;
     
     
     /**
@@ -196,7 +204,38 @@ public class Form implements Serializable {
         con.close();
         return "index";
     }
+    
+    public String addClass(int loginId) throws SQLException {
+        Connection con = Util.connect(dbConnect);
+        PreparedStatement ps;
+        String query;
+        query = "INSERT INTO Class(name, teacherId) ";
+        query += "VALUES (?, ?)";
+        ps = con.prepareStatement(query);
+        ps.setString(1, getNewClassName());
+        ps.setInt(2, loginId);
+        ps.executeUpdate();
+        
+        con.commit();
+        con.close();
+        return "refresh";
+    }
      
+    public String addClassSession(int loginId) throws SQLException {
+        Connection con = Util.connect(dbConnect);
+        String query = "INSERT INTO ClassSession(classId, blockId, price) ";
+        query       += "VALUES(?, ?, ?)";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, classId);
+        ps.setInt(2, classDay + classTime);
+        ps.setFloat(3, classPrice);
+        ps.executeUpdate();
+        con.commit();
+        con.close();
+        return "refresh";
+        
+    }    
+    
     /**
      * @return the animalName
      */
@@ -545,5 +584,75 @@ public class Form implements Serializable {
      */
     public void setCustomerUsername(String customerUsername) {
         this.customerUsername = customerUsername;
+    }
+
+    /**
+     * @return the newClassName
+     */
+    public String getNewClassName() {
+        return newClassName;
+    }
+
+    /**
+     * @param newClassName the newClassName to set
+     */
+    public void setNewClassName(String newClassName) {
+        this.newClassName = newClassName;
+    }
+
+    /**
+     * @return the classId
+     */
+    public int getClassId() {
+        return classId;
+    }
+
+    /**
+     * @param classId the classId to set
+     */
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
+
+    /**
+     * @return the classDay
+     */
+    public int getClassDay() {
+        return classDay;
+    }
+
+    /**
+     * @param classDay the classDay to set
+     */
+    public void setClassDay(int classDay) {
+        this.classDay = classDay;
+    }
+
+    /**
+     * @return the classTime
+     */
+    public int getClassTime() {
+        return classTime;
+    }
+
+    /**
+     * @param classTime the classTime to set
+     */
+    public void setClassTime(int classTime) {
+        this.classTime = classTime;
+    }
+
+    /**
+     * @return the classPrice
+     */
+    public int getClassPrice() {
+        return classPrice;
+    }
+
+    /**
+     * @param classPrice the classPrice to set
+     */
+    public void setClassPrice(int classPrice) {
+        this.classPrice = classPrice;
     }
 }

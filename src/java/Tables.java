@@ -122,8 +122,7 @@ public class Tables implements Serializable {
         con.commit();
         con.close();
         return allEmps;
-    }
-    
+    }   
     
     public List<Employee> getAllEmployees() throws SQLException {
         if (allEmployees == null)
@@ -148,8 +147,75 @@ public class Tables implements Serializable {
         con.close();
     }
     
+    public List<PetClass> getAllClasses() throws SQLException {
+        Connection con = Util.connect(dbConnect);
+        List<PetClass> allClasses = new ArrayList<PetClass>();
+        String query = "SELECT classId, startTime, endTime, name, price, ";
+        query       += "ClassSession.id as sid, blockId, firstName, lastName ";
+        query       += "FROM Class, ClassTimes, ClassSession, Login ";
+        query       += "WHERE class.teacherId = Login.id ";
+        query       += "AND ClassSession.blockId = ClassTimes.id ";
+        query       += "AND ClassSession.classId = Class.id";
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet result = ps.executeQuery();
+        String[] days = new String[] {"M", "T", "W", "R", "F", "Sa", "Su"};
+
+     
+        while (result.next()) {
+            PetClass pet = new PetClass();
+            pet.setClassId(result.getInt("classId"));
+            pet.setStartTime(result.getTime("startTime").toString());
+            pet.setEndTime(result.getTime("endTime").toString());
+            pet.setClassName(result.getString("name"));
+            pet.setPrice(result.getFloat("price"));
+            pet.setSessionId(result.getInt("sid"));
+            pet.setUsername(result.getString("firstName") + " " + result.getString("lastName"));
+            String day = days[(result.getInt("blockId") / 100) - 1];
+            pet.setDay(day);
+            allClasses.add(pet);
+        }
+        result.close();
+        con.close();
+        return allClasses;
+    }
     
-   
+    public List<PetClass> showUserClasses(int loginId) throws SQLException {
+        Connection con = Util.connect(dbConnect);
+        List<PetClass> classes = new ArrayList<PetClass>();
+        String query = "SELECT * FROM Class ";
+        query       += "WHERE teacherId = ?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, loginId);
+        ResultSet result = ps.executeQuery();
+        while (result.next()) {
+            PetClass temp = new PetClass();
+            temp.setClassId(result.getInt("id"));
+            temp.setClassName(result.getString("name"));
+            classes.add(temp);
+        }
+        result.close();
+        con.commit();
+        con.close();
+        return classes;
+    }
+    
+    public List<PetClass> showAllClasses() throws SQLException {
+        Connection con = Util.connect(dbConnect);
+        List<PetClass> classes = new ArrayList<PetClass>();
+        String query = "SELECT * FROM Class ";
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet result = ps.executeQuery();
+        while (result.next()) {
+            PetClass temp = new PetClass();
+            temp.setClassId(result.getInt("id"));
+            temp.setClassName(result.getString("name"));
+            classes.add(temp);
+        }
+        result.close();
+        con.commit();
+        con.close();
+        return classes;
+    }
     
     /**
      * @return the showCats

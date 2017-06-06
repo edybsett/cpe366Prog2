@@ -24,6 +24,9 @@ DROP TABLE Price;
 DROP TABLE Animal;
 DROP TABLE Login;
 DROP TABLE Shelter;
+DROP TABLE ClassSession;
+DROP TABLE ClassTimes;
+DROP TABLE Class;
 
 /**************************
  * Create Statements
@@ -157,29 +160,30 @@ create table MedicalInfo(
     action      TEXT
 );
 
-/* Class times */
+/* Class times. Pre-determined time slots available 
+   for classes to be taught. */
 create table ClassTimes(
-    blockId   INT PRIMARY KEY,
+    id        INT PRIMARY KEY,
     startTime TIME,
     endTime   TIME
 );
 
-/* Teachers teach classes */
-create table Teachers (
-    classId   SERIAL PRIMARY KEY,
-    teacherId INT,
-    className TEXT,
-    FOREIGN KEY (teacherId) REFERENCES Login (id)
+/* Class has an id, name, and a primary teacher */
+create table Class (
+    id        SERIAL PRIMARY KEY,
+    name      TEXT,
+    teacherId INT REFERENCES Login ON DELETE CASCADE
 );
 
-/* Many-many relationship table */
-create table Class (
+/* A class session is a class with a teacher, which may
+   be different from the primary teacher. It has an associated
+   time interval and a price. */
+create table ClassSession (
     id      SERIAL PRIMARY KEY,
-    teachId INT,
-    blockID INT,
-    price   REAL,
-    FOREIGN KEY (teachId) REFERENCES Teachers (classId),
-    FOREIGN KEY (blockId) REFERENCES ClassTimes (blockId)
+    classId INT REFERENCES Class ON DELETE CASCADE,
+    blockId INT,
+    price   REAL check(price > 0),
+    FOREIGN KEY (blockId) REFERENCES ClassTimes (id)
 );
 
 /**************************
@@ -217,7 +221,7 @@ VALUES ('good with dogs'),
        ('bites');
 
 /* Set time blocks */
-INSERT INTO ClassTimes(blockId, startTime, endTime)
+INSERT INTO ClassTimes(id, startTime, endTime)
 VALUES (101, '03:00 PM', '04:00 PM'),
        (102, '04:00 PM', '05:00 PM'),
        (103, '05:00 PM', '06:00 PM'),

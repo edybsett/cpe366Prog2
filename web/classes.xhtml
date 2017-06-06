@@ -8,200 +8,141 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     
     
-  <ui:composition template="template.xhtml">
-    <ui:define name="head">
-        <title>#{profile.name}</title>
-    </ui:define>
-      
-      <ui:define name="body">
-          <b:container>
-              <b:panel title="Classes"
-                       collapsible="false"
-                       look="primary">
-                  
-                  <!-- Image and description -->
-                  <b:container>
-                      <h3>Monday Classes</h3>
-                      <h:form>
-                          <b:dataTable value="#{petclass.getMondayClasses()}" var="day">
-                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
-                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
-                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
-                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
-                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
-                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
-                          </b:dataTable>               
-                      </h:form> 
-                      <h3>Tuesday Classes</h3>
-                      <h:form>
-                          <b:dataTable value="#{petclass.getTuesdayClasses()}" var="day">
-                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
-                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
-                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
-                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
-                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
-                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
-                          </b:dataTable>               
-                      </h:form> 
-                      <h3>Wednesday Classes</h3>
-                      <h:form>
-                          <b:dataTable value="#{petclass.getWednesdayClasses()}" var="day">
-                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
-                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
-                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
-                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
-                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
-                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
-                          </b:dataTable>
-                      </h:form> 
-                      <h3>Thursday Classes</h3>
-                      <h:form>
-                          <b:dataTable value="#{petclass.getThursdayClasses()}" var="day">
-                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
-                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
-                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
-                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
-                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
-                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
-                          </b:dataTable>
-                      </h:form> 
-                      <h3>Friday Classes</h3>
-                      <h:form>
-                          <b:dataTable value="#{petclass.getFridayClasses()}" var="day">
-                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
-                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
-                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
-                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
-                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
-                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
-                          </b:dataTable>
-                      </h:form> 
-                      <h3>Saturday Classes</h3>
-                      <h:form>
-                          <b:dataTable value="#{petclass.getSaturdayClasses()}" var="day">
-                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
-                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
-                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
-                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
-                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
-                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
-                          </b:dataTable>
-                      </h:form> 
-                      <h3>Sunday Classes</h3>
-                      <h:form>
-                          <b:dataTable value="#{petclass.getSundayClasses()}" var="day">
-                              <b:dataTableColumn value="#{day.classId}" label="Class Id" />
-                              <b:dataTableColumn value="#{day.startTime}" label="Start Time" />
-                              <b:dataTableColumn value="#{day.endTime}" label="End Time" />
-                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
-                              <b:dataTableColumn value="#{day.username}" label="Teacher" />
-                              <b:dataTableColumn value="#{day.price}" label="Drop-in Price" />
-                          </b:dataTable>
-                      </h:form> 
-                  </b:container>
-                  <b:panel rendered="#{login.isEmployee()}"
-                       look="danger"
-                       collapsible="false"
-                       title="Employee Functions">
-                      <b:panel title="Employee Classes"
-                               collapsed="true"
-                          look="success">
-                          <h:form>
-                          <b:dataTable value="#{petclass.showUserClasses(login.username)}" var="day">
-                              <b:dataTableColumn value="#{day.classId}" label="Id" />
-                             
-                              <b:dataTableColumn value="#{day.className}" label="Class Name" />
-                              
-                          </b:dataTable>
-                      </h:form> 
-                                   
-                      </b:panel>
-                      <b:panel title="Sign up for new class"
-                               collapsed="true"
-                          look="success">
-                          <h:form>
-                              <b:inputText label="Class Name"
-                                         value="#{petclass.newClassname}"
-                                         id="newclassname"/>
-                              <b:commandButton  class="btn btn-primary"
-                                            ajax="true"
-                                            oncomplete="if(validationFailed) alert('Invalid class name');"
-                                            action="#{petclass.addNewClassname(login.username)}"
-                                            value="Add New Class"/>
-                          
-                          </h:form> 
-                                   
-                      </b:panel>
-                      <b:panel title="Add Class"
-                               collapsed="true"
-                               look="success">
-                          <h:form>
-                          <b:formGroup>
-                            <b:selectOneMenu value="#{petclass.time}" colMd="2" required="true" label="Select Time:" labelColMd="2">
-                                <f:selectItem itemLabel="3:00-4:00" itemValue="1" />
-                                <f:selectItem itemLabel="4:00-5:00" itemValue="2" />
-                                <f:selectItem itemLabel="5:00-6:00" itemValue="3" />
-                                <f:selectItem itemLabel="6:00-7:00" itemValue="4" />
-                            </b:selectOneMenu>
-                            <b:selectOneMenu value="#{petclass.day}" colMd="2" required="true" label="Select Day:" labelColMd="2">
-                                
-                                <f:selectItem itemLabel="Monday" itemValue="100" />
-                                <f:selectItem itemLabel="Tuesday" itemValue="200" />
-                                <f:selectItem itemLabel="Wednesday" itemValue="300" />
-                                <f:selectItem itemLabel="Thursday" itemValue="400" />
-                                <f:selectItem itemLabel="Friday" itemValue="500" />
-                                <f:selectItem itemLabel="Saturday" itemValue="600" />
-                                <f:selectItem itemLabel="Sunday" itemValue="700" />
-                                
-                            </b:selectOneMenu>
-                            <b:inputText label="Class"
-                                         value="#{petclass.classChoice}" 
-                                         
-                                         id="classChoice"/>
-                            <b:inputText label="Price"
-                                         value="#{petclass.pricechoice}"
-                                         id="priceChoice">
-                                <f:facet name="append">
-                                    <h:outputText value=".00"/>
-                                </f:facet>
-                            </b:inputText>
-                                
-                          </b:formGroup>
-                          <b:commandButton  class="btn btn-primary"
-                                            ajax="true"
-                                            oncomplete="if(validationFailed) alert('Invalid class');"
-                                            action="#{petclass.addClass(login.username)}"
-                                            value="Add Class"/>
-                          <b:messages escape="false"/>
-                          </h:form>
-                      </b:panel>
-                  </b:panel>
-                  <b:panel rendered="#{login.isManager()}"
-                       look="danger"
-                       collapsible="false"
-                       title="Manager Functions">
-                      <b:panel title="Remove Class"
-                               collapsed="true"
-                          look="success">
-                          <h:form>
-                              <b:inputText label="Class Id"
-                                         value="#{petclass.removeClassId}"
-                                         id="newclassname"/>
-                              <b:commandButton  class="btn btn-primary"
-                                            ajax="true"
-                                            oncomplete="if(validationFailed) alert('Invalid class name');"
-                                            action="#{petclass.deleteClass()}"
-                                            value="Delete Class"/>
-                          
-                          </h:form> 
-                                   
-                      </b:panel>
-                      
-                     
-                  </b:panel>
-              </b:panel>
-          </b:container>
-      </ui:define>
-      
-  </ui:composition>
+    <ui:composition template="template.xhtml">
+        <ui:define name="head">
+            <title>#{profile.name}</title>
+        </ui:define>
+            
+        <ui:define name="body">
+            <b:container>            
+                <h3>Classes</h3>
+                <h:form>
+                    <b:dataTable value="#{tables.getAllClasses()}" var="class">
+                        <b:dataTableColumn value="#{class.day}" label="Day" />
+                        <b:dataTableColumn value="#{class.startTime}" 
+                                           label="Start Time" 
+                                           data-type="date"/>
+                        <b:dataTableColumn value="#{class.endTime}" 
+                                           label="End Time"
+                                           />
+                        <b:dataTableColumn value="#{class.className}" 
+                                           label="Class Name" />
+                        <b:dataTableColumn value="#{class.username}" label="Teacher" />
+                        <b:dataTableColumn value="#{class.price}" label="Drop-in Price" />
+                        <b:dataTableColumn label="Delete"
+                                           rendered="#{login.isManager()}"
+                                           orderable="false">
+                            <b:commandButton class="btn btn-danger"
+                                             icon="remove"
+                                             action="#{class.deleteClassSession()}"
+                                             />
+                        </b:dataTableColumn>
+                    </b:dataTable>               
+                </h:form>
+            </b:container>
+            <!-- Employee panel is hidden -->
+            <b:container>
+            <b:panel rendered="#{login.isEmployee()}"
+                     look="danger"
+                     collapsible="false"
+                     title="Employee Functions">
+                <!-- View and edit classes you teach -->
+                <b:panel title="Courses You Teach"
+                         collapsed="true"
+                         look="success">
+                    <b:form>
+                        <b:container>
+                            <b:dataTable value="#{tables.showUserClasses(login.id)}" 
+                                         var="class"
+                                                     
+                                         searching="false">
+                                <b:dataTableColumn value="#{class.classId}" label="Id" />
+                                <b:dataTableColumn value="#{class.className}" label="Class Name" />
+                                <b:dataTableColumn label="Delete"
+                                                   orderable="false">
+                                    <b:commandButton class="btn btn-danger"
+                                                     icon="remove"
+                                                     action="#{class.deleteClass()}"
+                                                     />
+                                </b:dataTableColumn>
+                                            
+                            </b:dataTable>
+                        </b:container> 
+                    </b:form>
+                </b:panel>
+                <!-- Add a New class to teach -->
+                <b:panel title="Add A Course"
+                         collapsed="true"
+                         look="success">
+                    <h:form>
+                        <b:inputText label="Class Name"
+                                     value="#{form.newClassName}"
+                                     id="newclassname"/>
+                        <b:commandButton class="btn btn-primary"
+                                         value="Submit"
+                                         ajax="true"
+                                         update="@form"
+                                         action="#{form.addClass(login.id)}"/>                                               
+                    </h:form> 
+                </b:panel>
+                
+                <b:panel title="Add Class Session"
+                         collapsed="true"
+                         look="success">
+                    <b:form>
+                        <b:selectOneMenu value="#{form.classId}"
+                                         style="height:2.5em;"
+                                         label="Class">
+                            <f:selectItems value="#{tables.showAllClasses()}"
+                                           var="c"
+                                           itemLabel="#{c.className}"
+                                           itemValue="#{c.classId}"/>
+                        </b:selectOneMenu>
+                        <b:row>
+                            <b:column col-md="6">
+                                <b:selectOneMenu value="#{form.classTime}" 
+                                                 required="true" 
+                                                 style="height:2.5em"
+                                                 label="Time">
+                                    <f:selectItem itemLabel="3:00-4:00" itemValue="1" />
+                                    <f:selectItem itemLabel="4:00-5:00" itemValue="2" />
+                                    <f:selectItem itemLabel="5:00-6:00" itemValue="3" />
+                                    <f:selectItem itemLabel="6:00-7:00" itemValue="4" />
+                                </b:selectOneMenu>
+                            </b:column>
+                            <b:column col-md="6">
+                                <b:selectOneMenu value="#{form.classDay}" 
+                                                 required="true" 
+                                                 style="height:2.5em"
+                                    label="Day">
+                                                         
+                                    <f:selectItem itemLabel="Monday" itemValue="100" />
+                                    <f:selectItem itemLabel="Tuesday" itemValue="200" />
+                                    <f:selectItem itemLabel="Wednesday" itemValue="300" />
+                                    <f:selectItem itemLabel="Thursday" itemValue="400" />
+                                    <f:selectItem itemLabel="Friday" itemValue="500" />
+                                    <f:selectItem itemLabel="Saturday" itemValue="600" />
+                                    <f:selectItem itemLabel="Sunday" itemValue="700" />
+                                </b:selectOneMenu>
+                            </b:column>
+                        </b:row>
+                        <b:touchSpin value="#{form.classPrice}"
+                                     label="Price"
+                                     min="5"
+                                     max="200"
+                                     step="5"
+                        prefix="$"/>
+                                                 
+                        <b:commandButton  class="btn btn-primary"
+                                          ajax="true"
+                                          oncomplete="if(validationFailed) alert('Invalid class');"
+                                          action="#{form.addClassSession(login.id)}"
+                                          value="Add Class"/>
+                        <b:messages escape="false"/>
+                    </b:form>
+                </b:panel>
+            </b:panel> 
+            </b:container>
+        </ui:define>
+    </ui:composition>
 </html>
