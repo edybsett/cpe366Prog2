@@ -163,7 +163,7 @@ public class AnimalForm implements Serializable{
         ps.executeUpdate();
         con.commit();
         con.close();
-        return "profile";
+        return "refresh";
     }
     
     /**

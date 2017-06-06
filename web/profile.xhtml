@@ -79,11 +79,14 @@
                                 <ui:repeat value="#{profile.allergies}"
                                            var="allergy">
                                     <h:outputText value="#{allergy.name}"
-                                                  class="h5"/>
+                                                  class="h4"/>
                                     <br/>
+                             
                                     <h:outputText value="#{allergy.description}"
                                                   rendered="#{allergy.hasDescription()}"/>
                                     <br/>
+                                    <h:outputText value="Recommended action: "
+                                                  rendered="#{allergy.hasAction()}"/>
                                     <h:outputText value="#{allergy.action}"
                                                   rendered="#{allergy.hasAction()}"/>
                                     <br/>
@@ -94,11 +97,13 @@
                                 <ui:repeat value="#{profile.surgeries}"
                                            var="surg">
                                     <h:outputText value="#{surg.name}"
-                                                  class="h5"/>
+                                                  class="h4"/>
                                     <br/>
                                     <h:outputText value="#{surg.description}"
                                                   rendered="#{surg.hasDescription()}"/>
                                     <br/>
+                                    <h:outputText value="Recommended action: "
+                                                  rendered="#{surg.hasAction()}"/>
                                     <h:outputText value="#{surg.action}"
                                                   rendered="#{surg.hasAction()}"/>
                                     <br/>
@@ -114,7 +119,7 @@
                                     <h:outputText value="#{c.description}"
                                                   rendered="#{c.hasDescription()}"/>
                                     <br/>
-                                    <h:outputText value="Recommended action:"
+                                    <h:outputText value="Recommended action: "
                                                   rendered="#{c.hasAction()}"/>
                                     <h:outputText value="#{c.action}"
                                                   rendered="#{c.hasAction()}"/>
@@ -199,8 +204,160 @@
                     <!-- Modify this animal's About Me section -->
                     <b:panel title="Edit About Me"
                              collapsed="true"
-                             onclick="#{animalform.setId(profile.id)}"
+                             onclick="#{form.setAnimalId(profile.id)}"
                              look="info">
+                        <b:form enctype="multipart/form-data"
+                                id="animalinfo">
+                            <!-- Name -->
+                            <b:inputText value="#{form.animalName}"
+                                         class='form-control'
+                                         required ="true"
+                                         
+                                         label="Name"
+                                         requiredMessage="Your must enter Animal's Name"
+                                         id="inputName"/>
+                            <!-- Species and Sex are one row -->
+                            <b:row>
+                                <!-- Species -->
+                                <b:column col-md="4"
+                                          col-xs="6">
+                                    <b:selectOneMenu value='#{form.animalSpecies}'
+                                                     required="true"
+                                                     label="Species"
+                                                     style="height: 2.5em;"
+                                                     id='inputSpecies'>
+                                        <f:selectItem itemValue="cat"
+                                                      class="form-check-label"
+                                                      itemLabel="cat"/>
+                                        <f:selectItem itemValue="dog"
+                                                      class="form-check-label"
+                                                      itemLabel="dog"/>
+                                    </b:selectOneMenu>
+                                </b:column>
+                                <!-- Sex -->
+                                <b:column col-md="4"
+                                          col-xs="6">
+                                    <b:selectOneMenu value='#{form.animalSex}'
+                                                     required="true"
+                                                     label="Sex"
+                                                     style="height:2.5em;"
+                                                     id='inputSex'>
+                                        <f:selectItem itemValue="male"
+                                                      class="form-check-label"
+                                                      itemLabel="male"/>
+                                        <f:selectItem itemValue="female"
+                                                      class="form-check-label"
+                                                      itemLabel="female"/>
+                                    </b:selectOneMenu>
+                                </b:column>
+                                <!-- Weight -->
+                                <b:column col-md="4"
+                                          col-xs="6">
+                                    <b:inputText value='#{form.animalWeight}'
+                                                 id='inputWeight'
+                                                 required="true"
+                                                 requiredMessage="Weight required"
+                                                 label="Weight"
+                                                 class='form-control'>
+                                        <f:convertNumber />
+                                    </b:inputText>
+                                </b:column>
+                            </b:row>
+                            <!-- Age -->
+                            <b:row>
+                                <b:column col-md="4" col-xs="6">
+                                    <b:inputText value='#{form.animalAgeY}'
+                                                 id='inputAgeY'
+                                                 required="true"
+                                                 requiredMessage="Age Years required"
+                                                 update="@this"
+                                                 validatorMessage="Age Years must be 0 - 100"
+                                                 label="Age Years"
+                                                 class='form-control'>
+                                        <f:validateLongRange minimum="0"
+                                                             maximum="100"/>
+                                    </b:inputText>
+                                </b:column>
+                                <b:column col-md="4" col-xs="6">
+                                    <b:inputText value='#{form.animalAgeM}'
+                                                 id='inputAgeM'
+                                                 required="true"
+                                                 requiredMessage="Age Months Required"
+                                                 label="Age Months"
+                                                 update="@this"
+                                                 validatorMessage="Age Months must be 0 - 11"
+                                                 class='form-control'>
+                                        <f:validateLongRange minimum="0"
+                                                             maximum="11"/>
+                                                         
+                                    </b:inputText>
+                                </b:column>
+                                <b:column col-md="4" col-xs="6">
+                                    <b:inputText value='#{form.animalAgeW}'
+                                                 id='inputAgeW'
+                                                 required="true"
+                                                 requiredMessage="Age Weeks Required"
+                                                 validatorMessage="Age Weeks must be 0 - 4"
+                                                 label="Age Weeks"
+                                                 update="@this"
+                                                 class='form-control'>
+                                        <f:validateLongRange minimum="0"
+                                                             maximum="4"/>
+                                    </b:inputText>
+                                </b:column>
+                            </b:row>
+                            <!-- Color -->
+                            <b:row>
+                                <b:column col-xs="6">
+                                    <b:inputText value='#{form.animalColor}'
+                                                 id='inputColor'
+                                                 required="true"
+                                                 requiredMessage="Color requried"
+                                                 label="Color"
+                                                 class='form-control'/>
+                                </b:column>
+                                <!-- Energy Level -->
+                                <b:column col-xs="6">
+                                    <b:touchSpin value="#{form.animalEnergyLevel}"
+                                                 id="inputEnergyLevel"
+                                                 required="true"
+                                                 requiredMessage="Energy Level Required"
+                                                 label="Energy Level"
+                                                 min="0"
+                                                 max="10"/>
+                                </b:column>
+                            </b:row>
+                            <!-- Food Type -->
+                            <b:inputText value="#{form.animalFoodType}"
+                                         id="inputFoodType"
+                                         required="true"
+                                         requiredMessage="Food Type required"
+                                         label="Food Type"
+                                         class="form-control"/>
+                            <!-- Description -->
+                            <b:inputTextarea value='#{form.animalDesc}'
+                                             id='inputDesc'
+                                             required="true"
+                                             requiredMessage="Description required"
+                                             label="Description"
+                                             class='form-control'/>
+                            <!-- Image -->
+                            <label for="inputImage">Upload image</label>
+                            <h:inputFile id="inputImage"
+                                         value="#{form.animalImage}"
+                                         class="form-control"
+                                         required="true"
+                                         requiredMessage="Image required"
+                                         style="height:3em;"/>
+                            <b:messages escape="false"/>
+                            <br/>
+                                             
+                            <b:commandButton class="btn btn-primary"
+                                             value="Submit"
+                                             ajax="true"
+                                             update="@form"
+                                             action="#{form.updateAnimal()}"/>
+                        </b:form>
                                  
                     </b:panel>
                         

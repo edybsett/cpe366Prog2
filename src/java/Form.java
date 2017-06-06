@@ -117,7 +117,39 @@ public class Form implements Serializable {
         return "refresh";
     }
     
+    
+    public String updateAnimal() throws SQLException, IOException {
+        Connection con = Util.connect(dbConnect);
+        PreparedStatement ps;
+        String query;
+        query = "UPDATE Animal set name = ?, ageYears = ?, ageMonths = ?, ageWeeks = ?, ";
+        query += "description = ?, weight = ?, species = ?, color =?, foodType =?, energyLevel =?, ";
+        query += "sex = ?, image = ?, dateAdmitted = ? where id = 1 ";
+        ps = con.prepareStatement(query);
+        ps.setString(1, animalName);
+        ps.setInt(2, animalAgeY);
+        ps.setInt(3, animalAgeM);
+        ps.setInt(4, animalAgeW);
+        ps.setString(5, animalDesc);
+        ps.setFloat(6, animalWeight);
+        ps.setString(7,animalSpecies);
+        ps.setString(8, animalColor);
+        ps.setString(9, animalFoodType);
+        ps.setInt(10, animalEnergyLevel);
+        ps.setString(11, animalSex);
+        InputStream is = animalImage.getInputStream();
+        ps.setBinaryStream(12,is,is.available());
+        ps.setDate(13, new Date(System.currentTimeMillis()));
+        //ps.setInt(14, animalId);
+        ps.executeUpdate();
+        ps.close();
+        
+        con.commit();
+        con.close();
+        return "refresh";
+    }
     /**
+     * 
      * Adds the breed if it doesn't already exist
      * @param breed
      * @param con 
