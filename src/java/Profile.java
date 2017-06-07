@@ -135,6 +135,7 @@ public class Profile implements Serializable{
         setConditions(new ArrayList<MedicalInfo>());
         setAllergies(new ArrayList<MedicalInfo>());
         setSurgeries(new ArrayList<MedicalInfo>());
+        this.spay = null;
         
         /* Add in all medical conditions */
         while (rs.next()) {
@@ -165,7 +166,7 @@ public class Profile implements Serializable{
         /* If any are empty, give them a blank info, which
            says 'none'
         */
-        if (spay == null)
+        if (spay == null || this.spay.isEmpty())
             spay = "not spayed";
         if (allergies.isEmpty())
             allergies.add(new MedicalInfo());

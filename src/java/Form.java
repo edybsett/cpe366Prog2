@@ -133,7 +133,7 @@ public class Form implements Serializable {
         String query;
         query = "UPDATE Animal set name = ?, ageYears = ?, ageMonths = ?, ageWeeks = ?, ";
         query += "description = ?, weight = ?, species = ?, color =?, foodType =?, energyLevel =?, ";
-        query += "sex = ?, image = ?, dateAdmitted = ? where id = ? ";
+        query += "sex = ?, dateAdmitted = ? where id = ? ";
         ps = con.prepareStatement(query);
         ps.setString(1, animalName);
         ps.setInt(2, animalAgeY);
@@ -146,12 +146,23 @@ public class Form implements Serializable {
         ps.setString(9, animalFoodType);
         ps.setInt(10, animalEnergyLevel);
         ps.setString(11, animalSex);
-        InputStream is = animalImage.getInputStream();
-        ps.setBinaryStream(12,is,is.available());
-        ps.setDate(13, new Date(System.currentTimeMillis()));
-        ps.setInt(14, animalId);
+        ps.setDate(12, new Date(System.currentTimeMillis()));
+        ps.setInt(13, animalId);
         ps.executeUpdate();
         ps.close();
+        
+        /* Remove this animal's personality */
+        query = "DELETE FROM Personality WHERE animalId = ?;";
+        ps = con.prepareStatement(query);
+        ps.setInt(1, animalId);
+        ps.executeUpdate();
+        ps.close();
+                
+        /* Fill the personality table back up */
+        /* Insert personality tags into table */
+        for (String s : animalTags.split(",")) {
+            addTag(s, con);
+        }
         
         con.commit();
         con.close();
@@ -175,6 +186,23 @@ public class Form implements Serializable {
         ps.setInt(4, animalId);
         ps.executeUpdate();
         ps.close();
+    }
+    
+    public void fillForm(Profile p) {
+        this.animalId = p.getId();
+        this.animalName = p.getName();
+        this.animalSpecies = p.getSpecies();
+        this.animalSex = p.getSex();
+        this.animalWeight = p.getWeight();
+        this.animalAgeY = p.getAgeYears();
+        this.animalAgeM = p.getAgeMonths();
+        this.animalAgeW = p.getAgeWeeks();
+        this.animalColor = p.getColor();
+        this.animalEnergyLevel = p.getEnergyLevel();
+        this.animalFoodType = p.getFoodType();
+        this.animalDesc = p.getDescription();
+        this.animalBreeds = p.getBreeds();
+        this.animalTags = p.getTags();
     }
     
     /**
