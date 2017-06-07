@@ -76,6 +76,7 @@
                                               />
                             </b:tab>
                             <b:tab title="Allergies">
+                                <h:form>
                                 <ui:repeat value="#{profile.allergies}"
                                            var="allergy">
                                     <h:outputText value="#{allergy.name}"
@@ -92,6 +93,7 @@
                                     <br/>
                                     <br/>
                                 </ui:repeat>
+                                </h:form>
                             </b:tab>
                             <b:tab title="Surgeries">
                                 <ui:repeat value="#{profile.surgeries}"
@@ -129,7 +131,7 @@
                             </b:tab>
                         </b:tabView>
                     </b:container>
-                        
+
                     <!-- Current Holds/Place a Hold -->
                     <b:container id="holds">
                         <h:form>
@@ -355,7 +357,7 @@
                             <b:commandButton class="btn btn-primary"
                                              value="Submit"
                                              ajax="true"
-                                             update="@form"
+                                             update="@all"
                                              action="#{form.updateAnimal()}"/>
                         </b:form>
                                  
@@ -398,7 +400,7 @@
                             <b:messages/>
                             <b:commandButton class="btn btn-primary"
                                              ajax="true"
-                                             update="@form"
+                                             update="@all"
                                              action="#{animalform.addCondition()}"
                                              value="Submit"/>
                         </h:form>

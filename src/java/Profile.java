@@ -419,7 +419,8 @@ public class Profile implements Serializable{
     /**
      * @return the allergies
      */
-    public List<MedicalInfo> getAllergies() {
+    public List<MedicalInfo> getAllergies() throws SQLException {
+        constructConditions();
         return allergies;
     }
 
@@ -433,7 +434,8 @@ public class Profile implements Serializable{
     /**
      * @return the spay
      */
-    public MedicalInfo getSpay() {
+    public MedicalInfo getSpay() throws SQLException {
+        constructConditions();
         return spay;
     }
 
@@ -447,7 +449,8 @@ public class Profile implements Serializable{
     /**
      * @return the surgeries
      */
-    public List<MedicalInfo> getSurgeries() {
+    public List<MedicalInfo> getSurgeries() throws SQLException {
+        constructConditions();
         return surgeries;
     }
 

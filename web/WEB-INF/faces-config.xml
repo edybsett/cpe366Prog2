@@ -167,11 +167,6 @@
             <to-view-id>/profile.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
-         <navigation-case>
-            <from-outcome>refresh</from-outcome>
-            <to-view-id>/profile.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
     </navigation-rule>
 
     
