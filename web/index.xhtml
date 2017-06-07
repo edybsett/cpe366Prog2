@@ -128,9 +128,12 @@
                     <h:form>
                         <b:inputText id="name"
                                      label="Name"
-                                     placeholder="John Smith"></b:inputText>
+                                     placeholder="John Smith"
+                                     required="true"
+                                     ></b:inputText>
                         <b:inputText id="email" 
                                      label="Email"
+                                     required="true"
                                      placeholder="foo@bar.com"></b:inputText>
                         <b:selectOneMenu label="About"
                                          style="height:2.5em;">
@@ -139,13 +142,25 @@
                             <f:selectItem itemLabel="Concerns"/>
                             <f:selectItem itemLabel="Suggestions"/>
                         </b:selectOneMenu>
-                        <b:inputTextarea label="Message"
+                        <b:inputTextarea required="true" label="Message"
                                          placeholder="Message here..."/>
-                        <b:button look="success" value='Submit'/>
+        <b:button value="Submit" look="success" onclick="$('.modalPseudoClass2').modal()" size="lg"/>
                     </h:form>
                 </b:well>
             </b:container>
                 
+            <h:form id="myFormID">
+    <b:modal id="amodal2" title="Thank you for contacting us!" styleClass="modalPseudoClass2"
+             closable="false"  close-on-escape="false" backdrop="false">
+        <p> If you are reading this message, then your message has been successfully received, but we'll probably never get
+            back to you :)
+        </p>
+        <f:facet name="footer">
+            <b:button value="fine :/ here's an A" dismiss="modal" />
+            <b:button value="Wooooooooow Okkk, A++++++" look="primary" dismiss="modal" />
+        </f:facet>
+    </b:modal>
+</h:form>
         </ui:define>
     </ui:composition> 
 </html>
