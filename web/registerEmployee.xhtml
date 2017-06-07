@@ -98,7 +98,7 @@
                                                  id="wage"/>
                                 </b:column>
                             </b:row>
-                                             
+                            <b:messages></b:messages>         
                             <b:commandButton class="btn btn-primary"
                                              value="Submit"
                                              ajax="true"
@@ -106,20 +106,7 @@
                                              action="#{register.addEmployee()}"/>
                         </b:form>
                     </b:well>
-                    <!-- This script disables the enter key for tags
-                          so that a new tag doesn't submit the form -->
-                    <script>
-                        $('#animalinfo').on('keyup keypress', function(e) {
-                            var keyCode = e.keyCode || e.which;
-                            var focusedId = ($("*:focus").attr("id"));
-                            if(keyCode === 13) {
-                                if(typeof focusedId === "undefined") {
-                                    e.preventDefault();
-                                    return false;
-                                }
-                            }
-                        })
-                    </script>
+
                 </b:container>
                     
             </ui:define>
