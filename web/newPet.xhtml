@@ -71,10 +71,13 @@
                                     <b:inputText value='#{form.animalWeight}'
                                                  id='inputWeight'
                                                  required="true"
+                                                 update="@this"
                                                  requiredMessage="Weight required"
                                                  label="Weight"
+                                                 validatorMessage="Weight must be between 0 and 200 lbs"
                                                  class='form-control'>
-                                        <f:convertNumber />
+                                        <f:validateLongRange minimum="0"
+                                                             maximum="200"/>
                                     </b:inputText>
                                 </b:column>
                             </b:row>
@@ -158,13 +161,28 @@
                                              class='form-control'/>
                             <!-- Breeds -->
                             <b:row>
-                                <b:column span="12">
+                                <b:column col-md="6">
                                     <b:inputText value="#{form.animalBreeds}"
                                                  id="inputBreeds"
                                                  required="true"
+                                                 placeholder="Press enter to add more"
                                                  requiredMessage="Breeds required"
                                                  label="Breeds"
                                                  class="tags"
+                                                 tags="true">
+                                        <script>
+                                            $('.tags').tagsinput('refresh');
+                                        </script>
+                                    </b:inputText>
+                                </b:column>
+                                <b:column col-md="6">
+                                    <b:inputText value="#{form.animalTags}"
+                                                 id="inputTags"
+                                                 typeahead="true"
+                                                 typeahead-values="#{form.tagValues()}"
+                                                 label="Personality"
+                                                 class="tags"
+                                                 placeholder="Press enter to add more"
                                                  tags="true">
                                         <script>
                                             $('.tags').tagsinput('refresh');

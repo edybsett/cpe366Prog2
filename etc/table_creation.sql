@@ -127,13 +127,6 @@ create table Personality(
     tagId    INT REFERENCES Tag ON DELETE CASCADE
 );
 
-/* Just store who adopted whom */
-create table Adoption(
-    animalId   INT REFERENCES Animal ON DELETE CASCADE,
-    customerId INT REFERENCES Login ON DELETE CASCADE,
-    day        DATE
-);
-
 /* Animals may be placed on hold for MAX_HOLD_DAYS.
    Up to 3 people can place a hold with priority 
    in order of who placed it. */
@@ -217,8 +210,9 @@ VALUES ('good with dogs'),
        ('bad with kids'),
        ('shy'),
        ('cuddler'),
-       ('spayed/neutered'),
-       ('bites');
+       ('bites'),
+       ('barks'),
+       ('trained');
 
 /* Set time blocks */
 INSERT INTO ClassTimes(id, startTime, endTime)

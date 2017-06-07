@@ -52,7 +52,6 @@ public class Tables implements Serializable {
         
         
         /* Execute query */
-        System.out.println("Executing query: " + query);
         PreparedStatement ps = con.prepareStatement(query);
         /* Get results */
         ResultSet rs = ps.executeQuery();
@@ -86,6 +85,16 @@ public class Tables implements Serializable {
                 else
                     a.setBreeds(a.getBreeds() + ", " + breedSet.getString("type"));
             }
+            
+            query = "SELECT description FROM Personality JOIN Tag ";
+            query += "ON tagId = Tag.id WHERE animalId = ?";
+            bps = con.prepareStatement(query);
+            bps.setInt(1, a.getId());
+            ResultSet tagSet = bps.executeQuery();
+            while (tagSet.next()) {
+                a.addTag(tagSet.getString("description"));
+            }
+            
             allAnimals.add(a);
         }
         con.commit();

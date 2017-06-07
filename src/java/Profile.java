@@ -35,7 +35,7 @@ public class Profile implements Serializable{
     private byte[] image;
     /* Need to be constructed from tables */
     private DBConnect dbConnect = new DBConnect();
-    private String[] tags;
+    private String tags;
     private String breeds;
     private List<String> holds;
     /* Conditions are going to be stored in separate lists
@@ -43,7 +43,7 @@ public class Profile implements Serializable{
     */
     private List<MedicalInfo> allergies;
     private List<MedicalInfo> conditions;
-    private MedicalInfo       spay;
+    private String            spay;
     private List<MedicalInfo> surgeries;
    
     
@@ -70,9 +70,21 @@ public class Profile implements Serializable{
         this.sex          = ani.getSex();
         this.breeds       = ani.getBreeds();
         this.image        = ani.getImage();
+        this.tags         = ani.getTags();
         constructHolds();
         constructConditions();
         return "profile";
+    }
+    
+    /** When profiles are edited on their page, they need
+      * be completely reconstructed from the database.
+      * @author Austin Sparks 
+      */
+    public void recreateProfile() throws SQLException {
+        /* So what we want to do here is use the current animal id
+           to get the animal information from the db
+        */
+        createProfile(Animal.getAnimalById(this.id));
     }
     
     public void constructHolds() throws SQLException {
@@ -96,6 +108,9 @@ public class Profile implements Serializable{
                 String h = Integer.toString(rs.getInt("priority"));
                 h += ". ";
                 h += rs.getString("firstName");
+                h += " (";
+                h += rs.getString("username");
+                h += ")";
                 holds.add(h);
             } while(rs.next());
         } else
@@ -131,7 +146,7 @@ public class Profile implements Serializable{
             
             switch (m.getType()) {
                 case "spay":
-                    setSpay(m);
+                    spay = "spayed";
                     break;
                 case "allergy":
                     allergies.add(m);
@@ -151,7 +166,7 @@ public class Profile implements Serializable{
            says 'none'
         */
         if (spay == null)
-            spay = new MedicalInfo();
+            spay = "not spayed";
         if (allergies.isEmpty())
             allergies.add(new MedicalInfo());
         if (surgeries.isEmpty())
@@ -277,7 +292,7 @@ public class Profile implements Serializable{
     /**
      * @return the tags
      */
-    public String[] getTags() {
+    public String getTags() {
         return tags;
     }
     
@@ -390,7 +405,6 @@ public class Profile implements Serializable{
      * @return the holds
      */
     public List<String> getHolds() throws SQLException {
-        constructHolds();
         return holds;
     }
     
@@ -420,7 +434,6 @@ public class Profile implements Serializable{
      * @return the allergies
      */
     public List<MedicalInfo> getAllergies() throws SQLException {
-        constructConditions();
         return allergies;
     }
 
@@ -434,15 +447,14 @@ public class Profile implements Serializable{
     /**
      * @return the spay
      */
-    public MedicalInfo getSpay() throws SQLException {
-        constructConditions();
+    public String getSpay() throws SQLException {
         return spay;
     }
 
     /**
      * @param spay the spay to set
      */
-    public void setSpay(MedicalInfo spay) {
+    public void setSpay(String spay) {
         this.spay = spay;
     }
 
@@ -450,7 +462,6 @@ public class Profile implements Serializable{
      * @return the surgeries
      */
     public List<MedicalInfo> getSurgeries() throws SQLException {
-        constructConditions();
         return surgeries;
     }
 
@@ -459,5 +470,11 @@ public class Profile implements Serializable{
      */
     public void setSurgeries(List<MedicalInfo> surgeries) {
         this.surgeries = surgeries;
+    }
+    
+    public String spaySeverity(){
+        if ("spayed".equals(spay))
+            return "success";
+        else return "danger";
     }
 }

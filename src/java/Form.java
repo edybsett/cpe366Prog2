@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet; 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
@@ -31,6 +33,7 @@ public class Form implements Serializable {
     private DBConnect dbConnect = new DBConnect();
     /* Navigation result */
     private String navigation;
+    private List<String> tagValues;
     /* New animal form data */
     private String animalName;
     private int    animalAgeY;
@@ -46,6 +49,7 @@ public class Form implements Serializable {
     private Part   animalImage;
     private int    animalId;
     private String animalBreeds;
+    private String animalTags;
     /* Login form data */
     private UIInput loginUI;
     @NotEmpty
@@ -112,6 +116,11 @@ public class Form implements Serializable {
             addBreed(s, con);
         }
         
+        /* Insert personality tags into table */
+        for (String s : animalTags.split(",")) {
+            addTag(s, con);
+        }
+        
         con.commit();
         con.close();
         return "refresh";
@@ -124,7 +133,7 @@ public class Form implements Serializable {
         String query;
         query = "UPDATE Animal set name = ?, ageYears = ?, ageMonths = ?, ageWeeks = ?, ";
         query += "description = ?, weight = ?, species = ?, color =?, foodType =?, energyLevel =?, ";
-        query += "sex = ?, image = ?, dateAdmitted = ? where id = 1 ";
+        query += "sex = ?, image = ?, dateAdmitted = ? where id = ? ";
         ps = con.prepareStatement(query);
         ps.setString(1, animalName);
         ps.setInt(2, animalAgeY);
@@ -140,7 +149,7 @@ public class Form implements Serializable {
         InputStream is = animalImage.getInputStream();
         ps.setBinaryStream(12,is,is.available());
         ps.setDate(13, new Date(System.currentTimeMillis()));
-        //ps.setInt(14, animalId);
+        ps.setInt(14, animalId);
         ps.executeUpdate();
         ps.close();
         
@@ -148,6 +157,26 @@ public class Form implements Serializable {
         con.close();
         return "refresh";
     }
+    
+    private void addTag(String tag, Connection con) throws SQLException {
+        /* this query is gonna be wild. we want to add tags that 
+           don't already exist but we don't want to overwrite 
+           tags that already do.
+        */
+        String query = "with s as (select id from tag where description=?";
+        query += "), i as (insert into tag (description) ";
+        query += "select ? where not exists (select id from s) returning id) ";
+        query += "insert into personality ";
+        query += "select ?, id from i union all select ?, id from s";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, tag);
+        ps.setString(2, tag);
+        ps.setInt(3, animalId);
+        ps.setInt(4, animalId);
+        ps.executeUpdate();
+        ps.close();
+    }
+    
     /**
      * 
      * Adds the breed if it doesn't already exist
@@ -264,7 +293,22 @@ public class Form implements Serializable {
         con.close();
         return "refresh";
         
-    }    
+    }
+    
+    public List<String> tagValues() throws SQLException {
+        Connection con = Util.connect(dbConnect);
+        String query = "SELECT description FROM Tag";
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet tags = ps.executeQuery();
+        ArrayList<String> tagV = new ArrayList<String>();
+        while (tags.next())
+            tagV.add(tags.getString("description"));
+        tags.close();
+        ps.close();
+        con.commit();
+        con.close();
+        return tagV;
+    }
     
     /**
      * @return the animalName
@@ -684,5 +728,19 @@ public class Form implements Serializable {
      */
     public void setClassPrice(int classPrice) {
         this.classPrice = classPrice;
+    }
+
+    /**
+     * @return the animalTags
+     */
+    public String getAnimalTags() {
+        return animalTags;
+    }
+
+    /**
+     * @param animalTags the animalTags to set
+     */
+    public void setAnimalTags(String animalTags) {
+        this.animalTags = animalTags;
     }
 }

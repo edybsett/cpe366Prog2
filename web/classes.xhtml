@@ -20,8 +20,7 @@
                     <b:dataTable value="#{tables.getAllClasses()}" var="class">
                         <b:dataTableColumn value="#{class.day}" label="Day" />
                         <b:dataTableColumn value="#{class.startTime}" 
-                                           label="Start Time" 
-                                           data-type="date"/>
+                                           label="Start Time"/>
                         <b:dataTableColumn value="#{class.endTime}" 
                                            label="End Time"
                                            />
@@ -76,6 +75,8 @@
                          look="success">
                     <h:form>
                         <b:inputText label="Class Name"
+                                     required="true"
+                                     requiredMessage="Class Name required"
                                      value="#{form.newClassName}"
                                      id="newclassname"/>
                         <b:commandButton class="btn btn-primary"

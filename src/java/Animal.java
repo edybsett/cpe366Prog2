@@ -7,6 +7,7 @@ import javax.annotation.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  * Represents the animals
@@ -31,7 +32,8 @@ public class Animal implements Serializable {
     private String sex;
     private String breeds = "Unknown";
     private byte[] image; 
-    private DBConnect dbConnect = new DBConnect();
+    private String tags;
+    private static final DBConnect dbConnect = new DBConnect();
     
     private void collectBreeds(Animal a, Connection con) throws SQLException {
         String query = "SELECT type FROM Breed JOIN BreedXAnimal ON ";
@@ -43,6 +45,68 @@ public class Animal implements Serializable {
         while (rs.next()) {
             a.setBreeds(a.getBreeds() + ", " + rs.getString("type"));
         }
+    }
+    
+    public static Animal getAnimalById(int id) throws SQLException {
+        Animal ani = new Animal();
+        Connection con = Util.connect(dbConnect);
+        
+        String query = "SELECT * from Animal ";
+        query       += "WHERE id = ?";
+        
+        /* Execute query */
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, id);
+        /* Get results */
+        ResultSet rs = ps.executeQuery();
+        
+        /* Get every result */
+        if (rs.next()) {
+            ani.setId(rs.getInt("id"));
+            ani.setAgeYears(rs.getInt("ageYears"));
+            ani.setAgeMonths(rs.getInt("ageMonths"));
+            ani.setAgeWeeks(rs.getInt("ageWeeks"));
+            ani.setName(rs.getString("name"));
+            ani.setWeight(rs.getFloat("weight"));
+            ani.setSpecies(rs.getString("species"));
+            ani.setDescription(rs.getString("description"));
+            ani.setDateAdmitted(rs.getDate("dateAdmitted"));
+            ani.setColor(rs.getString("color"));
+            ani.setFoodType(rs.getString("foodType"));
+            ani.setEnergyLevel(rs.getInt("energyLevel"));
+            ani.setSex(rs.getString("sex"));
+            ani.setImage(rs.getBytes("image"));
+            query = "SELECT type FROM Breed JOIN BreedXAnimal ON ";
+            query += "Breed.id = breedId WHERE animalId = ?";
+            PreparedStatement bps = con.prepareStatement(query);
+            bps.setInt(1, ani.getId());
+            ResultSet breedSet = bps.executeQuery();
+
+            while (breedSet.next()) {
+                if (ani.getBreeds().equals("Unknown"))
+                    ani.setBreeds(breedSet.getString("type"));
+                else
+                    ani.setBreeds(ani.getBreeds() + ", " + breedSet.getString("type"));
+            }
+            query = "SELECT description FROM Personality JOIN Tag ";
+            query += "ON tagId = Tag.id WHERE animalId = ?";
+            bps = con.prepareStatement(query);
+            bps.setInt(1, ani.getId());
+            ResultSet tagSet = bps.executeQuery();
+            while (tagSet.next()) {
+                ani.addTag(tagSet.getString("description"));
+            }
+        }
+        con.commit();
+        con.close();
+        return ani;
+    }
+    
+    public void addTag(String newTag) {
+        if (this.tags == null || this.tags.isEmpty())
+            this.tags = newTag;
+        else
+            this.tags += ", " + newTag;
     }
     
     public String getShortAge() {
@@ -271,6 +335,20 @@ public class Animal implements Serializable {
      */
     public void setBreeds(String breeds) {
         this.breeds = breeds;
+    }
+
+    /**
+     * @return the tags
+     */
+    public String getTags() {
+        return tags;
+    }
+
+    /**
+     * @param tags the tags to set
+     */
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
 }

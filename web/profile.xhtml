@@ -10,6 +10,11 @@
           
     <ui:composition template="template.xhtml">
         <ui:define name="head">
+            <!-- This is a bit silly because a profile will be created 
+                 twice when you go to it. But this allows the forms to update
+                 the page in the most efficient way given the messy framework
+                 I made :/ -->
+            #{profile.recreateProfile()}
             <title>#{profile.name}</title>
         </ui:define>
             
@@ -67,14 +72,15 @@
                         
                     <!-- Medical History -->
                     <b:container>
+                        <b:label text="#{profile.spay}"
+                                 severity="#{profile.spaySeverity()}"/>
+                        <br />
+                        <ui:repeat value="#{profile.tags.split(',')}"
+                                   var="tag">
+                            <b:label text="#{tag}"
+                                     severity="info"/>
+                        </ui:repeat>
                         <b:tabView activeIndex="0">
-                            <b:tab title="Spay/Neuter">
-                                <b:label text="#{profile.spay.name}"
-                                         severity="danger"
-                                         />
-                                <h:outputText value="#{profile.spay.description}"
-                                              />
-                            </b:tab>
                             <b:tab title="Allergies">
                                 <h:form>
                                 <ui:repeat value="#{profile.allergies}"
