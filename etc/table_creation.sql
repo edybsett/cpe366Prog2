@@ -31,17 +31,6 @@ DROP TABLE Class;
 /**************************
  * Create Statements
  **************************/
-
-/* This is the animal shelter itself. There will
-   only be one */
-create table Shelter (
-    id          SERIAL PRIMARY KEY,
-    name        TEXT,
-    location    TEXT,
-    dogCapacity INT,
-    catCapacity INT
-);
-
 /* Login as well as personal information. A customer
    is only this information. Employee and Manager are
    different */

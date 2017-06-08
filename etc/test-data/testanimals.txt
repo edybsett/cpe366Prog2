@@ -1,55 +1,180 @@
+Animals for Testing
 
---- Dogs
--- Chula
-- AgeY: 3
-- AgeM: 0
-- AgeW: 1
-- Name: Chula
-- Weight: 60
-- Species: dog
-- Description: Hello, my name is Chula and I'm one beautiful, large lady. I have a very mature and strong look to me, but I'm quite the softy when it comes to people giving me love and attention. I'll lean into you for more pets! It feels so nice to be pet! I'm sort of a busy-body. I enjoy having ways to exert my energy whether that is going for a run, playing in the yard, going for a walk, or a hike. Whatever floats your boat, I'm in! I'm an energetic, bouncy, and spunky gal that can't wait to have a home where I can be my goofy self. I just love to be where the people are and really feel a part of the family. Are you my perfect match that can give me that human companionship I so desperately desire?
-- DateAdmitted: bogus
-- FoodType: regular
-- EnergyLevel: 8
-- Sex: Female
-- Breed: Boxer, American Pit Bull, Terrier
-- Color: Brown Brindle
-- Tags: housetrained, highenergy, goodwdogs, goodwcats
+--- Demo Animal
+- Name:    Wile E. Coyote
+- Species: Dog
+- Sex:     Male
+- Weight:  32.0
+- AgeY:    67
+- AgeM:    8
+- AgeW:    3
+- Color:   Brown
+- Energy:  10
+- Food:    Road Runners
+- Breed:   Coyote
+- Description: Wile E. Coyote is constantly trying to catch Road Runner, but he somehow always fails. He also stars in he and Road Runner's own shorts. He is usually shown ordering Acme products as he would normally do in most shorts. For instance, in the short Winter Blunderland, he orders an Acme product that makes the whole desert turn into an ice land. He also appears briefly outside of a short in Yosemite Sam's Blow My Stack at the anger management classes. Acme products that he ordered will be used in such plans to catch Road Runner but always fails. A lot of the products have such advantages, though it always backfires on Wile E. He later appears in Point, Laser Point, where he is shown at Witch Lezah's counseling classes in the waiting room, and Sylvester starts to constantly bug him. In Rebel Without a Glove, he was shown trying to catch the Road Runner. He saw Bugs on the road and exchanged peace signs in passing. He appears again in Here Comes the Pig, where following another failed attempt to catch the Road Runner he pointed the lost rabbit (Bugs) the way back to the road.
 
--- Hatchi
-- Breed: Siberian Husky Mix
-- Color: Grey and White
-- Age: Young
-- Sex: Male
-- Personality: highenergy
-- Weight: 60
-- AgeY: 1
-- AgeM: 1
-- AgeW: 1
-- Description: The name is Hatchi. Yes, I'm sure when you see me you will say, "Oooh-Aaaah!" Yes, I'm quite the looker and will probably grab your attention right when you meet me. I'm a friendly boy, but I definitely have my Husky quirks so I'm looking for an owner who has the time to spend with me and hopefully has some Husky experience. I'm definitely a free spirit and enjoy exploring the world around me. I love nothing more than going on walks and playing with my toys. I'm an exceptional soccer player and love playing goalie against people so I can take the ball and run around happily with it! I'm definitely a goofy boy who will bring a lot of joy to your life. Although I enjoy the company of people, I do enjoy my independence at times. I love to be shown affection, but on my own terms of course. When I'm feeling up for love, I'll approach you and probably plop myself right in your lap and roll over for belly rubs. I'm a quirky, funny, and happy boy who can't wait to find my person who can use all this goofy energy towards being active and learning new things! I'm a good boy and I can't wait to go home with you today
+- Name:    Jetter
+- Species: Dog
+- Sex:     Male
+- Weight:  15.0
+- AgeY:    2
+- AgeM:    4
+- AgeW:    3
+- Color:   Tri-color
+- Energy:  10
+- Food:    Regular
+- Breeds:  Jack Russell Terrier Mix
+- Personality: goodw/kids, goodw/dogs, cuddler
+- Description: Jetter here! Boy you are in for a treat if I'm the one you choose! I'm one lively, little fella that is so excited to finally find a home to call mine! I'm one spry and spunky boy who can't wait to find a family that will play with me, take me on walks, and even on runs! You see, I might be a small dog, but I like to think I'm big, which means that I'm no couch potato! No way! I like to be on the move and checking out every little thing. I'm also not the snuggly type. Sorry! I just have too much energy and too much of adventurous soul to snuggle. I'm a pretty energetic fella that would enjoy a good amount of physical and mental activity. It's fun to get outside, smell everything around me, and get my legs really moving! I definitely have that adventurous personality that makes me highly compatible with an adventurous person! I love to have fun and live it up every single day. I know I have what it takes to be the perfect dog for someone and I'm hoping that someone is you!
+-- Later edits
+-- Neutered
+
+- Name:    Layla
+- Species: Dog
+- Sex:     Female
+- Weight:  60.1
+- AgeY:    6
+- AgeM:    10
+- AgeW:    1
+- Color:   Black and White
+- Energy:  8
+- Food:    Regular
+- Breeds:  Siberian Husky, Labrador Retriever
+- Personality: shy, cuddler, goodwkids, badwdogs
+- Description: Why hello there! My name is Layla and I'm a head turner if you ask me. I got all the beautiful features of my husky side: markings, eyes and all. I'm what you would classify as an energetic gal! I'm always at-the-ready and rearing to go whether that be on a long walk, hike, or maybe even a run! It's a good way to get my energy out and it's a good way for us to bond if you ask me! I enjoy living my life to the fullest and be surrounded by people I love. But you should know, I take time to warm up to new people so I ask that you please be patient with me and then you will see my shining personality. I promise to shower you with love and affection everyday and I hope you will do the same. I definitely wouldn't classify myself as a couch potato. No way! Okay, well maybe after a day filled of physical activity! Once I get my energy out, then I'll be a couch potato with you for a little bit! I know my perfect match is out there somewhere and I just can't wait to meet you!
+-- Later edits
+-- Neutered
+
+- Name:    Kumilo
+- Species: Dog
+- Sex:     Male
+- Weight:  70.5
+- AgeY:    3
+- AgeM:    8
+- AgeW:    3
+- Color:   Tan
+- Energy:  8
+- Food:    Regular
+- Breeds:  Mastiff Mix
+- Personality: outgoing, cuddler, goodw
+- Description: How's it going!? My name is Kamilo! I'm one handsome fella that is a total goofball! I love to have fun and I'll never turn down play time! Not only am I total goof, but I'm also quite the lover. I enjoy being with my person and giving you some kisses if you let me. It's my way of showing my appreciation of you giving me love and attention. So, if you want to show your love for me, give me some belly rubs! Ahhh, that's the spot! I'm an energetic boy that would love to go on long walks, hikes, and possibly even on jogs with you! It's a good way for me to let some of my ya-ya's out! After some good ol' physical stimulation and a ton of time playing with my toys, I'm all for snuggling up next to you and kicking my paws up to take a snooze! I really am a fun boy that will be your constant source of love and entertainment! I just know it! What do you say? Could I be the goofy boy for you?
+-- Later edits
+-- Neutered
 
 
---- Cats
--- Dinah
-- Breed: Domestic Longhair
-- Color: Black
-- Age: Adult
-- Sex: Female
-- Personality: housetrained, loving, shy
-- Weight: 8.2
-- AgeY: 4
-- AgeM: 0
-- AgeW: 4
-- Description: I'm dependable, reliable, and balanced - the perfect housemate. I'm the same, morning, noon, and night - loving and quite relaxed. What more could you hope for? The name is Dinah. I'm a beautiful gal who is trying to figure out this shelter environment. I can be a bit reserved and timid, but if you give me some time, I do break out of my shell. I love it when someone approaches me slowly, lets me sniff their hand, and then pets my head gently. I do enjoy affection and once I'm even more comfortable around you, I'll be happy to let you pet me back gently. I really am a sweet girl who is going break out of her shell when I get into a home of my own! Could I be the beautiful gal for you?
+- Name:    Lucy
+- Species: Dog
+- Sex:     Female
+- Weight:  45.5
+- AgeY:    2
+- AgeM:    6
+- AgeW:    3
+- Color:   Brown
+- Energy:  7
+- Food:    Regular
+- Breeds:  Australian Cattle Dog Mix
+- Personality: outgoing, cuddler, goodwdogs, housetrained
+- Description: Hey there! My name is Lucy. Let me tell you, I'm pure bliss! I'm an Australian Cattledog Mix, so of course I'm clever! I'm a smart gal with the utmost potential. I love learning new things and being around a person. I'm a loving and up beat gal that enjoys what life has to offer. I know my forever home is out there and that I would make a family very happy with my goofy and playful personality. I'm energetic so consistent exercise will be in my best interest! I enjoy being outdoors so hikes would be a lot of fun for me! Come meet me! I know you will not regret it! 
+-- Later edits
+-- spayed
 
--- Bella
-- Breed: Siamese
-- Color: Grey and White
-- Age: Senior
-- Sex: Female
-- Personality: outgoing, goodwkids
-- Weight: 11.6
-- AgeY: 10
-- AgeM: 0
-- AgeW: 0
-- Description: Eye catching, quiet, and sweet - yeah that's me, Bella! I'm sure to captivate you by my cute face and winning personality! I'm a super outgoing girl who will always greet you with a nice meow and a possible head butt in hopes you will give me attention. I'm definitely a people kitty and haven't met a person I haven't liked. I love to strut my stuff, swat toys around, bask in the sun, and follow my humans around. I'll have fun getting affection from you, snoozing in a cozy bed, and exploring my surroundings. I know once I go to a home of my very own I'm going to be one happy cat that will bring you a lot of joy! I just know it!
+
+- Name:    Branly
+- Species: Dog
+- Sex:     Male
+- Weight:  15.8
+- AgeY:    7
+- AgeM:    0
+- AgeW:    3
+- Color:   Tan
+- Energy:  5
+- Food:    Regular
+- Breeds:  Beagle, Terrier, Unknown Mix
+- Personality: cuddler, goodwdogs, housetrained
+- Description: The name is Branly. I'm one cute, stocky guy who is hoping I will win you over with my playful demeanor. I'm a sweet boy who loves to have a good time. I'll enjoy being with my person, going on walks, and having toys to chew on. I'm quite engaging with my people when a toy is involved. I get very excited and vocal. That's when you know it is game time! Although I enjoy playing, I'm all for kicking my paws up and relaxing with you too. I don't mind just following you around the house or snuggling up and taking an afternoon snooze. I'm a sweet, friendly, and happy boy who can't wait to go home with you today.
+-- Later edits
+-- neutered
+
+
+- Name:    Mocha
+- Species: cat
+- Sex:     Male
+- Weight:  12.6
+- AgeY:    7
+- AgeM:    0
+- AgeW:    2
+- Color:   Chocolate
+- Energy:  2
+- Food:    Regular
+- Breeds:  Havana Brown
+- Personality: cuddler, goodwcats, housetrained, low-maintenance
+- Description: The name is Mocha, but Mr. reliable is what they call me. You don't get to this age and look this good by being a 'stress head'. Nope, I'm a pretty laid-back fella who enjoys being with my person. I'll happily plop in your lap and accept love and affection from you. I'm a pretty low maintenance guy who likes to look out the window, eat lots of food, and be spoiled beyond belief. I'm a sweet cat with my beautiful, chocolate coat that I wear ever so nicely! I know my breed says I'm a Domestic Shorthair, but I'm really a Havana Brown cat. Yes, very exotic, I know! Unfortunately that wasn't part of the choices in breeds so that's why I'm labeled the way I am. Anyways, if you're looking for a constant and always predictable, loving cat, pick me.
+-- Later edits
+-- neutered
+
+- Name:    Kitkat
+- Species: cat
+- Sex:     Female
+- Weight:  10.6
+- AgeY:    3
+- AgeM:    0
+- AgeW:    0
+- Color:   Black and White
+- Energy:  3
+- Food:    Wet
+- Breeds:  Domestic Shorthair
+- Personality: cuddler, goodwcats, housetrained
+- Description: The name is KitKat. I'm an adorable girl with my big eyes and very outgoing personality. I can tell you right now that I'm quite the talker. I can hold up my end of the conversation every single day with no problems at all. I have a lot to wsay, so I'm looking for that person who might like to have conversations with me on the regular. I'm a sweet girl who enjoys being shown attention, but I'll be sure to let you know I'm over it and want some independence by walking away. I need alone time you know? That way I can explore my surroundings, take a nice cat nap, and get my summer glow sunbathing in the window. I really am a nice cat who can't wait to go home with you today!
+-- Later edits
+-- spayed
+
+- Name:    Emmy
+- Species: cat
+- Sex:     Female
+- Weight:  8.8
+- AgeY:    2
+- AgeM:    1
+- AgeW:    2
+- Color:   Black
+- Energy:  3
+- Food:    Regular
+- Breeds:  Domestic Shorthair
+- Personality: cuddler, goodwcats, housetrained, shy
+- Description: The name is Emmy. I'm a beautiful gal who will most likely find tucked away in my hidey spot. Although I might be in my little cubby, I ask that you show me attention. I love being pet and human interaction. I love it when someone approaches me slowly, lets me sniff their hand, and then pets my head gently. What can I say? I have this beautiful, long coat that needs some petting! I really am a sweet girl who can't wait to get on out of here and into my forever home! Could I be the beautiful gal for you?
+-- Later edits
+-- spayed
+
+
+- Name:    Biscuit
+- Species: cat
+- Sex:     Female
+- Weight:  10.7
+- AgeY:    2
+- AgeM:    0
+- AgeW:    1
+- Color:   Brown Tabby
+- Energy:  5
+- Food:    Regular
+- Breeds:  Domestic Longhair
+- Personality: cuddler, goodwcats, housetrained
+- Description: Hi there, great to meet you! So in case you haven't guessed yet, I'm definitely a 'people-person/kitty'. The name is Biscuit and I'm just looking for someone to love, and adore, and play with. I'm very friendly, and love cuddles. Wherever you are, that's where I'll be! I'll nudge your hand in hopes you will stroke my beautiful coat and I'll purr in appreciation. I'm one heck of a love bug and I hope you can see that so I can go home with you today!
+-- Later edits
+-- spayed
+
+- Name:    Tortie
+- Species: cat
+- Sex:     Female
+- Weight:  12.2
+- AgeY:    4
+- AgeM:    3
+- AgeW:    2
+- Color:   Tortoiseshell
+- Energy:  3
+- Food:    Regular
+- Breeds:  Domestic Longhair
+- Personality: cuddler, goodwcats, housetrained, goodwkids
+- Description: Young and boisterous? I don't think so. Despite these youthful cute looks, I prefer a more mature and relaxed lifestyle. I'm Tortie. Yes, the tortie named Tortie! Don't even get my started on that topic! I'm a sweet cat who is searching for a home where I can be my relaxed and mellow self. I enjoy my independence, but I can tell you right now I absolutely love being shown affection. I'll never turn down a nice head scratch. I love it so much that I immediately start making muffins! I'm a lovely cat, so let me love you, adore you, and relax with you! Keen? Well come and pick me up! I'll just catch up on some more sleep in the mean time! 
+-- Later edits
+-- spayed
+
