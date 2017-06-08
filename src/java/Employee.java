@@ -36,7 +36,7 @@ public class Employee implements Serializable{
         }
     }
     
-    private void updateMe() throws SQLException {
+    public void updateMe() throws SQLException {
         Connection con = Util.connect(dbConnect);
         String query = "UPDATE Login ";
         query += "SET password=? ";
@@ -47,6 +47,21 @@ public class Employee implements Serializable{
         ps.executeUpdate();
         con.commit();
         con.close();
+    }
+    
+    public void delete() throws SQLException {
+        Connection con = Util.connect(dbConnect);
+        String query = "DELETE FROM Login ";
+        query += "WHERE id = ?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, this.id);
+        ps.executeUpdate();
+        con.commit();
+        con.close();
+    }
+    
+    public boolean canDelete(int loginId) {
+        return !(this.id == 1 || this.id == loginId);
     }
     
     /**

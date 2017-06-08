@@ -15,51 +15,63 @@ and open the template in the editor.
     
     <ui:composition template="template.xhtml">
         <ui:define name="head">
-         
+            
             <title>ACME Humane Society</title>
         </ui:define>
         
         <ui:define name="body">
             <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
-            
+            <!-- Always construct the list again on page load -->
+            <h:outputText value="#{tables.getEmployees()}"
+                          style="opacity:0.0;"/>
+           
             <b:container>
                 <h2>Employee Directory</h2>
-            <h:form>
-                <b:dataTable value="#{tables.getAllEmployees()}"
-                             var="emp"
-                             responsive="true"
-                             col-lg="half"
-                             class="empTable">
-                    <b:dataTableColumn value="#{emp.fullName}"
-                                       searchable="true"
-                                       label="Name"/>
-                    <b:dataTableColumn value="#{emp.username}"
-                                       searchable="true"
-                                       label="Username"/>
-                    <b:dataTableColumn value="#{emp.wage}"
-                                       searchable="false"
-                                       data-type="numeric"
-                                       label="Wage"/>
-                    <b:dataTableColumn label="Password">
-                        <b:inputText value="#{emp.password}"
-                                     rendered="#{emp.editing}"/>
-                        <h:outputText value="******"
-                                      rendered="#{not emp.editing}"/>
-                    </b:dataTableColumn>
-                    <b:dataTableColumn label="Edit Password"> 
-                        <b:commandButton value="edit/save"
-                                         ajax="true"
-                                         icon="edit"
-                                         update="@(.empTable)"
-                                         onclick="ajax:emp.edit()"/>
+                <h:form>
+                    <b:dataTable value="#{tables.getAllEmployees()}"
+                                 var="emp"
+                                 responsive="true"
+                                 class="empTable">
+                        <b:dataTableColumn value="#{emp.fullName}"
+                                           searchable="true"
+                                           label="Name"/>
+                        <b:dataTableColumn value="#{emp.username}"
+                                           searchable="true"
+                                           label="Username"/>
+                        <b:dataTableColumn value="#{emp.wage}"
+                                           searchable="false"
+                                           data-type="numeric"
+                                           label="Wage"/>
+                        <b:dataTableColumn value="#{emp.role}"
+                                           searchable="true"
+                                           label="Role"/>
+                        <b:dataTableColumn label="Password"
+                                           orderable="false">
+                            <b:inputText value="#{emp.password}"
+                                         rendered="#{emp.editing}"/>
+                            <h:outputText value="******"
+                                          rendered="#{not emp.editing}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="Edit Password"
+                                           orderable="false"> 
+                            <b:commandButton value="edit/save"
+                                             ajax="true"
+                                             icon="edit"
+                                             update="@form"
+                                             onclick="ajax:emp.edit()"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="Delete"
+                                           orderable="false"
+                                           searchable="false">
+                            <b:commandButton icon="remove"
+                                             look="danger"
+                                             action="refresh"
+                                             rendered="#{emp.canDelete(login.id)}"
+                                             onclick="ajax:emp.delete()"/>
                     </b:dataTableColumn>
                 </b:dataTable>
             </h:form>
-            <h:form>
-                <b:commandButton value="Add Employee"
-                                 action="manager"/>
-            </h:form>
-            </b:container>
-        </ui:define>
-    </ui:composition> 
+        </b:container>
+    </ui:define>
+</ui:composition> 
 </html>

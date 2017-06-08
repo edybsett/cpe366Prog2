@@ -123,7 +123,7 @@ public class Form implements Serializable {
         
         con.commit();
         con.close();
-        return null;
+        return "refresh";
     }
     
     
@@ -289,7 +289,7 @@ public class Form implements Serializable {
         
         con.commit();
         con.close();
-        return "index";
+        return "home";
     }
     
     public String addClass(int loginId) throws SQLException {

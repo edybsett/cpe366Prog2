@@ -67,7 +67,7 @@
     <managed-bean>
         <managed-bean-name>tables</managed-bean-name>
         <managed-bean-class>Tables</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
+        <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
     
     <navigation-rule>
@@ -87,6 +87,11 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
+            <from-outcome>contact</from-outcome>
+            <to-view-id>/index.xhtml#contact</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>index</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
@@ -101,6 +106,7 @@
         <navigation-case>
             <from-outcome>listEmployees</from-outcome>
             <to-view-id>/listEmployees.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>listAnimals</from-outcome>
@@ -161,6 +167,7 @@
         <navigation-case>
             <from-outcome>adoption</from-outcome>
             <to-view-id>/adoption.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>profile</from-outcome>

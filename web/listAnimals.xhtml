@@ -30,7 +30,9 @@ and open the template in the editor.
                                  col-lg="half"
                                  responsive="true"
                                  class="aniTable">
-                        <b:dataTableColumn label="Image">
+                        <b:dataTableColumn label="Image"
+                                           searchable="false"
+                                           orderable="false">
                             <o:graphicImage value="#{ani.image}"
                                             dataURI="true"
                                             class="img-thumbnail"
@@ -46,7 +48,9 @@ and open the template in the editor.
                         <b:dataTableColumn value="#{ani.breeds}"
                                            searchable="true"
                                            label="Breed"/>
-                        <b:dataTableColumn label="View Profile"> 
+                        <b:dataTableColumn label="View Profile"
+                                           orderable="false"
+                                           searchable="false"> 
                             <h:commandLink value="view/edit"
                                            class="btn btn-info"
                                            action="#{profile.createProfile(ani)}"/>

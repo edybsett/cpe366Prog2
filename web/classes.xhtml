@@ -54,8 +54,8 @@
                         <b:container>
                             <b:dataTable value="#{tables.showUserClasses(login.id)}" 
                                          var="class"
-                                         col-md="6"
-                                         col-lg="one-third"
+                                         span="12"
+                                         col-lg="half"
                                          searching="false">
                                 <b:dataTableColumn value="#{class.classId}" label="Id" />
                                 <b:dataTableColumn value="#{class.className}" label="Class Name" />
@@ -94,7 +94,7 @@
                          look="success">
                     <b:form>
                         <b:selectOneMenu value="#{form.classId}"
-                                         style="height:2.5em;"
+                                         style="height:3em;"
                                          label="Class">
                             <f:selectItems value="#{tables.showAllClasses()}"
                                            var="c"

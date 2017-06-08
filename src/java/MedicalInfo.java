@@ -18,11 +18,11 @@ public class MedicalInfo implements Serializable {
     }
     
     public boolean hasType() {
-        return type != null && !description.isEmpty();
+        return type != null && !type.isEmpty();
     }
     
     public boolean hasAction() {
-        return action != null && !description.isEmpty();
+        return action != null && !action.isEmpty();
     }
 
     /**
@@ -57,7 +57,10 @@ public class MedicalInfo implements Serializable {
      * @return the action
      */
     public String getAction() {
-        return "Recommended action: " + action;
+        if (hasAction())
+            return "Recommended action: " + action;
+        else
+            return "";
     }
 
     /**

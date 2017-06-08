@@ -20,6 +20,7 @@
             
         <ui:define name="body">
             <b:container>
+                <br/>
                 <b:panel title="#{profile.name}"
                          collapsible="false"
                          look="primary">
@@ -79,12 +80,13 @@
                                    var="tag">
                             <b:label text="#{tag}"
                                      severity="info"/>
+                            <br/>
                         </ui:repeat>
                         <b:tabView activeIndex="0">
                             <b:tab title="Allergies">
                                 
                                 <b:form>
-                                    <b:well>
+                                    <b:well class="scroll">
                                     <ui:repeat value="#{profile.allergies}"
                                                var="allergy">
                                         <h:outputText value="#{allergy.name}"
@@ -93,10 +95,10 @@
                                             
                                         <h:outputText value="#{allergy.description}"
                                                       rendered="#{allergy.hasDescription()}"/>
-                                        <br/>
+                                        <br rendered="#{allergy.hasDescription()}"/>
                                         <h:outputText value="#{allergy.action}"
                                                       rendered="#{allergy.hasAction()}"/>
-                                        <br/>
+                                        <br rendered="#{allergy.hasAction()}"/>
                                     </ui:repeat>
                                     </b:well>
                                 </b:form>
@@ -104,7 +106,7 @@
                             <b:tab title="Surgeries">
                                 <b:form>
                                     
-                                    <b:well>
+                                    <b:well class="scroll">
                                 <ui:repeat value="#{profile.surgeries}"
                                            var="surg">
                                     <h:outputText value="#{surg.name}"
@@ -124,7 +126,7 @@
                             </b:tab>
                             <b:tab title="Medical Conditions">
                                 <b:form>
-                                    <b:well>
+                                    <b:well class="scroll">
                                 <ui:repeat value="#{profile.conditions}"
                                            var="c">
                                     <h:outputText value="#{c.name}"
@@ -161,17 +163,17 @@
                     
                 <!-- Hidden employee panel -->
                 <b:panel rendered="#{login.isEmployee()}"
-                         look="danger"
-                         collapsible="false"
-                         title="Employee Functions">
+                         title="Employee Functions"
+                         look="success">
                     #{animalform.setId(profile.id)}
                     #{form.fillForm(profile)}
                     <!-- Place an adoption. For our purposes,
                          we just need to verify that customer exists
                          and then redirect to a form -->
                     <b:panel title="Adopt"
+                             id="panel1"
                              collapsed="true"
-                             look="success">
+                             look="info">
                         <h:form>
                             <b:inputText value="#{animalform.customerUsername}"
                                          validator="#{animalform.validateAdopt}"
@@ -192,7 +194,7 @@
                          Lots of validation needed here -->
                     <b:panel title="Hold"
                              collapsed="true"
-                             look="success">
+                             look="info">
                         <h:form id="formhold">
                             <b:switch value="#{animalform.removing}"
                                       label="Add/Remove"
@@ -239,7 +241,7 @@
                                         <b:selectOneMenu value='#{form.animalSpecies}'
                                                          required="true"
                                                          label="Species"
-                                                         style="height: 2.5em;"
+                                                         style="height: 3em;"
                                                          id='inputSpecies'>
                                             <f:selectItem itemValue="cat"
                                                           class="form-check-label"
@@ -255,7 +257,7 @@
                                         <b:selectOneMenu value='#{form.animalSex}'
                                                          required="true"
                                                          label="Sex"
-                                                         style="height:2.5em;"
+                                                         style="height:3em;"
                                                          id='inputSex'>
                                             <f:selectItem itemValue="male"
                                                           class="form-check-label"
@@ -402,7 +404,6 @@
                          a simple form -->
                     <b:panel title="Add Medical Condition"
                              collapsed="true"
-                             onclick="#{animalform.setId(profile.id)}"
                              look="info">
                         <h:form>
                             <b:inputText label="Title"
@@ -421,6 +422,7 @@
                             </b:row>
                             <b:selectOneMenu label="Type of Condition"
                                              required="true"
+                                             requiredMessage="A description is required"
                                              value="#{animalform.conditionType}"
                                              style="height:3em;">
                                 <f:selectItem itemLabel="Allergy"
@@ -435,7 +437,7 @@
                             <b:messages/>
                             <b:commandButton class="btn btn-primary"
                                              ajax="true"
-                                             update="@all"
+                                             update="@form"
                                              action="#{animalform.addCondition()}"
                                              value="Submit"/>
                         </h:form>

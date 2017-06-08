@@ -12,19 +12,44 @@
     <ui:insert name="head"/>
   </h:head>
   <h:body style="padding-top:70px;">
+      <style>
+          .has-error .control-label,
+          .has-error .help-block,
+          .has-error .form-control-feedback
+          .field-error .control-label
+          .field-error .help-bock
+          .field-error .form-control-feedback{
+              color: red;
+          }
+          div.scroll {
+              position: relative;
+              height: 200px;
+              overflow:scroll;
+              width:98%;
+          }
+          #scrollUpCustom {
+              background-image:url("#{resource['images:top.png']}");
+              bottom: 65px;
+              right: 18px;
+              width: 38px;
+              height: 38px;
+              outline: none;
+          }
+      </style>
       <ui:insert name="navbar">
           <!-- NAV BAR -->
           <h:form>
           <b:container id="navcontainer">
           <b:navBar brand="ACME"
                     brandHref="index.xhtml"
+                    inverse="true"
                     fixed="top">
               
               <b:navbarLinks >
                   <b:listLinks class="navbar-nav"
                                style="display:inline;">
                   <b:navLink value="Home" outcome="home"/>
-                  <b:navLink value="Contact" outcome="home"/>
+                  <b:navLink value="Contact" outcome="contact"/>
                   <b:navLink value="Classes" outcome="classes" />
                   </b:listLinks>
                   

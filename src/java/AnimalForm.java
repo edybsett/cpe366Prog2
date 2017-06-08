@@ -34,7 +34,6 @@ public class AnimalForm implements Serializable{
 
     public void validateHold(FacesContext context, UIComponent component, Object value) throws ValidatorException, SQLException {
         Connection con   = Util.connect(dbConnect);
-        id               = (int)getProfileUI().getLocalValue();
         customerUsername = (String)value;
         boolean customerExists = false;
         boolean customerHolds  = false;
@@ -68,9 +67,11 @@ public class AnimalForm implements Serializable{
         customerId = rs.getInt("id");
         
         /* Does the customer already have a hold? */
-        query = "SELECT customerId FROM TempHold WHERE customerId = ?";
+        query = "SELECT customerId FROM TempHold WHERE customerId = ? ";
+        query += "AND animalId = ? ";
         ps = con.prepareStatement(query);
         ps.setInt(1, customerId);
+        ps.setInt(2, id);
         rs = ps.executeQuery();
         customerHolds = rs.next();
         

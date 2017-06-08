@@ -10,7 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet; 
 import java.sql.SQLException;
 import javax.annotation.ManagedBean;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 /**
  *
@@ -96,6 +100,24 @@ public class Register implements Serializable {
     public double getWage(){
         return wage;
     }
+    
+    public void usernameValidate(FacesContext context, UIComponent component, Object value) throws ValidatorException, SQLException {
+        Connection con = Util.connect(dbConnect);
+        this.username = value.toString();
+        String query = "select id from Login where username=?";
+        
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, this.username);
+        ResultSet result = ps.executeQuery();
+        if (result.next()) {
+            FacesMessage errorMessage = new FacesMessage("Username taken");
+            throw new ValidatorException(errorMessage);
+        }
+        result.close();
+        ps.close();
+        con.commit();
+        con.close();
+    }
 
     
     public String addCustomer() throws SQLException, IOException {
@@ -168,8 +190,8 @@ public class Register implements Serializable {
         role ="";
         wage = 0.0;
         con.commit();
-        con.close();       
-        return "success";        
+        con.close();  
+        return "listEmployees";        
     }
     
     

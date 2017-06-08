@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:o="http://omnifaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
           
     <h:body>
         <ui:composition template="template.xhtml">
@@ -16,69 +16,70 @@
                 
             <ui:define name="body">
                 <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
-                    
-
+                <style>
+                    #customerinfo .has-error .control-label,
+                    #customerinfo .has-error .help-block,
+                    #customerinfo .has-error .form-control-feedback {
+                        color: red;
+                    }
+                </style>
+                        
                 <b:container>
                     <h2>Register a new employee!</h2>
                     <b:well>
-
+                        
                         <b:form enctype="multipart/form-data"
                                 id="customerinfo">
-                              <b:row>
-                                <!-- Species -->
-                                <b:column col-md="5"
-                                          col-xs="7">
-                            <!-- Name -->
-                            <b:inputText value="#{register.username}"
-                                         class='form-control'
-                                         required ="true"
-                                         
-                                         label="Username"
-                                         requiredMessage="You must enter a username"
-                                         id="inputusername"/>
-                                </b:column>
-                                <b:column col-md="5"
-                                          col-xs="7">
-                            <b:inputSecret value="#{register.password}"
-                                         class='form-control'
-                                         required ="true"
-                                         
-                                         label="Password"
-                                         requiredMessage="You must enter a password"
-                                         id="inputpassword"/>
-                                 </b:column>
-                            </b:row>
-                              <b:row>
-                                <!-- Species -->
-                                <b:column col-md="5"
-                                          col-xs="7">
-                            <!-- Name -->
-                            <b:inputText value="#{register.firstname}"
-                                         class='form-control'
-                                         required ="true"
-                                         
-                                         label="First Name"
-                                         requiredMessage="You must enter your first name"
-                                         id="inputFirstName"/>
-                                </b:column>
-                                <b:column col-md="5"
-                                          col-xs="7">
-                            <b:inputText value="#{register.lastname}"
-                                         class='form-control'
-                                         required ="true"
-                                         
-                                         label="Last Name"
-                                         requiredMessage="You must enter your last name"
-                                         id="inputLastName"/>
-                                 </b:column>
-                         </b:row>
                             <b:row>
-                                <b:column col-md="3"
-                                          col-xs="3">
+                                <!-- Species -->
+                                <b:column col-md="6">
+                                    <!-- Name -->
+                                    <b:inputText value="#{register.username}"
+                                                 class='form-control'
+                                                 required ="true"
+                                                 validator="#{register.usernameValidate}"
+                                                 label="Username"
+                                                 requiredMessage="You must enter a username"
+                                                 id="inputusername"/>
+                                </b:column>
+                                <b:column col-md="6">
+                                    <b:inputSecret value="#{register.password}"
+                                                   class='form-control'
+                                                   required ="true"
+                                                       
+                                                   label="Password"
+                                                   requiredMessage="You must enter a password"
+                                                   id="inputpassword"/>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <!-- Species -->
+                                <b:column col-md="6">
+                                    <!-- Name -->
+                                    <b:inputText value="#{register.firstname}"
+                                                 class='form-control'
+                                                 required ="true"
+                                                     
+                                                 label="First Name"
+                                                 requiredMessage="You must enter your first name"
+                                                 id="inputFirstName"/>
+                                </b:column>
+                                <b:column col-md="6">
+                                    <b:inputText value="#{register.lastname}"
+                                                 class='form-control'
+                                                 required ="true"
+                                                     
+                                                 label="Last Name"
+                                                 requiredMessage="You must enter your last name"
+                                                 id="inputLastName"/>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="6">
                                     <b:selectOneMenu value='#{register.role}'
                                                      required="true"
                                                      label="Role"
-                                                     style="height: 2.5em;"
+                                                     style="height: 3em;"
                                                      id='role'>
                                         <f:selectItem itemValue="manager"
                                                       class="form-check-label"
@@ -88,17 +89,20 @@
                                                       itemLabel="employee"/>
                                     </b:selectOneMenu>
                                 </b:column>
-                                <b:column col-md = "5" col-xs="3">
+                                <b:column col-md = "6">
                                     <b:inputText value="#{register.wage}"
                                                  class="form-control"
                                                  required ="true"
                                                  
                                                  label ="Wage"
                                                  requiredMessage="You must enter a wage"
-                                                 id="wage"/>
+                                                 id="wage">
+                                        <f:validateDoubleRange minimum="0.00"
+                                                               maximum="1000"/>
+                                    </b:inputText>
                                 </b:column>
                             </b:row>
-                            <b:messages></b:messages>         
+                            <b:messages />       
                             <b:commandButton class="btn btn-primary"
                                              value="Submit"
                                              ajax="true"
@@ -106,7 +110,6 @@
                                              action="#{register.addEmployee()}"/>
                         </b:form>
                     </b:well>
-
                 </b:container>
                     
             </ui:define>

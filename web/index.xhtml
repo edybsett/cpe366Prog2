@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:o="http://omnifaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
           
     <ui:composition template="template.xhtml">
         <ui:define name="head">
@@ -14,25 +14,26 @@
             
         <ui:define name="body">
             <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
-
-            <!-- The Jumbotron -->
-            <b:jumbotron style="background-color:lightblue;">
+            <b:scrollUp distance="200" animation="fade" text="" title="false" name="scrollUpCustom" />
+                        <!-- The Jumbotron -->
+            <b:jumbotron style="background-color:peachpuff"
+                         id="topjumbo">
                 <b:container>
                     <h1 class="display-3">ACME Humane Society</h1>
                     <p class="lead">Discover your new best friend</p>
                 </b:container>
             </b:jumbotron>
-                
+                    
             <h:form>
                 <b:carousel id="parque"
                             style="margin:auto; max-width:1000px">
                     <b:carouselItem >
-                        <b:image value="pic/sneakycat.jpg"
+                        <b:image value="pic/cooldog.jpg"
                                  width="1280px"
                                  height="640px"/>
                     </b:carouselItem>
                     <b:carouselItem >
-                        <b:image value="pic/cooldog.jpg"
+                        <b:image value="pic/sneakycat.jpg"
                                  width="1280px"
                                  height="640px"/>
                     </b:carouselItem>
@@ -48,12 +49,12 @@
                     </b:carouselItem>
                 </b:carousel>   
             </h:form>
-            
+                    
             <br/>
-                
+                    
             <!-- Animal Listing -->
             <b:jumbotron id="pets"
-                         style="background-color:lightblue">
+                         style="background-color:peachpuff">
                 <b:container>
                     <h2>Current Residents</h2>
                     <p class="lead">
@@ -61,7 +62,7 @@
                     </p>
                 </b:container>
             </b:jumbotron>
-            
+                    
             <b:container>
                 <h:form>
                     <b:row>
@@ -79,6 +80,7 @@
                                       label="Show Cats"/>
                         </b:column>
                     </b:row>
+                            
                     <ui:repeat value="#{tables.allAnimals}"
                                var="ani">
                         <b:column col-xs="6" 
@@ -97,12 +99,13 @@
                                     <b:panelGrid size="md"
                                                  colSpans="3, 9"
                                                  class="card-text"
+                                                 style="height:10rem;"
                                                  columns="2">
                                         <h:outputLabel value="Age"/>
                                         <h:outputText value="#{ani.getShortAge()}"/>
                                         <h:outputLabel value="Sex"/>
                                         <h:outputText value="#{ani.getSex()}"/>
-                                            
+                                                
                                         <h:outputLabel value="Breed"/>
                                         <h:outputText value="#{ani.getFirstBreed()}"/>
                                     </b:panelGrid>
@@ -115,10 +118,9 @@
                     </ui:repeat>
                 </h:form>
             </b:container>
-                
+                    
             <!-- Contact Us -->
-            <b:jumbotron id="contact"
-                         style="background-color:lightblue;">
+            <b:jumbotron id="contact" style="background-color:peachpuff">
                 <b:container>
                     <h2 class="display-2">Contact Us</h2>
                 </b:container>
@@ -136,7 +138,7 @@
                                      required="true"
                                      placeholder="foo@bar.com"></b:inputText>
                         <b:selectOneMenu label="About"
-                                         style="height:2.5em;">
+                                         style="height:3em;">
                             <f:selectItem itemLabel="Adoptions"/>
                             <f:selectItem itemLabel="Donations"/>
                             <f:selectItem itemLabel="Concerns"/>
@@ -144,11 +146,11 @@
                         </b:selectOneMenu>
                         <b:inputTextarea required="true" label="Message"
                                          placeholder="Message here..."/>
-        <b:button value="Submit" look="success" onclick="$('.modalPseudoClass2').modal()" size="lg"/>
+                        <b:button value="Submit" look="success" onclick="$('.modalPseudoClass2').modal()" size="lg"/>
                     </h:form>
                 </b:well>
             </b:container>
-            
+                    
             <h:form id="myFormID">
                 <b:modal id="amodal2" title="Thank you for contacting us!" styleClass="modalPseudoClass2"
                          closable="false"  close-on-escape="false" backdrop="false">

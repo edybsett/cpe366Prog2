@@ -16,7 +16,13 @@
                 
             <ui:define name="body">
                 <h:outputStylesheet name="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css"/>
-                    
+                <style>
+                    #customerinfo .has-error .control-label,
+                    #customerinfo .has-error .help-block,
+                    #customerinfo .has-error .form-control-feedback {
+                        color: red;
+                    }
+                </style>
 
                 <b:container>
                     <h2>Add New Pet</h2>
@@ -38,7 +44,7 @@
                                     <b:selectOneMenu value='#{form.animalSpecies}'
                                                      required="true"
                                                      label="Species"
-                                                     style="height: 2.5em;"
+                                                     style="height: 3em;"
                                                      id='inputSpecies'>
                                         <f:selectItem itemValue="cat"
                                                       class="form-check-label"
@@ -54,7 +60,7 @@
                                     <b:selectOneMenu value='#{form.animalSex}'
                                                      required="true"
                                                      label="Sex"
-                                                     style="height:2.5em;"
+                                                     style="height:3em;"
                                                      id='inputSex'>
                                         <f:selectItem itemValue="male"
                                                       class="form-check-label"
@@ -206,7 +212,6 @@
                                              value="Submit"
                                              ajax="true"
                                              update="@form"
-                                             onsuccess="$('.successModal').modal()"
                                              action="#{form.submitAnimal()}"/>
                         </b:form>
                     </b:well>
@@ -226,20 +231,6 @@
                         })
                     </script>
                 </b:container>
-                <h:form id="myFormID">
-                <b:modal id="amodal2" title="Success!" styleClass="successModal"
-                         closable="false"  close-on-escape="false" backdrop="false">
-                    <p> You have successfully added this animal. Add another?
-                    </p>
-                    <f:facet name="footer">
-                        <b:commandButton value="Go Back" 
-                                         action="home"/>
-                        <b:commandButton value="Add Another" 
-                                         action="refresh"
-                                         look="primary"/>
-                        </f:facet>
-                </b:modal>
-            </h:form>
                     
             </ui:define>
         </ui:composition>

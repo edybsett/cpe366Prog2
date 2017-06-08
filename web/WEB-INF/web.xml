@@ -43,4 +43,14 @@
       <extension>eot</extension>
       <mime-type>application/vnd.ms-fontobject</mime-type>
     </mime-mapping>
+    
+    <context-param>
+        <param-name>BootsFaces_USETHEME</param-name>
+        <param-value>default</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>BootsFaces_THEME</param-name>
+        <param-value>flatly</param-value>
+    </context-param>
 </web-app>
