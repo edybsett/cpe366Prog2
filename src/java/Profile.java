@@ -168,12 +168,24 @@ public class Profile implements Serializable{
         */
         if (spay == null || this.spay.isEmpty())
             spay = "not spayed";
-        if (allergies.isEmpty())
-            allergies.add(new MedicalInfo());
-        if (surgeries.isEmpty())
-            surgeries.add(new MedicalInfo());
-        if (conditions.isEmpty())
-            conditions.add(new MedicalInfo());
+        if (allergies.isEmpty()) {
+            MedicalInfo m = new MedicalInfo();
+            m.setName("None");
+            m.setDescription(this.name + " has no allergies!");
+            allergies.add(m);
+        }
+        if (surgeries.isEmpty()) {
+            MedicalInfo m = new MedicalInfo();
+            m.setName("None");
+            m.setDescription(this.name + " has had no surgeries!");
+            surgeries.add(m);
+        }
+        if (conditions.isEmpty()) {
+            MedicalInfo m = new MedicalInfo();
+            m.setName("None");
+            m.setDescription(this.name + " has no known conditions!");
+            conditions.add(m);
+        }
         con.commit();
         con.close();
     }

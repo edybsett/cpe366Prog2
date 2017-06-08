@@ -82,7 +82,9 @@
                         </ui:repeat>
                         <b:tabView activeIndex="0">
                             <b:tab title="Allergies">
-                                <h:form>
+                                
+                                <b:form>
+                                    <b:well>
                                     <ui:repeat value="#{profile.allergies}"
                                                var="allergy">
                                         <h:outputText value="#{allergy.name}"
@@ -92,16 +94,17 @@
                                         <h:outputText value="#{allergy.description}"
                                                       rendered="#{allergy.hasDescription()}"/>
                                         <br/>
-                                        <h:outputText value="Recommended action: "
-                                                      rendered="#{allergy.hasAction()}"/>
                                         <h:outputText value="#{allergy.action}"
                                                       rendered="#{allergy.hasAction()}"/>
                                         <br/>
-                                        <br/>
                                     </ui:repeat>
-                                </h:form>
+                                    </b:well>
+                                </b:form>
                             </b:tab>
                             <b:tab title="Surgeries">
+                                <b:form>
+                                    
+                                    <b:well>
                                 <ui:repeat value="#{profile.surgeries}"
                                            var="surg">
                                     <h:outputText value="#{surg.name}"
@@ -114,11 +117,14 @@
                                                   rendered="#{surg.hasAction()}"/>
                                     <h:outputText value="#{surg.action}"
                                                   rendered="#{surg.hasAction()}"/>
-                                    <br/>
-                                    <br/>
                                 </ui:repeat>
+                                    
+                                    </b:well>
+                                    </b:form>
                             </b:tab>
                             <b:tab title="Medical Conditions">
+                                <b:form>
+                                    <b:well>
                                 <ui:repeat value="#{profile.conditions}"
                                            var="c">
                                     <h:outputText value="#{c.name}"
@@ -134,6 +140,8 @@
                                     <br/>
                                     <br/>
                                 </ui:repeat>
+                                    </b:well>
+                                </b:form>
                             </b:tab>
                         </b:tabView>
                     </b:container>

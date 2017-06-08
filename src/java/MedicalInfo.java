@@ -14,15 +14,15 @@ public class MedicalInfo implements Serializable {
     private String severity;
     
     public boolean hasDescription() {
-        return description != null;
+        return description != null && !description.isEmpty();
     }
     
     public boolean hasType() {
-        return type != null;
+        return type != null && !description.isEmpty();
     }
     
     public boolean hasAction() {
-        return action != null;
+        return action != null && !description.isEmpty();
     }
 
     /**
@@ -57,7 +57,7 @@ public class MedicalInfo implements Serializable {
      * @return the action
      */
     public String getAction() {
-        return action;
+        return "Recommended action: " + action;
     }
 
     /**

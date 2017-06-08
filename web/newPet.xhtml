@@ -27,7 +27,6 @@
                             <b:inputText value="#{form.animalName}"
                                          class='form-control'
                                          required ="true"
-                                         
                                          label="Name"
                                          requiredMessage="Your must enter Animal's Name"
                                          id="inputName"/>
@@ -165,6 +164,8 @@
                                     <b:inputText value="#{form.animalBreeds}"
                                                  id="inputBreeds"
                                                  required="true"
+                                                 typeahead="true"
+                                                 typeahead-values="#{form.breedValues()}"
                                                  placeholder="Press enter to add more"
                                                  requiredMessage="Breeds required"
                                                  label="Breeds"

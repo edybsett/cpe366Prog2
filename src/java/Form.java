@@ -338,6 +338,22 @@ public class Form implements Serializable {
         return tagV;
     }
     
+    public List<String> breedValues() throws SQLException {
+        Connection con = Util.connect(dbConnect);
+        String query = "SELECT type FROM Breed";
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet tags = ps.executeQuery();
+        ArrayList<String> tagV = new ArrayList<String>();
+        while (tags.next())
+            tagV.add(tags.getString("type"));
+        tags.close();
+        ps.close();
+        con.commit();
+        con.close();
+        return tagV;
+        
+    }
+    
     /**
      * @return the animalName
      */
