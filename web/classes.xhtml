@@ -16,8 +16,9 @@
         <ui:define name="body">
             <b:container>            
                 <h3>Classes</h3>
-                <h:form>
-                    <b:dataTable value="#{tables.getAllClasses()}" var="class">
+                <b:form>
+                    <b:dataTable value="#{tables.getAllClasses()}" var="class"
+                                 span="12" col-lg="half">
                         <b:dataTableColumn value="#{class.day}" label="Day" />
                         <b:dataTableColumn value="#{class.startTime}" 
                                            label="Start Time"/>
@@ -37,7 +38,7 @@
                                              />
                         </b:dataTableColumn>
                     </b:dataTable>               
-                </h:form>
+                </b:form>
             </b:container>
             <!-- Employee panel is hidden -->
             <b:container>
@@ -53,7 +54,8 @@
                         <b:container>
                             <b:dataTable value="#{tables.showUserClasses(login.id)}" 
                                          var="class"
-                                                     
+                                         col-md="6"
+                                         col-lg="one-third"
                                          searching="false">
                                 <b:dataTableColumn value="#{class.classId}" label="Id" />
                                 <b:dataTableColumn value="#{class.className}" label="Class Name" />

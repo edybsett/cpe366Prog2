@@ -131,7 +131,7 @@ public class Register implements Serializable {
 
         con.commit();
         con.close();       
-        return "success";
+        return "home";
         
     }
     

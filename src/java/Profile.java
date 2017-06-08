@@ -108,6 +108,7 @@ public class Profile implements Serializable{
                 String h = Integer.toString(rs.getInt("priority"));
                 h += ". ";
                 h += rs.getString("firstName");
+                h += " " + rs.getString("lastName");
                 h += " (";
                 h += rs.getString("username");
                 h += ")";
