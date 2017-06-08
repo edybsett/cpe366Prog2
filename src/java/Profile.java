@@ -125,6 +125,8 @@ public class Profile implements Serializable{
         Connection con = Util.connect(dbConnect);
         PreparedStatement ps;
         ResultSet rs;
+        String binaryGenderRepresentationSJWCringe = this.sex.equals("male")? "neutered" : "spayed";
+        
         
         query  = "SELECT * FROM MedicalInfo ";
         query += "WHERE animalId = ? ";
@@ -148,7 +150,7 @@ public class Profile implements Serializable{
             
             switch (m.getType()) {
                 case "spay":
-                    spay = "spayed";
+                    spay = binaryGenderRepresentationSJWCringe;
                     break;
                 case "allergy":
                     allergies.add(m);
@@ -168,7 +170,7 @@ public class Profile implements Serializable{
            says 'none'
         */
         if (spay == null || this.spay.isEmpty())
-            spay = "not spayed";
+            spay = "not " + binaryGenderRepresentationSJWCringe;
         if (allergies.isEmpty()) {
             MedicalInfo m = new MedicalInfo();
             m.setName("None");
@@ -487,7 +489,7 @@ public class Profile implements Serializable{
     }
     
     public String spaySeverity(){
-        if ("spayed".equals(spay))
+        if ("spayed".equals(spay) || "neutered".equals(spay))
             return "success";
         else return "danger";
     }

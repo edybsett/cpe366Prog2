@@ -19,6 +19,7 @@ public class Employee implements Serializable{
     private String password;
     private String firstName;
     private String lastName;
+    private String fullName;
     private String role;
     private float  wage;
     private boolean editing;
@@ -163,5 +164,13 @@ public class Employee implements Serializable{
      */
     public void setEditing(boolean editing) {
         this.editing = editing;
+    }
+
+    /**
+     * @return the fullName
+     */
+    public String getFullName() {
+        this.fullName = firstName + " " + lastName;
+        return fullName;
     }
 }
