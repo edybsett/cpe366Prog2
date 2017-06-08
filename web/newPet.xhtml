@@ -206,6 +206,7 @@
                                              value="Submit"
                                              ajax="true"
                                              update="@form"
+                                             onsuccess="$('.successModal').modal()"
                                              action="#{form.submitAnimal()}"/>
                         </b:form>
                     </b:well>
@@ -225,6 +226,20 @@
                         })
                     </script>
                 </b:container>
+                <h:form id="myFormID">
+                <b:modal id="amodal2" title="Success!" styleClass="successModal"
+                         closable="false"  close-on-escape="false" backdrop="false">
+                    <p> You have successfully added this animal. Add another?
+                    </p>
+                    <f:facet name="footer">
+                        <b:commandButton value="Go Back" 
+                                         action="home"/>
+                        <b:commandButton value="Add Another" 
+                                         action="refresh"
+                                         look="primary"/>
+                        </f:facet>
+                </b:modal>
+            </h:form>
                     
             </ui:define>
         </ui:composition>

@@ -123,7 +123,7 @@ public class Form implements Serializable {
         
         con.commit();
         con.close();
-        return "refresh";
+        return null;
     }
     
     
