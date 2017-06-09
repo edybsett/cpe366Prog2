@@ -17,7 +17,7 @@ using Java Server Faces and Postgres.
 
 ## Features
 1. Functional login and registration
--Manager user/pass: admin/admin
+-Passwords in user manual
 2. Working nav bar
 3. Animal management (adoption/personal information/medical history)
 4. Employee management (viewing/adding)

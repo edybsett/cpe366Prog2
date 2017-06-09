@@ -5,11 +5,18 @@ Group: Butterfly Falcons
 Starting Information
     
 
-Admin Usage
-    
+Admin Usage:
+admin/admin
+mkrabs/money
 
-Employee Usage
-   
+Employee Usage:
+ssquarepants/spatula
+stentacles/clarinet
+scheeks/texas
+pstar/1234
 
-Customer Usage
+Customer Usage:
+pkrabs/abcd
+splankton/chum
+sfancyson/squidsucks
     

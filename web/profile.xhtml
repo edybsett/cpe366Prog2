@@ -115,8 +115,6 @@
                                     <h:outputText value="#{surg.description}"
                                                   rendered="#{surg.hasDescription()}"/>
                                     <br/>
-                                    <h:outputText value="Recommended action: "
-                                                  rendered="#{surg.hasAction()}"/>
                                     <h:outputText value="#{surg.action}"
                                                   rendered="#{surg.hasAction()}"/>
                                 </ui:repeat>
@@ -135,8 +133,7 @@
                                     <h:outputText value="#{c.description}"
                                                   rendered="#{c.hasDescription()}"/>
                                     <br/>
-                                    <h:outputText value="Recommended action: "
-                                                  rendered="#{c.hasAction()}"/>
+                                    
                                     <h:outputText value="#{c.action}"
                                                   rendered="#{c.hasAction()}"/>
                                     <br/>
