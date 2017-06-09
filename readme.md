@@ -8,11 +8,12 @@
 
 ## Overview
 For our project we have created a web application for a made up animal shelter 
-using Java Server Faces and Postgres. 
+using Java Server Faces and Postgres. Our table creation statements, work log, 
+user manual, and test data are all in the ```etc/``` folder.
 
 ## Running
 1. Open NetBeans 8.2
-2. Open the project
+2. Open the project. See notes below.
 3. Select the 'Run' command from the IDE
 
 ## Features

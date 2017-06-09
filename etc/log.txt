@@ -14,3 +14,7 @@
 | AS         | 13:00 2017-05-17  | 17:00    |   4hr      | bugfixes   |
 | AS         | 18:00 2017-05-17  | 19:00    |   1hr      | add animal |
 -----------------------------------------------------------------------
+| I stopped keeping track around here...                              |
+|  We met every T and R from 4-6pm, plus lab every MWF, plus          |
+|  lots of time individually.                                         |
+-----------------------------------------------------------------------
